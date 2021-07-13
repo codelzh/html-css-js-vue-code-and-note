@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+
+  如果父传子数据，子数据要发生改变，在子模块应该定义一个data，用来存放并更新父的数据，修改或展示data里面的数据
+  prop里面的数据，只适合于传输，不适合改变
+
+-->
+<div id="app">
+  <mycpn :cnumber1="number1" :cnumber2="number2" @setfathernum1="fsetnum1" @setfathernum2="fsetnum2">
+  </mycpn>
+
+    父:{{number1}}
+    父:{{number2}}
+</div>
+
+
+<template id="cpn">
+  <div>
+    <h2>子里面数据:{{dnumber1}}</h2>
+    <input type="text" :value="dnumber1" @input="setnum1">
+
+    <p></p>
+
+    <h2>子里面数据:{{dnumber2}}</h2>
+    <input type="text" v-model="dnumber2" @input="setnum2">
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const cpn = {
+    template:'#cpn',
+    props:{
+      cnumber1:{
+        type:Number,
+      },
+      cnumber2:{
+        type:Number,
+      },
+    },
+    data(){
+      //用于改变的dnumber
+      return {dnumber1:this.cnumber1,dnumber2:this.cnumber2}
+    },
+
+    methods:{
+      setnum1(event){
+        //value值改变data里面
+        this.dnumber1 = event.target.value
+        //发送事件，改变父的数据
+        this.$emit('setfathernum1',event.target.value)
+      },
+
+      //value值改变data里面
+      setnum2(event){
+        this.dnumber2 = event.target.value
+        //发送事件，改变父的数据
+        this.$emit('setfathernum2',event.target.value)
+      }
+    }
+  }
+  let app = new Vue({
+    el:'#app',
+    data:{
+      number1:0,
+      number2:1,
+    },
+    components:{
+      mycpn:cpn
+    },
+    methods:{
+      fsetnum1(num1){
+        this.number1 = parseInt(num1)
+      },
+      fsetnum2(num2){
+        this.number2 = parseInt(num2)
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

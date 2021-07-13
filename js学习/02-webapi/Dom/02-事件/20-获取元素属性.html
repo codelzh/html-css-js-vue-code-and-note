@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" index="1">
+  <script>
+    //获取元素属性  第一种方法
+    var ipt1 = document.querySelector("input");
+    console.log(ipt1.type);
+    //第二种方法  第二种用来获取自定义属性的
+    var ipt2 = document.querySelector("input").getAttribute("index");
+    console.log(ipt2);
+
+    //设置元素属性  第一种
+    ipt1.type = "radio";
+    //第二种  用于设置自定义的属性
+    ipt1.setAttribute("type","text")
+
+    //删除元素属性
+    ipt1.removeAttribute("index");
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button class="light">开关灯</button>
+  
+  <script>
+    var bodyele = document.querySelector("body");
+    var lightele = document.querySelector(".light");
+    var flag = 0;
+    lightele.onclick = function(){
+      if(flag ===0){
+        bodyele.style.backgroundColor = "red";
+        flag = 1;
+        console.log("1");
+      }else{
+        bodyele.style.backgroundColor = "white";
+        flag = 0;
+      }
+    }
+  </script>
+</body>
+
+</html>

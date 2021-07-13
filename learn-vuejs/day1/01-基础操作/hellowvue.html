@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="text">{{name}}}</div>
+<h1 id="h1">{{message}}}</h1>
+
+<script src="../../js/vue.js"></script>
+<script>
+    //let是变量 const是常量,尽量不用var
+    //Vue 是引入的vue对象，在vuejs已经创建好,这个对象作用是用来管理元素对象的
+    let app = new Vue({
+        //el 属性，指定id，管理元素
+        el:'#text',
+        //data 属性 管理数据的
+        data:{
+            name:"dd",
+            message:"hellow vue"
+        }
+    });
+</script>
+
+</body>
+</html>

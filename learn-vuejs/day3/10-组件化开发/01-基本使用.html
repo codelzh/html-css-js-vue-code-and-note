@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  组件化开发就是把一个大需求，给它拆分成一个个小功能，进而解决问题
+
+  在vue中如何使用组件化？
+  1:调用Vue的extend方法创建组件
+  2:调用Vue的component方法注册组件
+  3:使用组件
+
+  在vue中，组件化就是把html代码给当成一个组件，以此达到重复使用
+--->
+
+<div id="app">
+  <mycpn></mycpn>
+  <mycpn></mycpn>
+  <mycpn></mycpn>
+  <mycpn></mycpn>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  //创建组件
+  let cpn = Vue.extend({
+    template:`
+      <div>
+        <h1>哈哈哈哈</h1>
+        <h1>哦哦哦哦</h1>
+      </div>
+    `
+  })
+
+  //注册组件
+  Vue.component('mycpn',cpn)
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    }
+  })
+</script>
+
+
+</body>
+</html>

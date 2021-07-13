@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .filmcolor{
+        color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+    <li v-bind:id="item" v-for="item in film" v-on:click="becamered(item)"> {{item}} </li>
+  </ul>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      film:['张三丰','西游记','水浒传','三国演义']
+    },
+    methods:{
+      becamered(index){
+        document.getElementById(index).style.color="red";
+      }
+    },
+  })
+</script>
+
+</body>
+</html>

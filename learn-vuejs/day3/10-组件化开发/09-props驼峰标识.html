@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    在父子传值时候，子的props某个对象名称是大写，那么要写成下面形式，否则赋值不了
+  --->
+  <mycpn :c-stu="stu"></mycpn>
+</div>
+
+<template id="cpn">
+  <div>
+    {{cStu}}
+  </div>
+</template>
+<script src="../../js/vue.js"></script>
+<script>
+
+  let cpn ={
+    template:'#cpn',
+    props:{
+      cStu:{
+        type:Object,
+      }
+    }
+  }
+  let app = new Vue({
+    el:'#app',
+    data:{
+      stu:{
+        name:'zhangsan',
+        age:14
+      }
+    },
+    components:{
+      mycpn:cpn
+    }
+  })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <h1>{{message}} 123</h1>
+  <!--
+  v-text 把字符串赋值到元素，不建议用，如果元素本身有内容，则覆盖
+  -->
+  <h1 v-text="message">123</h1>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hello'
+    }
+  })
+</script>
+
+</body>
+</html>

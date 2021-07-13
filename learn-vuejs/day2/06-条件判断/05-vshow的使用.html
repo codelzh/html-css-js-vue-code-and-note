@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!---
+   v-if 和 v-show 看起来效果一样
+
+   但是vif，如果为false时候，为ture的dom将被删除
+   vshow 则不是，如果为false，它会把dom添加一个属性:display，隐藏起来
+  -->
+  <h2 v-if="isshow" id="aaa">1</h2>
+  <h2 v-show="isshow" id="bbb">1</h2>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      isshow:true
+    }
+  })
+</script>
+
+</body>
+</html>

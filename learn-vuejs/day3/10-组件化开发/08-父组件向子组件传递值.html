@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  我想从子组件访问父组件的数据，如何访问？
+-->
+<div id="app">
+  <mycpn :cmessage='message'></mycpn>
+</div>
+
+<template id="cpn">
+  <div>
+    {{cmessage}}
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+
+  //相当于Vue.extend
+  let cpn = {
+    template:'#cpn',
+    //第一种写法，直接写数组
+    //把props数组里面看作变量，不是字符串
+    // props:['cmessage']
+
+    props:{
+      //第二种写法，类型限制
+      // cmessage:String,
+
+      //第三种写法，提供默认值，在父组件给子组件值，默认是这个值
+      cmessage:{
+        type:String,
+        default:"aaa",
+        //这个值为true，则这个值父组件必须传这个值，父组件不传值报错
+        required:true
+      }
+    }
+  }
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:"abc"
+    },
+    //注册子组件
+    components:{
+      'mycpn':cpn
+    }
+  })
+</script>
+
+
+</body>
+</html>

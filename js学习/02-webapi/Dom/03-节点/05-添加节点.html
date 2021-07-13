@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <ul>
+    <li>我是谁????</li>
+  </ul>
+
+  <script>
+    //创建节点
+    var linode1 = document.createElement("li");
+    var ul = document.querySelector("ul");
+    //在元素后面添加节点
+    ul.appendChild(linode1);
+    //在元素前面添加节点
+    var linode2 = document.createElement("li");
+    ul.insertBefore(linode2, ul.children[0]);
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+
+    ul{
+        list-style: none;
+    }
+
+    a{
+        text-decoration: none;
+    }
+
+    .box{
+        position: relative;
+        width: 500px;
+        height: 250px;
+        left: 50%;
+        margin-left: -250px;
+    }
+
+    .box em img{
+        width: 100%;
+    }
+
+    .box .previous{
+      position: absolute;
+      width: 20px;
+      height: 20px;
+        left:5px;
+      top: 50%;
+      margin-top: -10px;
+      background-color: rgba(0,0,0,0.4);
+    }
+
+    .box .next{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        right:5px;
+        top: 50%;
+        margin-top: -10px;
+        background-color: rgba(0,0,0,0.4);
+    }
+
+    .box div>a{
+        display: block;
+        width: 5px;
+        height: 5px;
+        font-size: 15px;
+        color: white;
+    }
+
+    /*  nav */
+    .box .rolling-nav{
+        position: absolute;
+        border-radius: 13px;
+        left: 50%;
+        bottom: 5px;
+        margin-left: -50px;
+        width: 100px;
+        height: 25px;
+        background-color: rgba(0,0,0,0.3);
+    }
+
+    .box ul{
+    }
+
+    .box ul>li>a{
+        float: left;
+        width: 5px;
+        height: 5px;
+        border-radius: 5px;
+        background-color: white;
+        margin:10px 5px 5px 10px;
+    }
+
+    .box ul>li>a:hover{
+        background-color: #ff8500;
+    }
+    
+
+</style>
+<body>
+
+<div class="box">
+  <em><img src="../images/tb.jpg" alt=""></em>
+  <div class="previous"><a href=""><</a></div>
+  <div class="next"><a href="">></a></div>
+  
+  <div class="rolling-nav">
+    <ul>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+    </ul>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      width: 500px;
+      height: 200px;
+      background-color: pink;
+    }
+
+    .son {
+      width: 200px;
+      height: 100px;
+      background-color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="father">老子
+    <div class="son">儿子</div>
+  </div>
+
+  <script>
+    //传统事件没有捕获，所以使用监听器事件
+    //addEventListener()  第三个参数为true 那么是捕获阶段
+    // var div = document.querySelectorAll("div");
+    // div[1].addEventListener("click",function(){
+    //   alert("123");
+    // },true)
+
+    // //给father添加点击事件，点击儿子，老子的事件会被执行，因为是捕获阶段:document--html--body--father--son,其他事件将被执行
+    // div[0].addEventListener("click",function(){
+    //   alert("老子被点击");
+    // },true)
+
+
+    //冒泡演示  addEventListener()  第三个参数为false或空 则处于冒泡阶段
+    var div = document.querySelectorAll("div");
+    div[1].addEventListener("click", function () {
+      alert("456");
+    }, false)
+
+    //给body 添加事件 点击儿子  body的事件会被执行  因为是冒泡阶段:son--father--body--html--document  其他事件将被执行
+    var body = document.querySelector("body");
+    body.addEventListener("click", function () {
+      alert("body");
+    }, false)
+  </script>
+
+</body>
+
+</html>

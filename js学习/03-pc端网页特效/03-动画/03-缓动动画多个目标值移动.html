@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      background-color: pink;
+      width: 100px;
+      height: 20px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <button class="btn400">向前移动400</button>
+  <button class="btn800">向前移动800</button>
+
+  <div class="father">father</div>
+  <script>
+    var fahter = document.querySelector(".father");
+    var btn400 = document.querySelector(".btn400");
+    var btn800 = document.querySelector(".btn800");
+
+    btn400.addEventListener("click", function () {
+      move(fahter, 400)
+    })
+
+    btn800.addEventListener("click", function () {
+      move(fahter, 800)
+    })
+
+    function move(obj, falg) {
+      clearInterval(obj.time)
+      obj.time = setInterval(function () {
+        //缓动动画公式: (目标位置-自身的位置)/10
+        var step = (falg - obj.offsetLeft) / 10;
+        //移动目标会发现，和目标有偏差，这是因为上面公式有除法，会有小数，所以我们需要给变成整数
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        if (falg == obj.offsetLeft) {
+          clearInterval(obj.time);
+        } else {
+          obj.style.left = obj.offsetLeft + step + "px";
+        }
+
+      }, 30)
+    }
+
+
+  </script>
+</body>
+
+</html>

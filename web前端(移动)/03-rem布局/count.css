@@ -1,0 +1,12 @@
+.t1 {
+  width: 50px;
+  height: 100px;
+  background-color: pink;
+}
+/*
+    1:两个数值运算，有一个有单位，那么结果就以这个为准
+    2:两个数值运算，两个都有单位，那么以前面的为准
+*/
+.test {
+  width: 150rem;
+}

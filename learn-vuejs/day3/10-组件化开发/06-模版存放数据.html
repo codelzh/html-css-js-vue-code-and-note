@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!---
+  在vue中，每个模版都有属于自己的数据和方法，和vue实例差不多
+
+  但是模版在定义数据时候必须是data函数，return一个对象，
+  vue这样设计是为了每次在new一个模板对象时候，我都返回一个不同的
+  对象来存储数据，这样在交互时，多个模板数据互不影响
+-->
+
+<div id="app">
+  <mycpn></mycpn>
+</div>
+
+<template id="cpn">
+  <h2>{{message}}</h2>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+  Vue.component('mycpn',{
+    template:'#cpn',
+    data(){
+      return {
+        message:'aaaaa'
+      }
+    }
+    })
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+  })
+</script>
+
+
+</body>
+</html>

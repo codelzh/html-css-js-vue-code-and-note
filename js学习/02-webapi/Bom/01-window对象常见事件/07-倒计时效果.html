@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 1200px;
+      margin: 0 auto;
+    }
+    span{
+      float: left;
+      width: 30px;
+      height: 20px;
+      background-color: pink;
+      margin-left: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <span class="hour"></span>
+    <span class="minute"></span>
+    <span class="second"></span>
+  </div>
+  <script>
+    var hour = document.querySelector(".hour");
+    var minute = document.querySelector(".minute");
+    var second = document.querySelector(".second");
+
+
+    var futureTime = new Date("2021-7-10");
+
+    getTime();
+    setInterval(getTime,1000);
+    function getTime() {
+      var nowTime = new Date();
+      var fmisecond = futureTime.getTime();
+      var nmisecond = nowTime.getTime();
+      var time = (fmisecond - nmisecond) / 1000;
+
+      var d = parseInt(time / 60 / 60 / 24);
+      d = d < 10 ? "0" + d : d;
+      hour.innerHTML = d;
+
+      var m = parseInt(time / 60 % 60);
+      m = m < 10 ? "0" + m : m;
+      minute.innerHTML = m;
+
+      var s = parseInt(time % 60);
+      s = s < 10 ? "0" + s : s;
+      second.innerHTML = s;
+
+    }
+  </script>
+</body>
+
+</html>

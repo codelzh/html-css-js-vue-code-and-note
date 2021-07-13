@@ -1,0 +1,516 @@
+# 移动端重要细节
+
+1：没有版心
+
+2：body需要设置最大和最小值
+
+3：大盒子宽度一定是百分比或flex布局，高度可以固定写或者不写
+
+4：布局先写大盒子，先写单个元素，先搭建模型
+
+5：大盒子不需要指定宽度，用小盒子来挤，但有时候小盒子需要设置高度(有文字的盒子)
+
+
+
+# 理想视口Viewport
+
+viewport 是用户网页的可视区域。用来适配手机端的，多个手机多个分辨率，可以很好的适配.
+
+
+
+## 设置 Viewport
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
+
+ 
+
+## 属性
+
+|     属性      | 描述                                                         |
+| :-----------: | :----------------------------------------------------------- |
+|     width     | 控制 viewport 的大小，可以指定的一个值，如 600，或者特殊的值，如 device-width 为设备的宽度 |
+|    height     | 和 width 相对应，指定高度。                                  |
+| initial-scale | 初始缩放比例，也即是当页面第一次 load 的时候缩放比例。       |
+| maximum-scale | 允许用户缩放到的最大比例。                                   |
+| minimum-scale | 允许用户缩放到的最小比例。                                   |
+| user-scalable | 用户是否可以手动缩放。                                       |
+
+
+
+# 像素
+
+在pc中，一个像素对应一个px。但是在移动端，一个px不是对应像素的
+
+1：物理像素：指手机的分辨率像素
+
+2：物理像素比：px比物理像素的比例关系
+
+# 二倍图
+
+一张图片，在移动端会模糊，因为会按照物理像素比放大，所以图片会模糊。我们先把图片缩小成物理像素比的倍数(一般是/2)，手机端在进行放大，就和原来图片一样了。
+
+# 背景缩放background-size
+
+让背景图片缩小或放大
+
+| 值         | 描述                                                         |
+| :--------- | :----------------------------------------------------------- |
+| length     | 设置背景图片高度和宽度。第一个值设置宽度，第二个值设置的高度。如果只给出一个值，第二个是设置为 **auto**(自动) |
+| percentage | 图片相对于盒子的百分比。第一个值设置宽度，第二个值设置的高度。如果只给出一个值，第二个是设置为"auto(自动)" |
+| cover      | 拉伸图片，当图片达到盒子宽和高，停止拉伸                     |
+| contain    | 拉伸图片，当图片达到盒子宽和高任意一个，停止拉伸             |
+
+
+
+# 移动端页面选择
+
+移动端分单独制作移动端页面和响应式页面两种方案
+
+
+
+# 移动端技术解决
+
+1：手机浏览器大多数是webkit内核，只需要考虑webkit内核
+
+2：css初始化，推荐使用normalize.css	https://necolas.github.io/	
+
+3：在移动端可以放心的使用盒子模型box-sizing:border-box
+
+
+
+## 特殊样式细节
+
+```css
+a{
+    /*取消a标签手机端点击背景颜色*/
+    -webkit-tap-highlight-color: transparent;
+}
+
+/*取消手机端按钮默认样式*/
+-webkit-appearance: none;
+
+img,a{
+    /*取消手机端长按出现操作选项，一般是图片和a标签*/
+    -webkit-touch-callout: none;
+}
+```
+
+
+
+# 流式布局(百分比布局)
+
+摒弃px，采用%布局
+
+max-width	最大放大宽度
+
+min-width	最小缩小宽度
+
+上面两个属性在移动布局中是必须给body设置的，流式布局是按照屏幕大小来进行放大或缩小的，在pc中我们不能让它和pc屏同高，缩小时也不能让布局变小到离谱
+
+
+
+# 流式布局京东案例
+
+重要细节
+
+1：body可以设置100%，因为流式布局很多个元素都是100%，设置body，自动继承
+
+2：body要设置最大宽高
+
+3：圣杯布局：中间搜索框用的就是，左右固定，中间随着屏幕变化而变化
+
+4：图片底部有默认空隙
+
+5：div里面有图片，div想要圆角效果，但是添加后图片不会被成为圆角，这时候使用overflow
+
+
+
+# 二倍精灵图移动端做法
+
+1：先在pw中缩放精灵图为原来的一半
+
+2：写坐标
+
+3：代码里的background-size也要缩放，缩放至精灵图的一半
+
+
+
+# flex布局
+
+flex布局就是通过给父盒子添加flex属性，来控制子盒子的位置和排列顺序
+
+当我们为父盒子设置flex布局后，子盒子的float，clear，vertical-align属性将失效
+
+
+
+## flex布局父项属性
+
+flex-direction:决定主轴的方向，主轴向哪里，元素就向哪里
+
+- `row`（默认值）：主轴为x方向，起点在左端。
+- `row-reverse`：主轴为x方向，起点在右端。
+- `column`：主轴为y方向，起点在上沿。
+- `column-reverse`：主轴为y方向，起点在下沿。
+
+
+
+justify-content:属性定义了元素在主轴上的对齐方式。
+
+- flex-start（默认值）：左对齐
+- flex-end：右对齐
+- center： 居中
+- space-around：每个项目两侧的间隔相等。
+- space-between：两端对齐，项目之间的间隔都相等。
+
+
+
+flex-wrap:默认情况下，项目都排在一条线（又称"轴线"）上`flex-wrap`属性定义，如果一条轴线排不下，如何换行。
+
+* nowrap：（默认值）不换行
+* wrap：换行
+
+
+
+align-items：控制元素在侧轴上的方向（单行）
+
+- `flex-start`：侧轴的起点对齐。
+- `flex-end`：侧轴的终点对齐。
+- `center`：侧轴的中点对齐。
+- `stretch`：拉伸
+
+
+
+align-content：控制元素在侧轴上的方向（多行）
+
+- `flex-start`：与侧轴的起点对齐。
+
+- `flex-end`：与侧轴的终点对齐。
+
+- `center`：与侧轴的中点对齐。
+
+- `space-around`：每根轴线两侧的间隔都相等。
+
+- `space-between`：与侧轴两端对齐，轴线之间的间隔平均分布。
+
+- `stretch`：轴线占满整个交叉轴。
+
+  
+
+单行与多行判断的标准是，是否进行了换行。
+
+单行必须用align-item	多行必须使用align-content
+
+
+
+flex-flow
+
+相当于flex-direction和flex-wrap的合并写法
+
+
+
+
+
+| 属性                  | 描述                                                         | 参数                                                         |
+| --------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| flex-direction        | 决定主轴的方向，主轴向哪里，元素就向哪里                     | row \| row-reverse \| column \| column-reverse               |
+| justify-content       | 属性定义了元素在主轴上的对齐方式。                           | flex-start \| flex-end \| center \| space-around \| space-between |
+| flex-wrap             | 默认情况下，项目都排在一条线（又称"轴线"）上`flex-wrap`属性定义，如果一条轴线排不下，如何换行。 | nowrap \| wrap                                               |
+| align-items（单行）   | 属性定义了元素在侧轴上的对齐方式(单行)。                     | flex-start \| flex-end \| center \| stretch                  |
+| align-content（多行） | 属性定义了元素在侧轴上的对齐方式（多行）。                   | flex-start \| flex-end \| center \| space-between \| space-around \| stretch |
+| flex-flow             | 相当于flex-direction和flex-wrap的合并写法                    |                                                              |
+
+
+
+
+
+## 子项flex属性的使用
+
+flex属性定义子项分配剩余空间的，具体看代码案例
+
+
+
+### align-self和order
+
+align-self：控制子项在侧轴的对齐方式
+
+order：定义元素的排列顺序	从0开始
+
+
+
+# 携程网案例细节
+
+
+
+核心：![](E:\前端学习\web前端(移动)\画图\flex常用布局.png)
+
+
+
+
+
+
+
+# 背景线性渐变
+
+语法：background-image: linear-gradient(direction, color-stop1, color-stop2,)
+
+必须加浏览器私有前缀，起始方向可以是方向或度数，默认是top
+
+
+
+# rem布局
+
+## rem基础
+
+1：rem是一种单位，它是相对于html的字体大小的 1rem=html字体大小
+
+## 媒体查询
+
+媒体查询是css3新语法，使用媒体查询可以针对不同的屏幕设置不同的样式
+
+语法：
+
+@media *mediatype* and|not|only *(media feature)* {*
+  CSS-Code
+}
+
+@media是声明
+
+mediatype是媒体类型，也就是什么设备	值：all(全部)	print(打印机)	scree(屏幕)
+
+and|not|only	是关键字
+
+media feature	媒体特性，暂时了解三个：
+
+| width     | 定义输出设备中的页面可见区域宽度。     |
+| --------- | -------------------------------------- |
+| max-width | 定义输出设备中的页面最大可见区域宽度。 |
+| min-width | 定义输出设备中的页面最小可见区域宽度。 |
+
+
+
+
+
+# less的使用
+
+
+
+*Less* 是一门 CSS 预处理语言,它扩展了 CSS 语言,增加了变量、Mixin、函数等特性。*Less* 可以运行在 Node 或浏览器端。
+
+
+
+## 变量
+
+语法：@变量名：值
+
+区分大小写，不能有特殊字符
+
+
+
+## 使用vscode编译less
+
+less需要编译，先使用vscode插件吧。...webstom没插件。
+
+vscode 插件	easy lees 
+
+
+
+## less嵌套
+
+```less
+.t1{
+    //这样写嵌套的css
+   span{
+        color: pink;
+    }
+}
+
+
+.t2{
+    // 伪链接选择器，伪元素选择器，需要加上&
+    &:hover{
+        font-size: 20px;
+        color: red;
+    }
+}
+
+.t2{
+    &::after{
+        content: "";
+    }
+}
+```
+
+
+
+## less运算
+
+```less
+//直接在后面运算就可以
+.t1{
+    width: 100px - 50;
+    height: 100px;
+    background-color: pink;
+}
+
+//数值单位的细节
+/*
+    1:两个数值运算，有一个有单位，那么结果就以这个为准
+    2:两个数值运算，两个都有单位，那么以前面的为准
+*/
+
+.test{
+    // 结果: 150rem
+    width: 100rem + 50px;
+}
+
+
+```
+
+
+
+
+
+## rem布局方案
+
+看图和案例
+
+
+
+## rem苏宁案例细节
+
+1：导入初始化normal.css，创建images，upload文件夹，创建index.html
+
+2：创建commom.less	这个是用来控制多个设备的html大小
+
+
+
+## rem核心
+
+1：px元素全部转换为rem，盒子都是自适应并且有宽高，布局大盒子里面盒子的宽和body同宽，高自己通过设计稿计算rem
+
+2：body要设置宽   //设置body，和width效果一样  设计稿宽/ (设计稿宽/划分份数)15
+
+3：给html 初始font-size值，所有rem值都是依照这个来写
+
+4：屏幕划分10 15 20 份都行
+
+
+
+## flexible.js的使用
+
+这个是把屏幕划分了10份，里面写了媒体查询，自己不用写。
+
+细节：但是自己要设置一个媒体查询来限制最大尺寸，来控制font-size。因为flexible是根据屏幕来划分的，会非常大
+
+
+
+
+
+# 黑马页面案例
+
+使用flex rem 媒体查询 flexible.js 来进行布局
+
+## swiper来实现旋转木马
+
+swiper是ui框架，主打滑动效果
+
+使用：1,下载swiiper，导入swiper的css和js	2,去演示站打开想要的效果，查看网页源代码，复制。
+
+https://www.swiper.com.cn/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

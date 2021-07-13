@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="images/z.gif" alt="">
+  <span>早上好</span>
+
+  <script>
+    var img = document.querySelector("img");
+    var span = document.querySelector("span");
+    var time = new Date();
+    var h = time.getHours();
+
+    if (h < 12) {
+      img.src = "images/z.gif";
+      span.innerHTML = "早上好"
+    } else if (h < 18) {
+      img.src = "images/s.gif";
+      span.innerHTML = "上午好"
+    } else {
+      img.src = "images/w.gif";
+      span.innerHTML = "晚上好"
+    }
+  </script>
+</body>
+
+</html>

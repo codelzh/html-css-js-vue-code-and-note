@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .father{
+        width: 200px;
+        height: 200px;
+        background-color: #ff8500;
+
+        /*解决方案
+          当div嵌套时候，给子设置外边距，子没成功设置，反倒是父div设置了
+          解决1:给父border
+              2:给父内边距
+              3:给父属性 overflow:hidden;
+
+        */
+
+        /*border: 1px solid transparent;*/
+        /*padding: 1px;
+		*/
+		
+		overflow:hidden;
+    }
+
+    .son{
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="father">
+  <div class="son"></div>
+</div>
+</body>
+</html>

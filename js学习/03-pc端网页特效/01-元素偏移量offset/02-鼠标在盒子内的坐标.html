@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .box{
+      width: 200px;
+      height: 100px;
+      background-color:pink;
+      margin: 100px auto;  
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box"></div>
+  <script>
+    //用pagex - offsetleft  就是盒子内的x坐标
+    var div = document.querySelector(".box");
+    div.addEventListener("mousemove",function(e){
+      var x = e.pageX - div.offsetLeft;
+      var y = e.pageY - div.offsetTop;
+      console.log(x);
+      console.log(y);
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      /*
+      原来默认的计算方法，设盒子为200*200,我需要调整盒子大小
+      */
+    .one{
+        box-sizing: content-box;
+        width: 160px;
+        height: 160px;
+        padding: 10px;
+        border: 10px solid red;
+        background-color: #2ca5e0;
+
+    }
+
+      /*
+      新的计算方法，css3自动调整，设盒子为200*200，这时候我不需要调整盒子大下
+      */
+    .two{
+        box-sizing:border-box;
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+        border: 10px solid red;
+        background-color: #2ca5e0;
+    }
+  </style>
+</head>
+<body>
+
+<div class="one"></div>
+<p></p>
+<div class="two"></div>
+
+</body>
+</html>

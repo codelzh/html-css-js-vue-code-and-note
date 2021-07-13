@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function getrandom(min, max) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    var random = getrandom(0, 10);
+    console.log(random);
+    var num = window.prompt("输入一个数字");
+    num = Number(num)
+    while (true) {
+      if (num > random) {
+        alert("大了");
+      }
+
+      if (num < random) {
+        alert("小了");
+      }
+
+      if (num == random) {
+        alert("对了，退出程序")
+        throw SyntaxError();
+      }
+      num = window.prompt("继续");
+    }
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .d1{
+        border: #ff8500 solid 2px;
+    }
+
+    .d2{
+        border: #ff8500 solid 2px;
+    }
+
+    .d2>img{
+        vertical-align: middle;
+    }
+  </style>
+</head>
+<body>
+
+<!--在div里嵌套图片，可能会有空白区域，原因是行内快元素是和基线对齐的-->
+<!--解决方案，给图片设置vertical-align属性-->
+
+<div class="d1">
+  <img src="../images/tudou.jpg" alt="">
+  我是个
+</div>
+
+<p></p>
+
+<div class="d2">
+  <img src="../images/tudou.jpg" alt="">
+  我是个
+</div>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+      .box{
+          width: 200px;
+          height: 100px;
+          position: relative;
+          margin: auto;
+          transition: all 2s;
+          perspective: 500px;
+          /* 让子元素保持3d立体空间环境 */
+          transform-style: preserve-3d;
+      }
+
+      .box div{
+          width: 200px;
+          height: 100px;
+          position: absolute;
+          left: 0;
+      }
+    .box div:first-of-type{
+        background-color: skyblue;
+    }
+
+    .box:hover{
+        transform: rotateY(180deg);
+    }
+
+    .box div:last-of-type{
+        background-color: pink;
+        transform: rotateX(80deg);
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <div></div>
+  <div></div>
+</div>
+
+</body>
+</html>

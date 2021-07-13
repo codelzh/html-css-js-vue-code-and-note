@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      div{
+          /*flex布局是添加到父亲上面，来控制子盒子*/
+          display: flex;
+          /*设置主轴从左到右*/
+          flex-direction: row;
+          /*左对齐 默认值*/
+          /*justify-content: flex-start;*/
+          /*右对齐*/
+          /*justify-content: flex-end;*/
+          /*居中对齐*/
+          /*justify-content: center;*/
+          /*两端相等*/
+          /*justify-content: space-around;*/
+          /*两端对齐，中间相等*/
+          justify-content: space-between;
+
+
+          width: 500px;
+          height: 200px;
+          background-color: pink;
+      }
+
+      div span{
+          width: 100px;
+          height: 100px;
+          background-color: skyblue;
+          margin-left: 5px;
+      }
+  </style>
+</head>
+<body>
+
+<div>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+</div>
+
+</body>
+</html>

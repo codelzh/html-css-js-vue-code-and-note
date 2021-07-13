@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .box{
+        width: 300px;
+        margin: auto;
+        border: 1px solid red;
+    }
+
+    .box>div{
+        width: 100px;
+        height: 100px;
+        float: left;
+        background: skyblue;
+    }
+
+    .box::after,.box::before{
+        content: "";
+        display: table;
+        clear:both;
+    }
+
+    .other{
+        width: 100px;
+        height: 100px;
+        background: #ff8500;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+  <div>son</div>
+  <div>son</div>
+</div>
+
+<div class="other">打酱油的</div>
+
+</body>
+</html>

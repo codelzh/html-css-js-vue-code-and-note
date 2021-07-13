@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app" >
+
+  <div v-on:click="divbtn">
+    <!--stop禁止冒泡--->
+    <button @click.stop="btn1">123</button>
+  </div>
+
+  <!--prevent禁止元素默认事件-->
+  <input type="submit" @click.prevent="btn1"></input>
+
+  <!--键盘事件--->
+  <input type="text" v-on:keyup.enter="keyup">
+
+  <!--once只调用一次方法--->
+  <button v-on:click.once="btn1">123</button>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+    methods:{
+      divbtn(){
+        console.log('divbtn')
+      },
+      btn1(){
+        console.log('btn')
+      },
+      keyup(){
+        console.log('keyup')
+      }
+    },
+
+
+  })
+</script>
+
+</body>
+</html>

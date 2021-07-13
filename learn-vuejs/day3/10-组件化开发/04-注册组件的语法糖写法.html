@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <mycpn1></mycpn1>
+  <mycpn2></mycpn2>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+
+  //全局组件语法糖写法，内部也是调用的extend
+  Vue.component('mycpn1',{
+    template:`
+      <div>
+        <h1>哈哈哈</h1>
+      </div>
+    `
+  })
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+    //局部组件语法糖写法 组件名称:组件值
+    components:{
+      mycpn2:{
+        template:`
+      <div>
+        <h1>哈哈哈</h1>
+      </div>
+    `
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--()没有参数可以省略-->
+  <button v-on:click="btn1">11</button>
+  <button v-on:click="btn1()">11</button>
+
+<p></p>
+
+  <!--
+    ()有参数,如果没传，则是undefind，如果省略括号则是浏览器生成的event对象
+  -->
+  <button v-on:click="btn2()">11</button>
+  <button v-on:click="btn2">11</button>
+
+  <p></p>
+
+  <!--
+    想要event对象，又想传参数，使用$event 固定写法
+  -->
+  <button v-on:click="btn3(123,$event)">11</button>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      number:0
+    },
+    methods:{
+      btn1(){
+        console.log('123')
+      },
+      btn2(test){
+        console.log(test);
+      },
+      btn3(number,event){
+        console.log(number)
+        console.log(event)
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

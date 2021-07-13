@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="d1"></div>
+  <div class="d2"></div>
+  <div>我是标签</div>
+
+  <script>
+    //querySelector只是获取第一个
+    var d1 = document.querySelector("#d1");
+    console.log(d1);
+    var d2 = document.querySelector(".d2");
+    console.log(d2);
+    var d3 = document.querySelector("div");
+    console.log(d3);
+
+    //使用querySelectorAll 来获取全部 用法和上面一样
+    var d4 = document.querySelectorAll("div");
+    console.log(d4);
+  </script>
+</body>
+
+</html>

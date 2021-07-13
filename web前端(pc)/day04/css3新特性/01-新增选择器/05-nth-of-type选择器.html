@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    ul li:first-of-type{
+        color: #00a4ff;
+    }
+
+    ul li:last-of-type{
+        color: #ff8500;
+    }
+
+    /*
+    这行代码不会运行，因为child运行机制是：
+    先找到所有孩子，把孩子123划分起来，然后用第一个元素和div比(前面指定的元素比较).如果相同则选择，不同则舍弃
+    */
+    section div:first-child{
+        background-color: black;
+    }
+
+    /*
+    这行代码可以运行，type-of的运行机制是：
+    先找到所有div(前面指定的元素)，然后在123逐个寻找
+    */
+    section div:first-of-type{
+      background-color: #1c036c;
+    }
+  </style>
+</head>
+<body>
+
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+</ul>
+
+<section>
+  <p>电灯泡</p>
+  <div>男生</div>
+  <div>女生</div>
+</section>
+
+</body>
+</html>

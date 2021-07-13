@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="jquery.js"></script>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+    }
+
+    .tab-index{
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    .top-nav{
+      width: 300px;
+      height: 21px;
+      background-color: pink;
+    }
+
+    .top-nav ul li{
+      float: left;
+      list-style:none;
+      width: 50px;
+      /* margin-left: 5px; */
+      text-align: center;
+    }
+
+    .content div{
+      display: none;
+    
+    }
+    
+    .active{
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="tab-index">
+    <div class="top-nav">
+      <ul>
+        <li class="active">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </ul>
+    </div>
+    <div class="content">
+      <div style="display: block;">内容1</div>
+      <div>内容2</div>
+      <div>内容3</div>
+      <div>内容4</div>
+      <div>内容5</div>
+    </div>
+  </div>
+
+  <script>
+    $(".top-nav li").mouseover(function(){
+      $(this).siblings().removeClass("active");
+      $(this).addClass("active");
+
+      var index = $(this).index();
+      $(".content div").css("display","none");
+      $(".content div").eq(index).css("display","block");
+    })
+  </script>
+</body>
+</html>

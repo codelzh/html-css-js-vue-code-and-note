@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  在开发中，我想访问一个子组件的属性，或者方法
+  可以使用$children(用得少) or $refs
+
+  children:获取本模块中所有子模块，以数组形式返回
+
+-->
+
+<div id="app">
+  <mycpn ref="a"></mycpn>
+  <mycpn></mycpn>
+  <mycpn></mycpn>
+
+  <button @click="btnchildren">访问所有子组件-children</button>
+  <button @click="btnrefs">访问指定子组件-refs</button>
+</div>
+
+<template id="cpn">
+  <div>
+    <h1>我是子组件</h1>
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+
+<script>
+  const cpn = {
+    template:'#cpn',
+    data(){
+      return {name:'zs'}
+    }
+  }
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+    components:{
+      mycpn:cpn
+    },
+    methods:{
+      btnchildren(){
+        console.log(this.$children[0].name)
+      },
+      btnrefs(){
+        console.log(this.$refs.a.name)
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

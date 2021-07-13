@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <!---默认格式直接遍历的value-->
+  <ul>
+    <li v-for="item in stu">{{item}}</li>
+  </ul>
+
+  <!---
+  完整格式:(value,key,index)
+   -->
+  <ul>
+    <li v-for="(value,key,index) in stu">{{index}}.{{key}}.{{value}}</li>
+  </ul>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      stu:{
+        name:'zhangsan',
+        age:'18',
+        sex:'man'
+      },
+
+    }
+  })
+</script>
+
+
+</body>
+</html>

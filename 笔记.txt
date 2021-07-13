@@ -1,0 +1,391 @@
+为什么要使用模块化？
+如果不使用模块化，那么会有变量被修改，逻辑错误，不方便维护等问题
+什么是模块化？
+核心就是导入和导出，模块化也有多种规范：如CommonJS  ES6等
+
+webpack是什么
+webpack就是模块和打包,把开发时候写的模块化代码打包成大部分浏览器可以使用的
+
+webpack运行需要(依赖)node,node环境运行需要各种依赖包，npm就是用来管理包的node packages manager
+
+
+dist目录用来存放用来发布的代码,src存放源代码
+
+
+
+
+---------------------------
+一、webpack的基本配置
+webpack.config.js文件
+每个目录下应该有一个webpack.config.js的文件，这个文件用于配置webpack的
+2:webpack自动化打包，在之前使用的打包是webpack ./(要打包的js入口文件)  ./(打包后的js文件)
+如何在终端输入webpack 就让它自动打包？
+
+使用如CommonJS命令在config文件里配置
+这个path必须是绝对路径，如果直接写上绝对路径，可以是可以，但是项目一旦发生改变，我又要
+重新写path==	如何解决？
+
+modlue.exports = {
+  entry:'./src/main.js',
+  output:{
+    path:,
+    filename:'bundle.js'
+  }
+}
+
+package.json文件
+使用node命令,使用node命令之前要初始化
+npm init
+
+
+const path = require('path')
+
+这时候可以使用node了，使用path.resolve(__dirname ,'dist')获取绝对路径，这时候就配置好了
+module.exports = {
+  entry:'./src/main.js',
+  output:{
+    path:path.resolve(__dirname ,'dist'),
+    filename:'bundle.js'
+  }
+}
+
+
+全局webpack和局部webpack
+全局webpack是计算机上安装的,但是每个项目里面也可以有一个webpack
+
+在项目中安装局部webpack
+npm install webpack@3.6.0 save-dev
+安装好后json文件多了个dependencies，这个是开发时依赖
+save是运行时依赖
+
+命令的简化
+npm run .. 
+后面的命令是json文件里的script的对象后面语法
+写上	"build":"webpack"
+npm run build 
+自动打包
+
+总结：
+1:一个项目先创建webpack.config.js文件，在里面配置webpack打包语法
+2:初始化node环境，因为上面的绝对路径有依赖node语法 npm init
+3:安装局部webpack  npm install webpack@3.6.0 save-dev
+
+以上三步是webpack的基本配置
+
+
+
+
+
+----------------------------
+二:webpack的css处理
+在使用css中，我也希望是模块化，只引用一个
+在上面一，基础上添加一个css文件，在main.js中依赖导入(依赖这个css文件)
+得webpack在用这一个main.js文件，把css也给我打包了
+require("./css/ordinary.css")
+
+npm run build 
+报错
+You may need an appropriate loader to handle this file type.
+
+
+所以需要一个loader,loader可以看作webpack的升级，webpack本身只能打包js，
+但是我们也需要其他的，所以loader就出现了，不同的loader有不同的功能
+
+我们去官网上找loader webpackjs.com
+
+随后安装npm npm install --save-dev css-loader
+--save 指的是运行和开发公用一个
+--save-dev 只开发时候使用
+
+在webpack.config.js配置
+
+值得一提的是，webpack 的版本和loader 版本，要兼容，如果代码没错，那么请卸载
+loader:npm uninstall 名称，在指定loader版本安装 npm install loader名称@3.6(版本号)
+
+
+css-loader用来加载css的，不会把css加载到html，如果要加载在添加一个style-loader，具体看文档
+
+
+总结：webpack只能打包js，如果想处理其他文件，请下载不同的loader
+最后加载成功，webpack把css代码直接添加到dom中，而我index.html只是引用了一个main.js，就可以做到
+全部导入，这一点很厉害..
+
+
+
+
+
+----------------------------
+三：loader处理图片
+在css里添加图片，加载css时候会将图片当作模块进行加载
+
+去官网上找处理图片loader
+url-loader
+npm install --save-dev url-loader@1.1.2
+
+url-loader 
+limit: 20000  这个属性，后面是20000kb，如果图片小于这个，
+那么在浏览器以base64的形式显示
+
+如果图片大于这个，那么将使用file-loder解析，把图片放到dist目录
+filter的使用
+如果图片大于limit，发现浏览器并不能解析图片，因为图片在dist目录
+在webconfigjs中添加 publicPath:'dist/',   本项目url默认路径都已这个开始
+
+filter-loader有一个属性name。这个属性可以设置在filter图片中的名字
+
+
+--------------
+四：babel-loader
+这个loader用来打包模块,把代码全部转为es5
+
+
+
+
+
+---------------
+五：webpack里面使用vue
+在webpack中vue也是一个模块
+1:安装vue npm install vue --save
+2:导入vue  import Vue from 'vue'
+3:vue分runtime-only 和 runtime-compiler
+
+runtime-only运行版本，不能有template vue也是一个template所以报错
+runtime-compiler 开发版本
+默认是 only版本
+
+4:指定版本(官网上有)
+module.exports = {
+  // ...
+  resolve: {
+    alias: {
+      'vue$': 'vue/dist/vue.esm.js' // 用 webpack 1 时需用 'vue/dist/vue.common.js'
+    }
+  }
+}
+
+
+
+----------------------------
+六：vue在webpack中使用
+一个组件同时出现template 和el  template的模版会代理el前端挂载的dom
+这样前端就不用写代码了,就一个html页面。
+
+npm install vue-loader@15.4.2 vue-template-compiler@2.5.21 --save-dev
+安装vue模块，这样可以在webpack使用vue
+
+
+
+----------------
+七：webpack使用插件
+插件是webpack的扩充，而loader是类型转换器
+具体在官方文档里看吧。。
+
+
+
+----------------
+八：webpack搭建本地服务器
+我们没写一次代码想测试就'webpack'一次，有没有解决办法？
+搭建本地服务器 	npm install --save-dev webpack-dev-server@2.9.3
+dev-server是一个模块，它的作用是搭建一个本地服务器，我们的代码全在
+内存里跑，并且是实时刷新的，我们代码并不会存在硬盘上，代码写好后,'webpack'一次
+就存到硬盘了
+
+
+---------------
+九：把webpackconfigjs抽离
+我们发现一个config文件里很多代码，我们给它分离出去，一个开发时候用，一个编译时候用
+
+
+
+-------------------
+十：使用vue cli 构建项目
+之前配置太麻烦了，使用cli可以一键配置，cli也依赖node，下载是使用npm的
+具体下载看官网
+
+
+
+
+----------------
+十一：runtime-compiler 和runtime-only
+在构建项目时候可以选择使用这其中一个，这两个有什么区别？
+compiler:在渲染dom元素时候，过程如下:
+template -> ast -> render -> vdom - dom
+compiler是先把template编译
+
+only:在渲染dom元素的时候，过程如下
+render -> vdom -> dom
+直接省略了前两步
+
+它们的区别在于main.js中。在noly中，我只需要提供一个render函数就可以渲染dom元素 
+
+.vue文件中的template 直接会被vue-template-compiler 这个编译为runder函数，所以only是没有template的存在
+	
+
+
+ 
+
+-----------------------
+十二：前端渲染和后端渲染
+第一阶段：后端渲染:发送url，后端处理数据，后端使用jsp,php 把数据渲染到dom元素，
+在发送给浏览器，浏览器显示
+
+第二阶段:前后端分离：前端先请求静态资源，然后再以ajax的方式像api服务器发送请求，
+后端接收数据并处理数据，后端json返回前端，前端接收，在渲染，每次请求都是一次渲染
+
+第三阶段：
+spa阶段，前端请求一资源，前端进行不是必须请求数据的操作，就可以从第一次请求的
+资源中，进行分离，直接显示到浏览器
+
+后端渲染就是url和后端的一个映射关系，发送哪个url，后端对应的渲染
+前端渲染就是url和前端的一个映射关系，后端负责数据传输无须渲染，前端负责数据的展示
+
+后二阶段都是前端渲染
+
+
+
+-----------------------
+十三：url的hash 和history
+location.hash 给当前页面一个值
+
+history.puchState() 给页面一个值，这个值以栈结构保存
+history.replaceState() 替换当前页面，不进行保存
+history.go(int) 返回或前进栈里面的网页
+history.back() 前进一个网页 back()=go(1)
+
+
+---------------------
+十四：npm 使用router前端路由
+前端路由就是url和页面的映射关系
+cli构建项目时候选择router，在router目录下index.js 注册router插件，创建router对象，导出
+rouoter对象，并在main.js中引入router对象
+
+
+
+tag="button" 设置路由组件渲染的元素
+replace 路由元素不会有历史记录，不进行pushState，
+active-class=""	设置单个路由元素默认class值
+
+
+------------------
+十五：通过代码进行路由跳转
+给dom绑定事件，组件里写对应的methods，调用this.$router.push('/about')，router
+就相是index.js定义的router，vue会给每个模版一个 push=pushState一样
+
+-----------------
+十六：动态路由
+在某些场面需要传递用户参数，比如 user/userid
+这个id怎么从首页传过去？
+1:单个传递
+1、在router中配置path /user/:userid  :是特殊符号
+2、在router-link 配置to v-bind:to="'/user/'+name"  
+
+2:多个传递
+1、:to="{path:'profile',query:{name:'zhangsan',age:12}直接在router-link上配置
+2、给dom绑定事件，在方法里配还是$router这个方法，只不过是对象形式
+this.$router.push({path:'/profile',query:{name:'zhangsan',age:'18'}})
+
+-----------------
+十七:嵌套路由
+路由下面还有路由，在inex.js(router)配置children
+
+
+--------------------
+十八：路由懒加载
+在index.js(router)文件中，配置模块和path对应关系
+模块是需要一个个导入的 import ...
+但是这样在打包dist文件时候，会全部为打包一个js文件，在后期这个文件会越来越大
+用户请求这个文件也会很慢，体验不好
+
+路由懒加载就是解决这的，路由懒加载可以把导入的模块，打包时候分为一个个的js
+const profile = () => import('../components/Profile') 路由懒加载的写法
+
+
+
+-------------------------
+十九：router 和 route
+router和route都可以在模块中通过this. 来获取到，因为vue配置的
+router 是index.js中的那个router，用来控制页面跳转的，因为它的方法.
+route 是 index.js中的route对象，是个数组[],route对象也是routes映射关系的活跃(被点击)对象
+
+
+----------------
+二十：全局守卫
+用来监控页面的，有多个方法，如果网页发生对应的操作，将调用这个全局守卫函数
+
+
+-----------------------
+二十一：router-view 和keep-alive
+每个模块都有自己的生命周期
+
+//组件生命周期函数，当函数被创建，调用此函数
+created(){},
+
+//当函数被销毁，调用此函数，组件显示---路由跳转其他页面，就是一次创建销毁
+destroyed(){},
+
+//当组件是活跃状态，执行此函数，此函数对应的组件必须keep-alive里面，才会生效，才不会被销毁
+activated() {},
+
+//当组件是不活跃状态，执行此函数，此函数对应的组件必须keep-alive里面，才会生效，才不会被销毁
+deactivated(){},
+
+如果模块渲染在route-view中，那么每次点击，跳转其他路由，就是一次生命周期(创建---离开---销毁)
+
+router-view可以在keep-alive中，如果这样，跳转其他路由，本模块被不销毁(创建--离开---依然存在)
+
+
+
+
+
+
+
+
+
+
+
+
+------------------------------------------
+vueX
+一：什么是vuex？
+vuex就是多个模块之间的一个共享域，在多个模块进行数据传输的时候，如果数据不方便传输，
+那我们就可以放到vuex中
+
+
+简单使用：
+1：安装npm install vuex --save
+2：注册vuex插件
+3:vue对象中挂载
+
+
+
+
+state：Vuex的基本数据，用来存储变量。
+getters：相当于vue的计算属性，state的数据我想返回，但是返回的数据在state基础上要改变，就可以用这个
+mutation：提交更新数据的方法，必须是同步的，如果需要异步使用action。每个 mutation 都有一个字符串的事件类型和一个回调函数handler。
+action：和mutation的功能大致相同，不同之处在于action 提交的是mutation，而不是直接变更状态。action 可以包含任意异步操作。在浏览器
+中可以通过一个devtools浏览器插件进行调试追踪
+modules：模块化Vuex，可以让每一个模块拥有自己的state、mutation、action、getters，使得结构非常清晰，方便管理。
+
+
+
+二：mutation的动态响应
+1:vuex的store中的数据是响应式的，数据发生改变，页面也随着改变
+2:如果在mutation中修改数据，必须使用有响应式的方法，否则修改了，页面不会发生改变
+
+
+
+
+
+------------------
+新项目
+1：创建目录结构
+2：起别名
+3：导入tabbat
+
+
+
+
+
+
+
+

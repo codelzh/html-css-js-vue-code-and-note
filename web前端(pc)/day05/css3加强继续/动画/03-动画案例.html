@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body{
+          background-color: #5a5a5a;
+      }
+    .map {
+        position: relative;
+        width: 747px;
+        height: 617px;
+        margin: auto;
+        background: url("../../images/map.png");
+    }
+
+    .map .drop{
+        position: absolute;
+        top: 228px;
+        right: 192px;
+        width: 8px;
+        height: 8px;
+        background-color: skyblue;
+        border-radius: 50%;
+    }
+    .map .drop div[class^="pulse"]{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        width: 8px;
+        height: 8px;
+        box-shadow: 0 0 12px #2ca5e0;
+        border-radius: 50%;
+        animation-name: move;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+    }
+
+      .map .drop div:nth-of-type(2){
+          animation-delay: 0.5s;
+      }
+
+      .map .drop div:nth-of-type(3){
+          animation-delay: 1s;
+      }
+
+
+      @keyframes move {
+        0%{}
+        75%{
+            width: 16px;
+            height: 16px;
+        }
+        100%{
+            width: 32px;
+            height: 32px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+<div class="map">
+  <div class="drop">
+    <div class="pulse1"></div>
+    <div class="pulse2"></div>
+    <div class="pulse3"></div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+body {
+  min-width: 320px;
+  width: 10rem;
+  max-width: 750px;
+  margin: 0 auto;
+  line-height: 1.5;
+  font-family: Arial, Helvetica, STHeiTi, sans-serif;
+  background: #f2f2f2;
+}

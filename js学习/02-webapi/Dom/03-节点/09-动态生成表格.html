@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    table {
+      width: 200px;
+      margin: 0 auto;
+    }
+
+    thead {
+      background-color: #cccccc;
+
+    }
+
+    tr td {
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+
+<body>
+  <table>
+    <thead>
+      <tr>
+        <td>姓名</td>
+        <td>科目</td>
+        <td>成绩</td>
+        <td>操作</td>
+      </tr>
+    </thead>
+
+    <tbody>
+
+    </tbody>
+
+  </table>
+
+  <script>
+    var stu = [{
+        name: "张三",
+        subject: "Java",
+        score: 100,
+      },
+      {
+        name: "李四",
+        subject: "Java",
+        score: 80,
+      },
+
+      {
+        name: "王五",
+        subject: "Java",
+        score: 100,
+      },
+
+    ]
+
+    //动态添加数据
+    for (var i = 0; i < stu.length; i++) { //控制行  数组length决定行
+      var tbody = document.querySelector("tbody");
+      var tr = document.createElement("tr");
+      tbody.appendChild(tr);
+
+      for (key in stu[i]) { //控制列  遍历对象  添加td
+        // console.log(stu[i][key]);
+        var td = document.createElement("td");
+        td.innerHTML = stu[i][key];
+        tr.appendChild(td);
+      }
+
+      //添加删除的td
+      var removetd = document.createElement("td");
+      removetd.innerHTML = '<a href="javascript:;">删除</a>';
+      tr.appendChild(removetd);
+    }
+
+    //给删除绑定事件
+    var remove = document.querySelectorAll("a");
+    for (var i = 0; i < remove.length; i++) {
+      remove[i].onclick = function () {
+        tbody.removeChild(this.parentNode.parentNode)
+      }
+
+    }
+  </script>
+</body>
+
+</html>

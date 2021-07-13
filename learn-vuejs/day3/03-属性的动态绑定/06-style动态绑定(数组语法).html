@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    style的数组绑定 直接是对象
+  -->
+  <div :style="[fontcolor,back]">1</div>
+
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      fontcolor:{color:'blue'},
+      back:{backgroundColor:'red'}
+    }
+  })
+</script>
+
+</body>
+</html>

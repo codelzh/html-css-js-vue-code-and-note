@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      *{
+          padding: 0;
+          margin: 0;
+      }
+
+      .box{
+          width: 1536px;
+          height: 769px;
+          margin: 0 auto;
+          background-color: #cccccc;
+      }
+
+      .left{
+          float:left;
+          width: 298px;
+          height: 767px;
+          background-color: purple;
+      }
+
+      .right{
+        width: 1238px;
+          height: 767px;
+          float: left;
+      }
+      .right>div{
+          width: 293px;
+          height: 366px;
+          background-color: pink;
+          float: left;
+          margin-left: 16px;
+          margin-top: 12px;
+      }
+      .right .last{
+          padding-right: 0;
+      }
+  </style>
+
+</head>
+<body>
+<div class="box">
+  <div class="left">0</div>
+  <div class="right">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+    <div>4</div>
+    <div>5</div>
+    <div>6</div>
+    <div>7</div>
+    <div class="last">8</div>
+  </div>
+
+</div>
+
+</body>
+</html>

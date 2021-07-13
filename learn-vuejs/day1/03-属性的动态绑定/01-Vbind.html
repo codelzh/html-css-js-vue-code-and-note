@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    给属性动态绑定值，在前面加上v-bind:  src="" 里面则解析的是vue数据
+  -->
+  <img v-bind:src="message" alt="">
+
+  <!--
+    语法糖写法(快捷写法),在属性前面加上:，就等同于b-bind:
+  -->
+  <img :src="message" alt="">
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1819216937,2118754409&fm=26&gp=0.jpg'
+    }
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+body {
+  min-width: 320px;
+  max-width: 750px;
+  margin: 0 auto;
+  background-color: #f2f4f7;
+}
+@media screen and (min-width: 750px) {
+  html {
+    font-size: 75px;
+  }
+}
+.header {
+  height: 0.85714286rem;
+  text-align: center;
+  font-size: 0.5rem;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid #ffffff;
+}
+.nav-index {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+}
+.nav-index a {
+  flex: 33%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.74285714rem;
+  text-align: center;
+  text-decoration: none;
+  color: #707070;
+}
+.nav-index a img {
+  flex: 1;
+  width: 1.42857143rem;
+  height: 1.42857143rem;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+.nav-index a span {
+  flex: 1;
+  font-size: 0.35714286rem;
+}
+.nav-index .activity {
+  margin: 0.82857143rem 0.21428571rem 0.52857143rem 0.21428571rem;
+}
+.nav-index .activity img {
+  width: 100%;
+  height: 100%;
+}
+.work-index {
+  padding: 0.52857143rem 0.31428571rem;
+  margin-top: 0.14285714rem;
+  background-color: #ffffff;
+}
+.work-index .work-hd {
+  display: flex;
+  justify-content: space-between;
+  height: 0.57142857rem;
+  background-color: #ffffff;
+  line-height: 0.57142857rem;
+  padding: 0 0.31428571rem;
+}
+.work-index .work-hd h4 {
+  font-size: 0.4rem;
+  vertical-align: middle;
+}
+.work-index .work-hd h4 span {
+  display: inline-block;
+  width: 0.28571429rem;
+  height: 0.28571429rem;
+}
+.work-index .work-hd h4 span img {
+  width: 100%;
+}
+.work-index .work-hd .more {
+  text-decoration: none;
+  font-size: 0.31428571rem;
+  color: #b6b6b6;
+}
+.work-index .bd {
+  margin-top: 0.57142857rem;
+}
+.work-index .bd .swiper-slide a {
+  display: block;
+  width: 4.85714286rem;
+  height: 5.4rem;
+}
+.work-index .bd .swiper-slide a img {
+  width: 100%;
+  height: 100%;
+}
+.work-index .bd .swiper-slide span {
+  display: block;
+  width: 4.85714286rem;
+}
+.work-index .bd .swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.work-index .bd .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  transition: 300ms;
+  transform: scale(0.8);
+  opacity: 0.6;
+}
+.work-index .bd .swiper-slide-active,
+.work-index .bd .swiper-slide-duplicate-active {
+  transform: scale(1);
+  opacity: 1;
+  z-index: 999;
+}
+.study-index {
+  background-color: #ffffff;
+  margin-top: 0.21428571rem;
+  padding: 0.32857143rem 0.25714286rem;
+}
+.study-index .study-hd {
+  display: flex;
+  justify-content: space-between;
+  line-height: 0.57142857rem;
+}
+.study-index .study-hd h4 {
+  font-size: 0.4rem;
+}
+.study-index .study-hd h4 span {
+  display: inline-block;
+  width: 0.51428571rem;
+  height: 0.51428571rem;
+  vertical-align: middle;
+}
+.study-index .study-hd h4 span img {
+  width: 100%;
+}
+.study-index .study-hd .more {
+  text-decoration: none;
+  font-size: 0.31428571rem;
+  color: #aaaaaa;
+}
+.study-index .hd {
+  margin-top: 0.78571429rem;
+}
+.study-index .hd .swiper-slide {
+  margin-right: 0.42857143rem;
+  overflow: hidden;
+}
+.study-index .hd .swiper-slide span {
+  overflow: hidden;
+  display: inline-block;
+  width: 3.17142857rem;
+  height: 2.41428571rem;
+}
+.study-index .hd .swiper-slide span img {
+  width: 100%;
+  height: 100%;
+}
+.study-index .hd .swiper-slide h5 {
+  display: inline-block;
+  margin-top: 0.14285714rem;
+  margin-bottom: 0.21428571rem;
+  font-size: 0.07142857rem;
+  width: 100%;
+}
+.study-index .hd .swiper-slide p {
+  color: red;
+  font-size: 0.07142857rem;
+}
+.study-index .hd .swiper-container {
+  width: 100%;
+  height: 100%;
+}
+.study-index .hd .swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}

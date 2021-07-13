@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+//需求 第一次请求 ----第一次处理，       第二次处理结果-----第三次处理结果
+//一次请求，多次处理。把处理给它分开
+// new Promise((resolve, reject)=>{
+//   setTimeout(()=>{
+//     console.log('第一次请求')
+//     resolve('哈哈哈')
+//   },1000)
+// }).then((data)=>{
+//   console.log(data + '第一次处理' )
+//
+//   //第二次结果处理
+//   new Promise((resolve,reject)=>{
+//     resolve(data)
+//   }).then((data)=>{
+//     console.log(data + 'aaaa'+ '第二次处理')
+//
+//     //第三次结果处理
+//     new Promise((resolve, reject)=>{
+//       resolve(data)
+//     }).then((data)=>{
+//       console.log(data + 'bbbb' + '第三次处理')
+//     })
+//   })
+// })
+
+// //第二种写法
+// new Promise((resolve, reject)=>{
+//   setTimeout(()=>{
+//     console.log('第一次请求')
+//     resolve('哈哈哈')
+//   },1000)
+// }).then((data)=>{
+//   console.log(data + '第一次处理' )
+//
+//   return Promise.resolve(data)
+// }).then((data)=>{
+//   console.log(data + 'aaa'  + '第二次处理')
+//
+//   return Promise.resolve(data)
+// }).then((data)=>{
+//   console.log(data + 'bbb' + '第三次处理')
+// })
+
+//reject的写法
+//第二种写法  return Promise.reject == throw .... 省略上面的，进行catch
+new Promise((resolve, reject)=>{
+  setTimeout(()=>{
+    console.log('第一次请求')
+    resolve('哈哈哈')
+  },1000)
+}).then((data)=>{
+  console.log(data + '第一次处理' )
+
+  return Promise.resolve(data)
+}).then((data)=>{
+
+  return Promise.reject('第二次处理失败')
+
+  console.log(data + 'aaa'  + '第二次处理')
+
+}).then((data)=>{
+  console.log(data + 'bbb' + '第三次处理')
+}).catch((error)=>{
+  console.log(error);
+})
+</script>
+
+
+</body>
+</html>

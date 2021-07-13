@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    数组的遍历
+  -->
+  <ul>
+    <li v-for="item in film ">{{item}}</li>
+  </ul>
+
+  <!--
+  数组的带下标的遍历:格式 (item,index)
+  -->
+  <ul>
+    <li v-for="(item,index) in film ">{{index}}.{{item}}</li>
+  </ul>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      film:['孙悟空','猪八戒','沙和尚','小白龙']
+    }
+  })
+</script>
+
+
+</body>
+</html>

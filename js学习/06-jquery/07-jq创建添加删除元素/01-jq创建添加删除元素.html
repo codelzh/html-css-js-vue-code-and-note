@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="jquery.js"></script>
+</head>
+<body>
+  <ul>
+    <li>我是原来的li</li>
+  </ul>
+
+  <script>
+    //创建元素
+    var $li = $("<li>我是添加的</li>")
+    
+    //添加元素
+    $("ul li").append($li);
+    $("ul li").prepend($li);
+
+    //删除元素
+    //删除自己
+    // $("ul").remove();
+
+    //删除子节点
+    $("ul").empty();
+  </script>
+</body>
+</html>

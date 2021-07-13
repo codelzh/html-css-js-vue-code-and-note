@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    div{
+        width: 100px;
+        height: 20px;
+        background-color: skyblue;
+        animation-name: move;
+        animation-duration: 2s;
+        animation-timing-function: steps(10);
+        transform-origin: left bottom;
+    }
+
+    @keyframes move {
+        0%{}
+        100%{
+            transform: scale(2,2);
+        }
+    }
+  </style>
+</head>
+<body>
+
+<div></div>
+
+</body>
+</html>

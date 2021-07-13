@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="animate.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav {
+      position: relative;
+      width: 500px;
+      height: 50px;
+      margin: 0 auto;
+      background-color: pink;
+    }
+
+    .nav ul {
+      position: absolute;
+    }
+
+    .nav ul li {
+      float: left;
+      list-style: none;
+      width: 80px;
+      text-align: center;
+      line-height: 50px;
+    }
+
+    .nav img {
+      float: right;
+    }
+
+    .cloud {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 83px;
+      height: 42px;
+      background: url(images/cloud.gif) no-repeat;
+
+    }
+  </style>
+</head>
+
+<body>
+  <div class="nav">
+    <div class="cloud"></div>
+    <ul>
+      <li>123</li>
+      <li>456</li>
+      <li>789</li>
+      <li>abc</li>
+      <li>zxc</li>
+    </ul>
+    <img src="images/rss.png" alt="">
+
+    <script>
+      var cloud = document.querySelector(".cloud");
+      var li = document.querySelector(".nav").querySelectorAll("li");
+      var flag = 0;
+      for (var i = 0; i < li.length; i++) {
+        li[i].addEventListener("mouseover", function () {
+          //li 的offsetLeft值就是 动画移动值
+          move(cloud, this.offsetLeft);
+
+        })
+
+        li[i].addEventListener("mouseout", function () {
+          move(cloud, flag);
+        })
+
+        li[i].addEventListener("click", function () {
+          flag = this.offsetLeft;
+        })
+
+
+      }
+    </script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .w {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    .head {
+      background-color: blue;
+      height: 200px;
+    }
+
+    .banner {
+      background-color: red;
+      height: 400px;
+    }
+
+    .main {
+      background-color: pink;
+      height: 600px;
+    }
+
+    .silder {
+      position: absolute;
+      top: 300px;
+      left: 50%;
+      margin-left: 600px;
+      width: 50px;
+      height: 50px;
+      background-color: black;
+    }
+
+    .goback {
+      display: none;
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="silder">
+    <span class="goback">返回顶部</span>
+  </div>
+  <div class="head w">head</div>
+  <div class="banner w">banner</div>
+  <div class="main w">主体</div>
+  <script>
+    var bannerTop = document.querySelector(".banner").offsetTop;
+    var silder = document.querySelector(".silder");
+    var goback = document.querySelector(".goback");
+    var silderTop = silder.offsetTop - bannerTop;
+
+    document.addEventListener("scroll", function () {
+      //window.pageYOffset 是整个页面被卷去的部分，如果到达了banner，则让侧边栏变固定定位
+      if (window.pageYOffset >= bannerTop) {
+        silder.style.position = "fixed";
+        silder.style.top = silderTop + "px";
+        goback.style.display = "block";
+      } else {
+        silder.style.position = "absolute";
+        silder.style.top = 300 + "px";
+        goback.style.display = "none";
+      }
+    })
+
+    goback.addEventListener("click", function () {
+      // window.scroll(0, 0);
+      move(window,0);
+    })
+
+    function move(obj, falg, callback) {
+      clearInterval(obj.time)
+      obj.time = setInterval(function () {
+        //缓动动画公式: (目标位置-自身的位置)/10
+        var step = (falg - obj.pageYOffset) / 10;
+        //移动目标会发现，和目标有偏差，这是因为上面公式有除法，会有小数，所以我们需要给变成整数
+        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+        if (falg ==  obj.pageYOffset) {
+          clearInterval(obj.time);
+          //回调函数的使用，当动画走完，执行
+          if (callback != null) {
+            callback();
+          }
+        }
+
+        // obj.style.left = obj.offsetLeft + step + "px";
+        window.scroll(0,window.pageYOffset + step);
+
+      }, 15)
+    }
+  </script>
+</body>
+
+</html>

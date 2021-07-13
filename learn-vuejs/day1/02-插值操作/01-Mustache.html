@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+<!--
+  //像这种{{}} 专业术语为Mustache
+  //在这里面可以进行简单操作
+-->
+  <h2>{{message + " " + name }}</h2>
+  <h2>{{message}} 123 {{name}}</h2>
+  <h2>{{number * 2}}</h2>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow',
+      name:'nick',
+      number:0
+    }
+  })
+</script>
+
+</body>
+</html>

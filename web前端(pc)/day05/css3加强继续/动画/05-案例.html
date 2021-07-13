@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      body{
+          background-color: #ccc;
+      }
+    .bear{
+        width: 200px;
+        height: 100px;
+        background: url("../../images/bear.png");
+
+        animation: bearrun 0.3s steps(8) infinite,move 1s forwards;
+    }
+
+    @keyframes bearrun {
+        0%{}
+        100%{
+            background-position: -1600px;
+        }
+    }
+
+    @keyframes move {
+        0%{}
+        100%{
+            transform: translate(600px,0);
+        }
+    }
+  </style>
+</head>
+<body>
+  <div class="bear">
+
+  </div>
+</body>
+</html>

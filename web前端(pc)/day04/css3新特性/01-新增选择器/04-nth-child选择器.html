@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+      /*nth-child(even)选择所有偶*/
+    ul li:nth-child(even){
+      color: red;
+    }
+
+      /*nth-child(odd)选择所有奇*/
+      ul li:nth-child(odd){
+          color: #ff8500;
+      }
+
+      /*nth-child()里面也可以是公式(n) 这个意思是从0开始每次加一，选择全部孩子元素*/
+      ol li:nth-child(n){
+          color: #00a4ff;
+      }
+
+  </style>
+</head>
+<body>
+
+<ul>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+  <li>6</li>
+</ul>
+
+<ol>
+  <li>1</li>
+  <li>2</li>
+  <li>3</li>
+  <li>4</li>
+  <li>5</li>
+  <li>6</li>
+</ol>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    解析字符串的http网站
+  -->
+  <h2 v-html="url"></h2>
+</div>
+
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'',
+      url:'<a href="http:www.baidu.com">百度</a>'
+    }
+  })
+</script>
+
+</body>
+</html>

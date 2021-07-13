@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .tab-list {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+
+    .tab-head {
+      width: 540px;
+      height: 25px;
+      background-color: #f1f1f1;
+    }
+
+    .tab-head li {
+      float: left;
+      list-style: none;
+      margin-left: 20px;
+    }
+
+    .tab-content div {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="tab-list">
+    <div class="tab-head">
+      <ul>
+        <li style="background-color: #c81623;" index="0">商品介绍</li>
+        <li index="1">规格与包装</li>
+        <li index="2">售后保障</li>
+        <li index="3">商品评价（50000）</li>
+        <li index="4">手机社区</li>
+      </ul>
+    </div>
+
+    <div class="tab-content">
+      <div style="display: block;">商品</div>
+      <div>规格</div>
+      <div>售后</div>
+      <div>评价</div>
+      <div>手机</div>
+    </div>
+  </div>
+
+  <script>
+    //利用排他思想实现头部切换
+    var tabli = document.querySelector(".tab-head").querySelectorAll("li");
+    var divlist = document.querySelector(".tab-content").querySelectorAll("div");
+
+    for (var i = 0; i < tabli.length; i++) {
+      tabli[i].onclick = function () {
+        for (var i = 0; i < tabli.length; i++) {
+          tabli[i].style.backgroundColor = "";
+        }
+        this.style.backgroundColor = "#c81623";
+        console.log(this.getAttribute("index"));
+
+        //利用排他思想实现选项卡的切换
+        for (var i = 0; i < divlist.length; i++) {
+          divlist[i].style.display = "none";
+        }
+        divlist[this.getAttribute("index")].style.display = "block";
+      }
+    }
+  </script>
+</body>
+
+</html>

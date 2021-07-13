@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <div>{{fristname + ' ' + lastname}}</div>
+
+  <!--搞一个方法来展示allname--->
+  <div>{{getallname()}}</div>
+
+  <!--
+  computed计算属性的方式,下面这个就变成属性了
+  --->
+  <div>{{fullname}}</div>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow',
+      fristname:'zhang',
+      lastname:'san',
+    },
+    methods:{
+      getallname(){
+        return this.fristname + ' ' + this.lastname;
+      }
+    },
+
+    computed:{
+      fullname:function (){
+        return this.fristname + ' ' + this.lastname;
+      }
+    },
+  })
+</script>
+
+
+</body>
+</html>

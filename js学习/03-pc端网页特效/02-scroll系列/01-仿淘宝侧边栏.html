@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .w {
+      width: 1200px;
+      margin: 0 auto;
+    }
+
+    .head {
+      background-color: blue;
+      height: 200px;
+    }
+
+    .banner {
+      background-color: red;
+      height: 400px;
+    }
+
+    .main {
+      background-color: pink;
+      height: 600px;
+    }
+
+    .silder {
+      position: absolute;
+      top: 300px;
+      left: 50%;
+      margin-left: 600px;
+      width: 50px;
+      height: 50px;
+      background-color: black;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="silder">
+    <span class="goback">返回顶部</span>
+  </div>
+  <div class="head w">head</div>
+  <div class="banner w">banner</div>
+  <div class="main w">主体</div>
+  <script>
+    var bannerTop = document.querySelector(".banner").offsetTop;
+    var silder = document.querySelector(".silder");
+    var silderTop = silder.offsetTop - bannerTop;
+
+    document.addEventListener("scroll", function () {
+      //window.pageYOffset 是整个页面被卷去的部分，如果到达了banner，则让侧边栏变固定定位
+      if (window.pageYOffset >= bannerTop) {
+        silder.style.position = "fixed";
+        silder.style.top = silderTop + "px";
+      } else {
+        silder.style.position = "absolute";
+        silder.style.top = 300+ "px";
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <div>{{allbooksprice}}</div>
+  <div>{{allbooksprice1}}</div>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data: {
+      books: [
+        {id: '1001', price: 17},
+        {id: '1002', price: 74},
+        {id: '1003', price: 64},
+        {id: '1004', price: 31},
+      ]
+    },
+    computed:{
+      allbooksprice:function (){
+        let cont = 0;
+        for (let i =0;i<this.books.length;i++){
+          cont += this.books[i].price;
+        }
+        return cont;
+      },
+
+      allbooksprice1:function () {
+        let cont = 0;
+        //这种循环直接获取数组下标
+        for (let i in this.books) {
+          cont +=this.books[i].price
+        }
+        return cont;
+      },
+
+    },
+
+  })
+</script>
+
+
+</body>
+</html>

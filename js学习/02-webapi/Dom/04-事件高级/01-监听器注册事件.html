@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button>传统事件按钮</button>
+  <button>监听器事件按钮</button>
+  <script>
+
+
+    var btn = document.querySelectorAll("button");
+    
+    //传统绑定只能绑定一个事件
+    btn[0].onclick = function(){
+      alert("1")
+    }
+
+    btn[0].onclick = function(){
+      alert("2")
+    }
+    
+    //监听器绑定能绑定多个
+    btn[1].addEventListener("click",function(){
+      alert("!");
+    })
+
+    btn.addEventListener("click",function(){
+      alert("123");
+    })
+  </script>
+</body>
+</html>

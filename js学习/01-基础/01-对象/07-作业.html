@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var t1 = window.prompt("欢迎使用计算器:\n 1:加法运算 \n 2:减法运算 \n 3:乘法运算 \n 4:除法运算 \n 5:退出")
+    t1 = Number(t1);
+    if (t1 == 5) {
+      throw SyntaxError();
+    }
+
+    var num1 = window.prompt("输入第一个数字");
+    var num2 = window.prompt("输入第二个数字")
+    num1 = Number(num1);
+    num2 = Number(num2);
+
+
+    switch (t1) {
+      case 1:
+        add(num1,num2)
+        break;
+
+      case 2:
+        odd(num1,num2)
+        break;
+
+      case 3:
+        ride(num1,num2)
+        break;
+
+      case 4:
+        except(num1,num2)
+        break;
+
+    }
+
+
+    function add(n1, n2) {
+      alert(n1 + n2);
+    }
+
+    function odd(n1, n2) {
+      alert(n1 - n2)
+    }
+
+    function ride(n1, n2) {
+      alert(n1 * n2)
+    }
+
+    function except(n1, n2) {
+      alert(n1 / n2)
+    }
+  </script>
+</body>
+
+</html>

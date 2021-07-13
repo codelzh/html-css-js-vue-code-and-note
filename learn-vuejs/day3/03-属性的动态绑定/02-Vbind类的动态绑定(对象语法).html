@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .fontcolor{
+        color:red;
+    }
+    .fontsize{
+        font-size: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    同样，v-bind 可以赋值任意dom属性,所以包括class
+  -->
+  <div v-bind:class='fontcolor'>1</div>
+
+  <!---
+    如果多个class，则使用下面绑定方法-对象绑定，对象是vue里面的
+  -->
+  <div v-bind:class={fontcolor:true,fontsize:true}>1</div>
+
+  <!--
+    多个class的动态绑定，把判断写活,这样在任何时候都可以操作class是否添加
+  -->
+  <div v-bind:class={fontcolor:isfontcolor,fontsize:isfontsize}>1</div>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow',
+      fontcolor:'fontcolor',
+      fontsize:'fontsize',
+      isfontcolor:true,
+      isfontsize:true,
+    }
+  })
+</script>
+
+</body>
+</html>

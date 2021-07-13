@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      console.log('第一次请求');
+      resolve()
+    },1000)
+  }).then(()=>{
+    console.log('第一次处理');
+    console.log('第一次处理');
+    console.log('第一次处理');
+    console.log('第一次处理');
+
+    new Promise((resolve,reject)=>{
+      setTimeout(()=>{
+        console.log('第二次请求');
+        resolve()
+      })
+    }).then(()=>{
+      console.log('第二次处理');
+      console.log('第二次处理');
+      console.log('第二次处理');
+      console.log('第二次处理');
+
+      new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+          console.log('第三次请求');
+          resolve()
+        })
+      }).then(()=>{
+        console.log('第三次处理');
+        console.log('第三次处理');
+        console.log('第三次处理');
+        console.log('第三次处理');
+      })
+    })
+  })
+</script>
+</body>
+</html>

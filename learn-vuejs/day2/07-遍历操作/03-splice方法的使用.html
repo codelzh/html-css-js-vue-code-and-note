@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+    <li v-for="item in film">{{item}}</li>
+  </ul>
+  <button v-on:click="btn">test</button>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      film:['aa','bb','cc','dd']
+    },
+    methods:{
+      btn(){
+        //删除元素 第一个参数从哪开始删除，第二个删除几个(第二个参数为空则从第一个参数全部删除)
+        //替换元素  第二个参数是要替换几个元素,后面是替换的元素值
+        //插入元素  第二个元素必须是0
+
+        // this.film.splice(1,2)
+        // this.film.splice(1,3,'11','22','33')
+        this.film.splice(0,0,'1')
+      }
+    }
+  })
+
+</script>
+
+
+</body>
+</html>

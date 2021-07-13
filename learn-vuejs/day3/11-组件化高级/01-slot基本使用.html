@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--
+  slot 又称为插槽
+  可以让我决定模块的一些东西来显示什么
+
+  1:如果插槽有默认值，使用模块时候不添加值,则默认的是插槽的，如果添加，则使用添加的
+  2:如果多个值同时写入标签对，那么会全部替代
+-->
+
+<div id="app">
+  <mycpn></mycpn>
+  <mycpn>
+    <button></button>
+    <button></button>
+    <i></i>
+  </mycpn>
+</div>
+
+
+<template id="cpn">
+  <div>
+    <h1>哈哈哈</h1>
+    <slot><button>1</button></slot>
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const cpn = {
+    template:'#cpn',
+  }
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+    components:{
+      mycpn:cpn
+    }
+  })
+</script>
+
+</body>
+</html>

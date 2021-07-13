@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <mycpn>
+    <button slot="right">1</button>
+  </mycpn>
+</div>
+
+<!--
+  如果像这样有多个slot？怎么替换我想替换的？
+  1:给slot添加name
+  2:如上所示，在组件里添加元素,slot和slot的name一样，就能替换对应的
+-->
+<template id="cpn">
+  <div>
+    <slot name="left"><span>左边</span></slot>
+    <slot name="center"><span>中间</span></slot>
+    <slot name="right"><span>右边</span></slot>
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const cpn = {
+    template:'#cpn',
+  }
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+    components:{
+      mycpn:cpn
+    }
+  })
+</script>
+
+</body>
+</html>

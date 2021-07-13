@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  问题：我们在input输入内容，点击切换，内容并不会消失，但是input dom的确是更改了，为什么内容不消失？
+
+  因为vue在渲染dom时候有一个缓存区，如果dom元素相同并不会创建新元素
+  所以在按钮切换时候，vue并没有创建<span>里面的代码，只是使用缓存区的，然后渲染，把dom元素不相同
+  的属性更改，比如：id属性  。但是vue并不会更改value属性，所以造成了不变
+
+  解决:使用key标识符，vue在渲染时候，如果key不相同，不使用缓存区的dom
+-->
+<div id="app">
+  <span v-if='islogin'>
+    <span>手机号</span>
+    <input type="text" id="phone" key="phone">
+  </span>
+
+  <span v-else>
+    <span>邮箱</span>
+    <input type="text" id="email" key="email">
+  </span>
+
+  <button @click="islogin= !islogin ">切换</button>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      islogin:true
+    }
+  })
+</script>
+
+</body>
+</html>

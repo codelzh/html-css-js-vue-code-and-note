@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+      /*text-align 这个属性把子里面的行内元素和行内快元素全部垂直居中，这样直接实现效果
+
+      */
+      .box{
+        text-align: center;
+      }
+    .box>a{
+        display:inline-block;
+        width: 50px;
+        height: 50px;
+        background-color: #e2e3da;
+        text-decoration: none;
+        text-align: center;
+        line-height: 50px;
+        color:black;
+    }
+
+    .box>.prev{
+        width: 80px;
+    }
+
+    .box>.next{
+        width: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="box">
+    <a href="" class="prev">&lt上一页</a>
+    <a href="">1</a>
+    <a href="">2</a>
+    <a href="">3</a>
+    <a href="">4</a>
+    <a href="">5</a>
+    <a href="">6</a>
+    <a href="">7</a>
+    <span>......</span>
+   <a href="" class="next">下一页&gt</a>
+
+
+
+</div>
+
+</body>
+</html>

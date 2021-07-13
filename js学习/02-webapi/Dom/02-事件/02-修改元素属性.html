@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button id="lh">莲华</button>
+  <button id="n">雫</button>
+  <img src="images/lh.jpg" alt="">
+
+  <script>
+    var lh = document.getElementById("lh");
+    var n = document.getElementById("n");
+    var img = document.querySelector("img");
+
+    lh.onclick = function(){
+      img.src = "images/lh.jpg";
+    }
+    
+    n.onclick = function(){
+      img.src = "images/n.jpg";
+    }
+  </script>
+</body>
+
+</html>

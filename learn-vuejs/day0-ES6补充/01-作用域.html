@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button>1</button>
+<button>2</button>
+<button>3</button>
+<button>4</button>
+
+<script>
+
+  var but = document.getElementsByTagName("button")
+  //下面代码，每个按钮都输出4，因为没有作用域，共用一个i，
+  // for (var i=0;i<but.length;i++){
+  //   but[i].onclick=function (){
+  //     console.log(i + "被点击")
+  //   }
+  // }
+
+  //修改如下，每个按钮可以正常赋值，因为let有作用域，
+  for (let i=0;i<but.length;i++){
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+
+  //ES5
+  //当用户点击，回调的时候，用到的是全局i，因为没有作用域，里面的i没用
+  var i = 2
+
+  {
+    i=0;
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+
+  {
+    i=1;
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+
+  {
+    i=2;
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+
+  //ES6
+  //当用户点击，回调的时候，用的是自己的i，不管外面那个i变为什么，对于我里面没有影响
+  let i = 2
+
+  {
+    i=0;
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+
+  {
+    i=1;
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+
+  {
+    i=2;
+    but[i].onclick=function (){
+      console.log(i + "被点击")
+    }
+  }
+</script>
+
+</body>
+</html>

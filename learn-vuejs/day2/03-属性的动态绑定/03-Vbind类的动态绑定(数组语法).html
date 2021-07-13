@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .fontcolor{
+        color:red;
+    }
+    .fontsize{
+        font-size: 100px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <!--
+    数组绑定class方式，一般不用
+  -->
+  <div v-bind:class=['colorful','show']>1</div>
+
+  <!--
+    对象语法和数组语法都可以和，写死的class 共存
+  -->
+  <div class="hide" v-bind:class=['colorful','show']>1</div>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow',
+    }
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+      div{
+          /*flex布局是添加到父亲上面，来控制子盒子*/
+          display: flex;
+          /*设置主轴从左到右*/
+          /*主轴向哪里，元素就向哪里*/
+          flex-direction: row;
+          /*开启换行*/
+          flex-wrap: wrap;
+
+          width: 500px;
+          height: 200px;
+          background-color: pink;
+      }
+
+      div span{
+          width: 200px;
+          height: 100px;
+          background-color: skyblue;
+          margin-left: 5px;
+      }
+  </style>
+</head>
+<body>
+
+<div>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+  <span>123</span>
+</div>
+
+</body>
+</html>

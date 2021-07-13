@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .active{
+        color: red;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app">
+  <ul>
+    <li v-for="(item,index) in film" :class="{active:liindex===index}" v-on:click="btn(index)">{{item}}</li>
+  </ul>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      film:['孙悟空','猪八戒','沙和尚','白龙马'],
+      liindex:0
+    },
+    methods:{
+      btn(index){
+        this.liindex = index
+      }
+    },
+  })
+</script>
+
+</body>
+</html>

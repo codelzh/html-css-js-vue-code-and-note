@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    /*
+      构造函数必须有this，这个this很特殊，就是声明属性
+      使用new来调用这个函数，并自动返回一个对象类型的值
+    */
+
+    // function t1() {
+    //   this.属性 = 值;
+    //   this.方法 =  function(){
+
+    //   }
+    // }
+
+    function t1(name) {
+      this.name = name;
+      this.song = function(age){
+        console.log(age);
+      }
+    }
+
+    //自动返回一个object类型的对象
+    var test1 =  new t1("zs");
+
+    console.log(typeof test1);  
+    test1.song(16);
+  </script>
+
+
+</body>
+
+</html>

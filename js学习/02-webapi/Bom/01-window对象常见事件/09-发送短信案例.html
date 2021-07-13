@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text"> <button>发送短信</button>
+  <script>
+    //点击发送 按钮disabled禁用 然后设置定时器，给一个秒数自减 秒数=按钮innerHtml
+    var btn = document.querySelector("button");
+    var time = 3;
+    btn.addEventListener("click", function () {
+      btn.disabled = true;
+
+      var falg = setInterval(function () {
+        if (time === -1) {
+          clearInterval(falg)
+          btn.disabled = false;
+          btn.innerHTML = "发送短信"
+        } else {
+          btn.innerHTML = "还剩" + time + "秒"
+          time--;
+        }
+      }, 1000)
+    })
+  </script>
+</body>
+
+</html>

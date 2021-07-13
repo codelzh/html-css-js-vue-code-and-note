@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  //这个方法是，多个请求，等待结果都返回后，进行处理，结果以数组方式返回
+Promise.all([
+
+  new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve('1111111')
+    },1000)
+  }),
+
+  new Promise((resolve, reject)=>{
+    setTimeout(()=>{
+      resolve('2222222')
+    },3000)
+  }),
+
+
+]).then((data)=>{
+  console.log(data);
+})
+
+</script>
+
+</body>
+</html>

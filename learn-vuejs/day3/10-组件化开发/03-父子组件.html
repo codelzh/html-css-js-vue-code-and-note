@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!--
+  一个组件内是可以有注册其他组件，用于在本组件里面使用，在组件里用别人的组件为父组件，被调用的为子组件
+  子组件如果没有在全局或局部注册组件，那么它只能在父组件里面使用，也就是说想要使用组件必须通过全局或局部注册组件
+-->
+<div id="app">
+  <mycpn2></mycpn2>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+
+  const cpn1 = Vue.extend({
+    template:`
+      <div>
+        <h1>我是1</h1>
+    </div>
+    `
+  })
+
+
+  const cpn2 = Vue.extend({
+    template:`
+      <div>
+        <h1>我是2</h1>
+        <mycpn2></mycpn2>
+    </div>
+    `,
+    components:{
+      'mycpn2':cpn1
+    }
+  })
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    },
+    components:{
+      'mycpn2':cpn2
+    }
+  })
+</script>
+
+</body>
+</html>

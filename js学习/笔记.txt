@@ -1,0 +1,1506 @@
+# 	数组
+
+js声明数组有两种方式
+
+1:new的方式
+
+var a = new Array();
+
+2:字面量的方式 [] ,字面量就是你给一个值。js就知道是什么类型，[]是js中的数组类型
+
+var a  = [1,2,3]
+
+# 函数
+
+arguments使用
+
+arguments是函数中特有的，里面存放全部实参，是数组类型。
+
+## 回调函数
+
+回调函数就是当一个程序被触发，才执行的函数，比如，事件里面的函数(当事件触发，调用函数)
+
+在调用函数时候，实参传递是可以写函数的
+
+```js
+function t(callback){
+    var a = 0;
+    //这就是回调函数(当程序被触发，才执行的函数)
+    if(a == 0){callback();}
+}
+
+//实参可以写函数
+t(function(){console.log("123")})
+```
+
+
+
+
+
+## 立即执行函数
+
+函数不需要调用，自己执行。
+
+作用：自己有一份作用域
+
+写法	(function(){})()
+
+
+
+
+
+# 作用域
+
+## 作用域
+
+js分全局作用域和局部作用域，作用域就是变量在某个范围起作用和效果
+
+1：全局作用域：整个script标签内
+
+2：局部作用域：function函数内
+
+
+
+## 块级作用域
+
+es5没有块级作用域，所以{}里面的值是共享的
+
+块级作用域指{}	 for{} 或者 if{} 
+
+
+
+## 作用域链
+
+作用域链：内部函数访问外部函数的变量，采取的是链式查找，一层一层往上找，就近原则
+
+```javascript
+var num = 100;
+function t1(){
+    var num = 0;
+    t2();
+    function t2(){
+        //就近原则，输入的是0
+        console.log(num);
+    }
+}
+
+t1();
+```
+
+
+
+# 预解析
+
+js在运行代码时候分两步：1:预解析	2：运行代码
+
+预解析就是变量提升和函数提升
+
+1：变量提升，把变量声明提升到当前作用域最前面
+
+2：函数提升，把函数声明提升到当前作用域最前面
+
+```javascript
+console.log(num)	//undefind
+var num = 0;
+/*以上代码在js中是这样运行的
+	先进行预解析，变量提升
+	var num;
+	console.log(num)
+	num = 0;
+	
+	所以是undefind
+*/
+```
+
+
+
+# 其他
+
+typeof() 检测对象为什么类型
+
+console.dir()	打印文档元素对象
+
+# 对象
+
+## 对象的创建
+
+### 1：字面量的方式创建
+
+使用字面量的形式创建对象，对象的字面量是{} 
+
+使用键值对的形式来写属性和方法
+
+```javascript
+    var dog = {
+      name:"dd",
+      age:"15",
+      speack: function(){
+        console.log("汪汪汪");
+      }
+    }
+
+    console.log(dog.age);
+    dog.speack();
+```
+
+
+
+### 2：new object创建
+
+```javascript
+    //使用new Object的方式创建对象
+    //想要添加属性或方法 使用下面的方式
+    var obj = new Object();
+    obj.name = "zs";
+    obj.age = 19;
+    obj.say = function(){
+      console.log("hi");
+    }
+    obj.say();
+```
+
+
+
+### 3：构造函数创建
+
+```javascript
+    /*
+      1：构造函数必须有this，这个this很特殊的，用来声明属性
+      2：使用new来调用这个构造函数，并自动返回一个对象类型的值
+    */
+
+    // function t1() {
+    //   this.属性 = 值;
+    //   this.方法 =  function(){
+
+    //   }
+    // }
+
+    function t1(name) {
+      this.name = name;
+      this.song = function(age){
+        console.log(age);
+      }
+    }
+
+    //自动返回一个object类型的对象
+    var test1 =  new t1("zs");
+    
+    console.log(typeof test1);  
+    test1.song(16);
+```
+
+
+
+## 对象的遍历
+
+使用for in 来遍历对象
+
+for(k in 对象)
+
+```javascript
+    var t1 = {
+      name: "zs",
+      age: 18,
+    }
+
+    for(key in t1){
+      console.log(key);   //key是属性名
+      console.log(t1[key]); //固定写法，输出属性值
+    }
+```
+
+
+
+# 常用内置对象
+
+具体看文档，不阐述太多
+
+## Math
+
+## Date日期对象
+
+date只能通过new来创建，参数常见写法
+
+1:字符串类型: '2020-1-1 10:1:1'
+
+
+
+### 日期初始化年月日
+
+| getYear()  | 返回 Date 对象的年(0 ~ 23)。                        |
+| :--------- | --------------------------------------------------- |
+|            |                                                     |
+| getDay()   | 从 Date 对象返回一周中的某一天 (0 ~ 6)。0是星期日   |
+| getMonth() | 从 Date 对象返回月份 (0 ~ 11)。比实际的月份少一个月 |
+
+
+
+### 日期初始化时分秒
+
+| getHours()   | 返回 Date 对象的小时 (0 ~ 23)。 |
+| ------------ | ------------------------------- |
+| getMinutes() | 返回 Date 对象的分钟 (0 ~ 59)。 |
+| getSeconds() | 返回 Date 对象的秒数 (0 ~ 59)。 |
+
+
+
+### 毫秒(时间戳)的获取
+
+时间戳是独一无二的不可重复
+
+date.gettime()	返回1970年到现在的毫秒
+
+date.valueof()	返回1970年到现在的毫秒
+
+
+
+### 倒计时写法
+
+你想要的时间的毫秒- 现在时间毫秒	=	剩余时间
+
+因为用时分秒相减会出现负数，所以使用毫秒来
+
+
+
+
+
+## 数组Array
+
+### 检测为数组对象的方式
+
+1:instanceof运算符
+
+2: Array.isArray
+
+
+
+### 添加和删除数组元素
+
+| push() | 向数组的末尾添加一个或更多元素，并返回新的长度。 |
+| ------ | ------------------------------------------------ |
+| pop()  | 删除并返回数组的最后一个元素                     |
+
+
+
+### 数组反转(算法)
+
+创建一个新数组，利用新数组的.length 为 0 1 2 3，反着遍历数组，就能反转
+
+```javascript
+    //数组反转
+    function oppsite(arr) {
+      var temp = [];
+      for (var i = arr.length - 1; i >= 0; i--) {
+        temp[temp.length] = arr[i];
+      }
+      return temp;
+    }
+
+    
+    var result = oppsite([1,2,3,4,5]);
+    console.log(result);
+```
+
+
+
+### 数组反转和排序
+
+| reverse() | 颠倒数组中元素的顺序。       |
+| --------- | ---------------------------- |
+| sort()    | 对数组的元素进行排序(有参数) |
+
+
+
+### 数组查找
+
+indexOf(searchElement)	方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
+
+
+
+### 数组去重(算法)
+
+创建一个新数组，遍历重复的数组，如果新数组没有重复的数组里的元素，则添加元素
+
+```javascript
+    function qc(arr) {
+      var newArr = [];
+      for (var i = 0; i < arr.length; i++) {
+        if (newArr.indexOf(arr[i]) === -1) {
+          newArr.push(arr[i]);
+        }
+      }
+      return newArr;
+    }
+```
+
+
+
+### 数组转换字符串
+
+| toString() | 把数组转换为字符串，并返回结果。                             |
+| ---------- | ------------------------------------------------------------ |
+| join()     | 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。 |
+
+
+
+
+
+## 基本包装类型
+
+js也存在自动装箱，即一个基本类型会被js编译成复杂数据类型，具有方法和属性
+
+
+
+## 字符串
+
+### 某个字符出现次数或位置(算法)
+
+用indexof 找出第一次的位置，然后运用indexof()的第二个参数，从第一次位置加1再次找
+
+```javascript
+    var test = "abcadfgva";
+    var temp = test.indexOf("a");
+
+    var num = 0;
+
+    while(temp!== -1){
+      console.log(temp);
+      num++;
+      temp = test.indexOf("a",temp+1);
+    }
+
+
+    //数组也能用这套算法
+    var arr = ["blue", "red", "purple", "red", "yellow", "red"];
+    var temp = arr.indexOf("red");
+
+    while (temp !== -1) {
+      console.log(temp);
+      temp = arr.indexOf("red",temp+1);
+    }
+```
+
+
+
+### 根据位置返回字符
+
+| charAt()     | 返回在指定位置的字符。                  |
+| ------------ | --------------------------------------- |
+| charCodeAt() | 返回在指定的位置的字符的 Unicode 编码。 |
+| str[]        | 获取指定位置字符(h5新增)                |
+
+
+
+### 字符串截取
+
+| [substr()](https://www.w3school.com.cn/jsref/jsref_substr.asp) | 从起始索引号提取字符串中指定数目的字符。 |
+| ------------------------------------------------------------ | ---------------------------------------- |
+| [replace()](https://www.w3school.com.cn/jsref/jsref_replace.asp) | 替换与正则表达式匹配的子串。             |
+| [split()](https://www.w3school.com.cn/jsref/jsref_split.asp) | 把字符串分割为数组。                     |
+
+
+
+
+
+
+
+# Webapi
+
+​	webapi就是浏览器给我们的接口，用来控制浏览器的操作，例如alert()
+
+dom和bom都是属于webapi
+
+
+
+# dom
+
+dom是用来操作文档元素的
+
+
+
+## 元素获取
+
+#### Document.getElementById("id")
+
+通过id获取元素
+
+返回一个匹配到 ID 的 DOM [`Element`](https://developer.mozilla.org/zh-CN/docs/Web/API/Element) 对象。若在当前 [`Document`](https://developer.mozilla.org/zh-CN/docs/Web/API/Document) 下没有找到，则返回 null。
+
+使用console.dir()	来打印element对象，能更好的查看元素属性和方法
+
+
+
+#### Document.getElementsByTagName()
+
+通过标签名获取多个元素，返回值是一个伪数组
+
+ 特殊用法 element.getElementsByTagName()
+
+```javascript
+    //2：特殊用法，通过父元素来获取，父元素必须是单个元素
+    var ol = document.getElementById("ol");
+    var olist = ol.getElementsByTagName("li");
+    console.dir(olist)
+```
+
+
+
+#### Document.getElementsByClassName()
+
+通过类名获取多个元素，返回值是一个伪数组
+
+
+
+#### 全能选择器
+
+括号里面需要加选择器
+
+Document.querySelector()
+
+Document.querySelectorAll()
+
+```html
+<body>
+  <div id="d1"></div>
+  <div class="d2"></div>
+  <div>我是标签</div>
+
+  <script>
+    //querySelector只是获取第一个
+    var d1 = document.querySelector("#d1");
+    console.log(d1);
+    var d2 = document.querySelector(".d2");
+    console.log(d2);
+    var d3 = document.querySelector("div");
+    console.log(d3);
+
+    //使用querySelectorAll 来获取全部 用法和上面一样
+    var d4 = document.querySelectorAll("div");
+    console.log(d4);
+  </script>
+</body>
+```
+
+
+
+#### 元素属性
+
+元素属性可以读和改，直接获取就行	element.属性
+
+
+
+## 事件
+
+事件三要素。1:事件源	2：绑定事件	3：添加处理函数
+
+
+
+#### 修改元素内容
+
+element.innerText:忽略html标签
+
+element.innerHTML:能识别html标签
+
+这两个属性可以修改元素内容，innerHTML用的多
+
+
+
+#### 修改元素属性
+
+元素属性也是可以修改的
+
+常用的：src href	id	alt	title
+
+element.属性 = ""	就能修改
+
+
+
+#### 修改表单元素
+
+type	value	checked	selected	disable
+
+### 
+
+#### 修改元素样式
+
+元素的样式也可以修改
+
+element.style.样式 = ""
+
+注意：js中的修改样式实际上是添加到了元素的标签上，权重高
+
+
+
+#### 表单事件
+
+onfocus	获取焦点事件
+
+onblur	离开焦点事件
+
+
+
+#### 使用className属性来修改css样式
+
+在js中有两种修改css样式方法
+
+1:通过属性	ele.style = 
+
+2:修改className属性，这个属性就是css类
+
+```html
+  <style>
+    .change {
+      width: 100px;
+      height: 100px;
+      color: pink;
+      background-color: red;
+    }
+  </style>
+
+  <script>
+    var divele = document.querySelector("div");
+    divele.onclick = function () {
+      //使用className 来改变css样式
+      divele.className = "change";
+    }
+  </script>
+
+```
+
+
+
+#### 排他思想(算法)
+
+1：给所有元素清除样式	2：给自己绑定
+
+
+
+#### js鼠标经过事件
+
+onmouseover
+
+onmouseout
+
+
+
+#### 自定义元素属性操作
+
+获取元素属性
+
+1:element.属性
+
+2:element.getAttribute("属性")
+
+区别：第一个是用来获取元素原有属性的	第二个用来获取我们自定义的属性
+
+
+
+自定义属性的写法，直接在标签上面加就行
+
+```html
+<input type="text" index="1">
+```
+
+
+
+设置元素属性
+
+1:element.属性 =""
+
+2:element.setAttribute("属性","值")	用于设置自定义属性
+
+
+
+移除元素属性
+
+element.removeAttribute("属性")
+
+
+
+#### 元素自定义属性规范
+
+程序员自定义的元素属性，要以data开头
+
+
+
+## 节点
+
+节点就是dom树中的全部，整个html文档(元素，属性，内容)都是节点，都能获取
+
+
+
+节点有三个必要的	1：noed Type(节点类型)	2:node Name(节点名称)	3：node Value(节点值)
+
+元素节点	node Type 为1
+
+属性节点	node Type 为2
+
+文本节点	node Type 为3
+
+
+
+### 节点操作
+
+#### 获取节点
+
+1：获取父节点	ele.parentNode
+
+2：获取子节点
+
+childNodes
+
+children	常用
+
+```js
+    //childNodes  获取的是全部子节点 包括文本节点  返回类型是伪数组 包括文本节点属性节点 等 
+    console.log(ulele.childNodes);
+    //children  获取的是全部子,元素节点  返回类型是伪数组 开发中常用的
+    console.log(ulele.children);
+```
+
+
+
+
+
+子节点的第一个和最后一个
+
+记住使用children来获取子第一个和最后一个节点就行，下面喜欢看就看，不重要
+
+```js
+    //firstchild  lastchild 获取第一个，最后一个，包括其他节点  开发不常用
+    var ulele = document.querySelector("ul");
+    console.log(ulele.firstChild);
+    console.log(ulele.lastChild);
+
+    //firstElementChild  lastElementChild 获取第一个，最后一个,元素节点 但是支持ie9以上，开发不常用
+    console.log(ulele.firstElementChild);
+    console.log(ulele.lastElementChild);
+
+    //使用children来获取子第一个和最后一个节点,开发常用
+    console.log(ulele.children[0]);
+    console.log(ulele.children[ulele.children.length - 1]);
+```
+
+
+
+
+
+#### 添加节点
+
+在页面中增加一个节点(元素)分两步
+
+1：创建一个节点	document.createElement("标签名")	
+
+2：在元素中添加节点	element.appendChild("节点")	element.insertBefor("节点",指定元素)
+
+element.appendChild("节点")	在元素后面追加节点	
+
+element.insertBefor("节点",指定元素)	在元素前面追加节点
+
+​	
+
+#### 删除节点
+
+elenent.removeChild("元素")
+
+
+
+#### 复制节点
+
+分两步
+
+1：复制一个节点	ele.clone()	返回值是一个节点
+
+2：在指定位置添加	用appendChild()或insertBefore()
+
+​	
+
+
+
+## 事件高级
+
+### 注册事件(绑定事件)
+
+注册事件分两种，
+
+第一种是传统注册	onclick	on开头的都是传统
+
+第二种是监听器注册	addeventListener(type,function(){})
+
+type是类型，什么样的事件，如click，mouseout
+
+区别：传统注册一个元素一个事件只能绑定一个
+
+​			监听器注册，一个元素一个事件可以绑定多个
+
+传统支持ie678
+
+如果开发种不考虑兼容性，那么就使用监听器注册，以下的笔记同理。
+
+
+
+### 删除事件
+
+传统绑定删除	   ele.onclick = null;
+
+监听器绑定删除	ele.removeEventListner(type,fun)
+
+```js
+    //监听器绑定删除
+    div[1].addEventListener("click",fun)	//fun必须写成方法
+
+    function fun(){
+      alert("22");
+      div[1].removeEventListener("click",fun)
+    }
+```
+
+
+
+
+
+### dom事件流
+
+事件流分捕获和冒泡，先执行捕获，然后执行冒泡
+
+捕获，给一个div元素添加事件会发送的事：document - html - body - div
+
+冒泡，div - body - html - document
+
+给一个元素添加事件，处于事件流的元素会执行自己的事件
+
+具体看图片
+
+
+
+### 事件对象
+
+在绑定事件的时候，有一个事件对象，是js给的
+
+ele.onclick = function(event){}
+
+ele.addEventListner("type",function(event))
+
+必须有事件，才会有事件对象
+
+事件对象 是 我们事件的一系列相关数据的集合 跟事件相关的 比如鼠标点击里面就包含了鼠标的相关信息，鼠标坐标啊。如果是键盘事件里面就包含的键盘事件的信息 比如 判断用户按下了那个键
+
+
+
+### 常见的事件对象属性和方法
+
+#### event.target 和this
+
+target 哪个元素被点击就是哪个 
+
+this 哪个元素被绑定事件就是哪个
+
+
+
+#### 事件类型和阻止默认行为
+
+event.type	可以获取是什么类型的事件
+
+
+
+阻止默认行为：如a链接的跳转，form表单的提交
+
+传统事件阻止：e.returnValue
+
+监听器事件阻止：e.preventDefault()
+
+
+
+#### 阻止事件冒泡
+
+传统：e.cancelBubble
+
+监听器：e.stopPropagation()
+
+
+
+### 事件委托
+
+核心：给父亲添加监听器事件，利用冒泡影响每一个子节点
+
+
+
+### 鼠标事件对象常用的属性
+
+e.pageX	返回相对于文档x坐标
+
+e.pageY	返回相对于文档y坐标
+
+
+
+
+
+### 键盘事件
+
+onkeydown	键盘按下触发
+
+onkeypress	键盘按下触发	不识别功能箭	ctrl shift等
+
+onkeyup	键盘弹起触发
+
+
+
+### 常用键盘事件对象属性
+
+e.keyCode	返回按下某个键的ASCII码值
+
+
+
+
+
+# Bom
+
+## 概述
+
+bom是浏览器对象，js接口中叫做window，是浏览器顶级对象
+
+windwo包括document
+
+
+
+## window对象常见事件
+
+### 页面加载事件
+
+window.onload	在页面元素都加载好后(包括,css,图片,视频等)，执行
+
+DOMContentLoaded	在页面元素加载好后(不包括css,图片,视频)，执行	在图片较多的网页，使用这个速度更快
+
+```js
+  document.addEventListener("DOMContentLoaded",function(){
+   alert("!")
+  })
+```
+
+
+
+### 调整窗口大小事件
+
+window.onresize	浏览器窗口发送变化，执行
+
+window.innerWidth 可以获取当前屏幕尺寸
+
+
+
+## 定时器
+
+### setTimeout
+
+window.setTimeout(调用函数,毫秒数)	多少毫米后执行函数
+
+1：window可以省略
+
+2：里面的调用函数可以写匿名函数，也可以在外部自定义一个然后里面写函数名(不带括号)
+
+3：毫秒数默认是0
+
+4：定时器可以给一个标识符(变量)
+
+### 
+
+### clearTimeout
+
+clearTimeout(要清除定时器的名字)	清除setTimeout定时器
+
+
+
+### setInterval
+
+window.setInterval(调用函数,毫秒数)	每间隔一段毫秒数，就会去调用函数
+
+
+
+### clearInterval
+
+clearInterval(要清除定时器的名字)	清除setInterval定时器
+
+
+
+
+
+## js中this指向问题
+
+  全局作用域下，普通函数的this指向window，定时器里的this指向window对象
+
+  方法中，谁调用指向谁
+
+  一句话，谁调用指向谁，在全局作用域下，前面都是省略了window的
+
+
+
+## js运行机制
+
+#### 同步和异步
+
+同步就是单线程
+
+异步就是多线程
+
+现在js支持异步
+
+```js
+    console.log("1");
+
+    setTimeout(function(){
+      console.log(2);
+    },1000)
+
+    console.log(3);
+
+//运行结果: 1  3  2
+```
+
+
+
+## location对象
+
+location对象是用来操控url的
+
+两个重要的属性	location.href	location.search	其他的属性看画图
+
+
+
+
+
+## navigator对象
+
+navigator对象里面包含了浏览器信息和设备参数，可以用来判断是手机还是电脑页面
+
+```js
+        if ((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i))) {
+            window.location.href = "../H5/index.html"; //手机
+        }else{
+            window.location.href = "../H5/index.html"; //电脑
+        }
+```
+
+
+
+## history对象
+
+history对象包含了浏览器记录，浏览器的左右箭头
+
+back()	回退	forward()前进	go(参数)	1为前进	-1为后退
+
+
+
+
+
+# PC端页面特效
+
+## 元素偏移量offset
+
+可以获取元素的位置，大小
+
+element.offsetTop	返回元素上方偏移，如果有父亲且有定位，那么就以父亲为准，否则以body为准
+
+element.offsetLeft	返回元素左方偏移，如果有父亲且有定位，那么就以父亲为准，否则以body为准
+
+element.offsetWidt	返回元素宽，包括bordr padding
+
+element.offsetHeight	返回元素高，包括bordr padding
+
+element.offsetParent	返回带有定位的父亲，父级都没，返回body
+
+
+
+### 元素偏移量offset和style的区别
+
+offset用来获取元素大小，位置
+
+style用来改变元素值
+
+
+
+## 盒子内的坐标获取方法
+
+  用pagex - offsetleft 就是盒子内的x坐标
+
+
+
+## Client系列
+
+这个和offset相似，开发中不常用
+
+element.ClientHeight	返回元素高，不包括border
+
+element.ClientWidth	返回元素宽，不包括border
+
+
+
+## 立即执行函数
+
+函数不需要调用，自己执行。
+
+作用：自己有一份作用域
+
+写法	(function(){})()
+
+
+
+
+
+## scroll系列
+
+scroll主要用来做滚动效果
+
+element.scrollTop	返回被卷去的上方距离
+
+element.scrollLeft	返回被卷去的左方距离
+
+element.scrollWidt	返回自身实际宽，不包括border
+
+element.scrollHeight	返回自身实际高，不包括border
+
+
+
+### scroll事件
+
+scroll事件就是发生滚动，则执行
+
+
+
+## 鼠标经过事件的区别
+
+mouseover	鼠标经过子盒子还会触发事件
+
+mouseenter	鼠标经过子盒子不会会触发事件
+
+mouseenter搭配鼠标离开mouseleave
+
+
+
+## 动画
+
+动画原理：一个定时器，一个元素有定位，有left属性，在定时器里面left值 +1
+
+
+
+匀速动画	自身的位置+固定的值
+
+缓动动画	自身位置	+	(目标位置-自身的位置) / 10
+
+
+
+缓动动画多个目标值移动
+
+1：之所以能实现后退，是因为公式，(目标位置-自身位置)/10 = 负数，那么left+负数就是后退
+
+2：移动目标会发现，和目标有偏差，这是因为上面公式有除法，会有小数，所以我们需要给变成整数
+
+
+
+## 轮播图的制作核心
+
+轮播图移动就是用的动画封装函数，移动的位置 = 坐标值 * 图片的宽
+
+左右箭头实现无缝滚动：克隆第一张图片，添加到最后。	
+
+自动播放：自动播放和右箭头点击的效果是一样的，添加一个定时器，给一个手动点击事件，就可以了
+
+
+
+
+
+
+
+# 移动端网页特性
+
+## touch触摸事件
+
+touchstart	手指触摸一个元素触发
+
+touchmove	手指在一个元素滑动触发
+
+touchend	手指从元素离开触发	(相当于鼠标弹起)
+
+
+
+### touchEvent触摸事件对象
+
+重点记住	e.tragetTouches	正在触摸当前dom元素的手指的一个列表
+
+
+
+## 。。。先略。以后在来学移动特性
+
+
+
+
+
+# 本地存储
+
+本地存储可以把数据存到浏览器里
+
+## window.sessionStorage
+
+生命周期为关闭浏览器窗口
+
+同一个页面可以共享数据
+
+以键值对方式存储
+
+添加数据	sessionStorage.setItem(key,value)
+
+获取数据	sessionStorage.getItem(key)
+
+删除数据	sessionStorage.removeItem(key)
+
+删除所有	sessionStorage.clear()
+
+## 
+
+## localStorage
+
+生命周期永久生效，除非删除数据或清除浏览器
+
+多个页面共享	
+
+以键值对方式存储
+
+
+
+# jquery
+
+## jq样式操作
+
+
+
+### 入口函数
+
+$(function(){
+
+})
+
+相当于js中的DomcontentLoaded，等资源加载完成，执行里面代码
+
+
+
+### dom对象和jquery对象
+
+用原生js获取的元素就是dom对象
+
+用jquery获取的元素就是juqery对象，返回的是一个伪数组
+
+dom对象不能使用jq的方法，jq的对象不能使用js的属性和方法
+
+
+
+### jq选择器
+
+  $("选择器")	就可以获取 	和css选择器一样
+
+
+
+
+
+### 隐式迭代
+
+jq获取的元素是一个伪数组，我们可以直接给这个伪数组添加jq方法，那每一个元素都会改变，这是因为jq会自动进行循环
+
+
+
+
+
+### jq筛选选择器
+
+$("element:first")	第一个
+
+$("element:last")	最后一个
+
+$("element:eq(2)")	第二个
+
+$("element:odd")	奇数
+
+$("element:event")	偶数
+
+
+
+### jq筛选方法
+
+$().parent();	返回最近父级
+
+$().children();	返回所有儿子
+
+$().siblings();	返回兄弟，不包括自己
+
+$().eq(index)	返回索引元素
+
+
+
+### jq的index()
+
+jq元素对象都有index()方法，这个方法记录了元素索引值
+
+
+
+### jq修改css的方法
+
+$("element").css("属性名","值")
+
+
+
+### jq中操作类的方法
+
+添加一个类	$("element").addClass("类名")
+
+移除类	$("element").removeClass("类名")
+
+切换类	$("element").toggleClass("类名")
+
+
+
+
+
+### jq的类操作与className区别
+
+原生js  className	会覆盖原来的类
+
+jq的类操作不会影响原来的类  
+
+
+
+## 
+
+## jq效果
+
+jq给我们封装了很多动画效果，都是可以使用的
+
+### 显示与隐藏效果
+
+show([speed,[easing],[fn]])
+
+hide([speed,[easing],[fn]])
+
+toggle([speed],[easing],[fn])	显示隐藏之间切换
+
+  这个效果难看，为默认就行
+
+
+
+### 滑动效果
+
+slideDown([speed],[easing],[fn])	下滑
+
+slidUp([speed],[easing],[fn])	上滑
+
+slidToggle([speed],[easing],[fn])	上下滑动切换
+
+​	
+
+### 停止动画排列stop()
+
+jq的动画效果点击多次，会执行多次，所以只要有动画，必须先stop()一下
+
+stop()	必须写在动画前面
+
+
+
+
+
+### 淡入淡出效果
+
+fadeIn([speed],[easing],[fn])	淡入
+
+fadeOut([speed],[easing],[fn])	淡出
+
+fadeToggle([speed,[easing],[fn]])		淡入淡出切换
+
+fadeTo([[speed],opacity,[easing],[fn])	 改变透明度
+
+**opacity**:一个0至1之间表示透明度的数字。
+
+
+
+
+
+### jq的animate
+
+animate(params,[speed],[easing],[fn])
+
+params：对象的形式，里面写元素css属性
+
+
+
+
+
+## jq属性操作
+
+1：$("element").prop("属性名");	获取属性，这个方法用来获取元素固有属性
+
+2：$("element").attr("属性名")	获取自定义属性
+
+​	$("element").attr("属性名",属性值)	给元素添加属性
+
+3：$("element").data("key","value")	给元素一个数据，这个数据刷新页面时失效
+
+​	$("element").data("key")	获取数据
+
+
+
+​	
+
+## jq修改元素内容
+
+html()	= innerHtml
+
+text() = innerText
+
+val() = input.value
+
+括号里面不写值就是获取，写了就是赋值
+
+
+
+## jq补充
+
+获取所有父元素	$("element").parents();	里面可以跟选择器，选择出想要的父级
+
+保留几位小数	toFixed()
+
+
+
+## jq遍历
+
+同一类元素做不同操作，就要用遍历
+
+这个用来遍历元素里面的内容
+
+$("element").each(function(index,dom){
+
+//index	是元素索引号
+
+//dom	是dom元素对象
+
+})
+
+
+
+$.each(ele,function(){i,data})
+
+  $.each 用来遍历数据，对象
+
+
+
+## jq的创建添加删除元素
+
+### 创建
+
+$("<div></div>")	在里面写标签就能创建
+
+
+
+### 添加
+
+1：内部添加	$("element").append()	内部添加到元素最后面
+						$("element").prepend()	内部添加到元素最前面
+
+
+
+2：外部添加	$("element").after()		外部添加到元素最后面
+
+​						$("element").before()	外部添加到元素最前面
+
+
+
+内部和外部的区别是，内部添加的是父子关系，添加到了里面。外部添加是兄弟关系
+
+
+
+### 删除
+
+$("element").remove()	删除自己
+
+$("element").empty()	删除里面的子节点，不删自己
+
+$("element").html("")	把里面的子节点清空，和empty效果一样
+
+
+
+
+
+
+
+## jq的尺寸和位置方法
+
+
+
+### 尺寸方法
+
+```js
+         // 1. width() / height() 获取设置元素 width和height大小 
+        console.log($("div").width());
+        // $("div").width(300);
+
+        // 2. innerWidth() / innerHeight()  获取设置元素 width和height + padding 大小 
+        console.log($("div").innerWidth());
+
+        // 3. outerWidth()  / outerHeight()  获取设置元素 width和height + padding + border 大小 
+        console.log($("div").outerWidth());
+
+        // 4. outerWidth(true) / outerHeight(true) 获取设置 width和height + padding + border + margin
+        console.log($("div").outerWidth(true));
+```
+
+
+
+### 位置方法
+
+1:offset()	元素距离文档的位置	有两个属性left top
+
+offset().left	offset().top
+
+offset里面可以传对象	用来设置left top	{	left:100	top:200	}
+
+
+
+2：position()	以父级为参照物的位置，如果没有父级，就以文档为准
+
+两个属性left top 		position里面不能传对象，不能设置left top
+
+
+
+3：scrollTop()	页面被卷去的头部		里面可以写数值
+
+​	scrollTop()	页面被卷去的左侧（基本不用）
+
+
+
+带有动画的返回顶部
+
+animate()	里面可以传scrollTop，能做到动画效果
+
+
+
+如果想实现页面滚动加动画，用jq的话	animate()里面必须写body,html	写document不管用，必须是元素
+
+
+
+
+
+# jq超有用的插件
+
+https://www.jq22.com/
+
+http://www.htmleaf.com/
+
+两个网站都能下，jq插件就是别人写好的特效
+
+
+
+## 图片懒加载插件
+
+这个非常有用
+
+
+
+
+
+
+

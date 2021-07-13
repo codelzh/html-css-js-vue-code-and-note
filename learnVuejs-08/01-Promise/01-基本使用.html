@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<script>
+  //在new promise后，会返回两个函数
+  //resolve成功时候调用，后面的then，里面可以跟一个函数，这个函数就是resolve传来的值
+  //reject失败时候调用，后面可以跟catch，里面也可以跟一个函数，这个函数就是reject传来的值
+  new Promise((resolve,reject)=>{
+    setTimeout(()=>{
+      // resolve('hello')
+    },1000)
+
+    setTimeout(()=>{
+      reject('错误')
+    })
+  }).then((data)=>{
+    console.log(data);
+  }).catch((error)=>{
+    console.log(error);
+  })
+
+</script>
+
+</body>
+</html>

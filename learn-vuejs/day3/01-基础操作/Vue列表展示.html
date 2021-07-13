@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<ul id="showul">
+<!--    <li>{{messagearr}}</li>-->
+    <li v-for="intem in messagearr">
+        {{intem}}
+    </li>
+</ul>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#showul',
+        data:{
+            messagearr:['1','2','3','4','5']
+        }
+    })
+</script>
+</body>
+</html>

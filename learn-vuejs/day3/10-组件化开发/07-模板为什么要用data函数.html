@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+
+<div id="app">
+  <mycpn></mycpn>
+  <mycpn></mycpn>
+  <mycpn></mycpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <h2>我是数字{{number}}</h2>
+    <button v-on:click="increment">+</button>
+    <button v-on:click="decrement">-</button>
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+  Vue.component('mycpn',{
+    template:'#cpn',
+    data(){
+      return {
+        number:0
+      }
+    },
+    methods:{
+      increment(){
+        return this.number++
+      },
+      decrement(){
+        return this.number--
+      }
+    }
+  })
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow'
+    }
+  })
+
+  //如果使用对象，那么创建的多个实例，内存地址指向同一对象，那么一个改变全都改变
+  const test = {
+    name:'aaa',
+  }
+
+  //如果使用的是函数，函数里面每次调用返回一个对象，每次实例的对象，指向不同的内存地址，互不影响
+  function a(){
+    // return test
+    return {
+      name:"aaaa"
+    }
+  }
+
+  let a1 = new a();
+  let a2 = new a();
+
+  a1.name='bbbb'
+  console.log(a2)
+</script>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="animate.js"></script>
+  <style>
+    .silder {
+      position: fixed;
+      top: 50px;
+      right: 0px;
+    }
+
+    span {
+      display: block;
+      width: 50px;
+      height: 40px;
+      background-color: pink;
+      text-align: center;
+      line-height: 40px;
+      color: white;
+    }
+
+    .silder div {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 150px;
+      height: 40px;
+      background-color: pink;
+      text-align: center;
+      line-height: 40px;
+      z-index: -1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="silder">
+    <span>←</span>
+    <div class="question">问题反馈</div>
+  </div>
+
+  <script>
+    var silder = document.querySelector(".silder");
+    var question = document.querySelector(".question");
+    var span = document.querySelector("span");
+
+    silder.addEventListener("mouseover", function () {
+      move(question,-150,function(){ span.innerHTML = "→" });
+    })
+
+    silder.addEventListener("mouseout", function () {
+      move(question,0,function(){ span.innerHTML = "←" });
+    })
+  </script>
+</body>
+
+</html>

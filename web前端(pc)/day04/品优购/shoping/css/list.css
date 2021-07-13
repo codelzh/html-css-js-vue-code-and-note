@@ -1,0 +1,90 @@
+@font-face {
+    font-family: 'icomoon';
+    src:  url('fonts/icomoon.eot?hwqvna');
+    src:  url('fonts/icomoon.eot?hwqvna#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?hwqvna') format('truetype'),
+    url('fonts/icomoon.woff?hwqvna') format('woff'),
+    url('fonts/icomoon.svg?hwqvna#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+.header .ms{
+    position: absolute;
+    left: 200px;
+    top: 14px;
+    width: 111px;
+    height: 37px;
+    border-left: 1px solid #b1191a;
+
+}
+
+.header .ms img{
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.head-nav{
+    height: 30px;
+    border-bottom: 2px solid #b1191a;
+}
+
+.head-nav .left{
+    float: left;
+}
+
+.head-nav .left ul li{
+    float: left;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left:70px;
+    margin-bottom: 5px;
+}
+
+.head-nav .left ul li:first-of-type{
+    margin-left:20px;
+}
+
+.head-nav .right{
+    float: left;
+    margin-left: 20px;
+}
+
+.head-nav .right ul li{
+    float: left;
+    font-size: 14px;
+    color: #8c8c8c;
+    margin-left: 42px;
+}
+
+.head-nav i{
+    font-size: 16px;
+    color: #8c8c8c;
+    float: left;
+    margin-left: 20px;
+}
+
+.head-nav i::after{
+    content: "\ea3e";
+    font-family: 'icomoon';
+}
+
+.goods{
+    background-color: pink;
+}
+
+.goods div{
+    float: left;
+    width: 290px;
+    height: 458px;
+    /*background-color: red;*/
+    margin-left: 10px;
+    margin-bottom: 1px;
+    border: 1px solid transparent;
+    overflow: hidden;
+}
+
+.goods div:hover{
+    border: 1px solid red;
+}

@@ -1,0 +1,390 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.clear{
+    clear: both;
+}
+
+a{
+    text-decoration: none;
+}
+
+li{
+    list-style: none;
+}
+
+.w{
+   width: 1200px;
+    margin: 0 auto;
+}
+
+body{
+    background-color: #f3f5f7;
+    height: 3000px;
+}
+
+.head{
+    height: 102px;
+    border: 1px solid transparent;
+}
+
+.logo{
+    float: left;
+    width: 196px;
+    height: 40px;
+    margin: 30px auto;
+}
+
+.nav{
+    float: left;
+    height: 20px;
+    margin-left: 70px;
+    margin-top: 41px;
+    margin-bottom: 30px;
+}
+
+.nav ul li {
+    float: left;
+}
+
+.nav ul li a{
+    display: block;
+    height: 30px;
+    padding: 0px 10px;
+    font-size: 18px;
+    color: #050505;
+}
+
+.nav ul li a:hover{
+    border-bottom: 2px solid #00a4ff;
+}
+
+.search{
+    float: left;
+    width: 410px;
+    height: 40px;
+    margin-top: 30px;
+    margin-left: 90px;
+}
+
+.search input{
+    float: left;
+    border: 2px solid #00a4ff;
+    height: 36px;
+    width: 340px;
+    border-right: 0;
+    color: #bfbfbf;
+    padding-left: 18px;
+}
+
+.search button{
+    float: left;
+    width: 50px;
+    height: 40px;
+    border: 0;
+    background-image: url("../images/search.png");
+}
+
+.user{
+    float: right;
+    margin-right: 30px;
+    margin-top: 34px;
+    margin-bottom: 29px;
+    height: 40px;
+}
+
+
+/*以下是banner*/
+.banner{
+    background-color: #1c036c;
+    height: 420px;
+}
+
+.core{
+    height: 420px;
+    background: url("../images/banner1.png") no-repeat top center;
+    /*position: relative;*/
+}
+
+.sidenav{
+    float: left;
+    width: 198px;
+    height: 420px;
+    background-color: rgba(0,0,0,0.3);
+
+}
+
+.sidenav ul li {
+    height: 45px;
+    line-height: 45px;
+    margin-left: 20px;
+    padding: 0px 20px;
+
+}
+
+.sidenav ul li a{
+    color: #ffffff;
+    font-size: 14px;
+}
+.sidenav ul li a span{
+    float: right;
+}
+
+.sidenav ul li a:hover{
+    color: #0393d9;
+}
+
+.core .course{
+    float:right;
+    width: 230px;
+    height: 300px;
+    background-color: white;
+    margin-top: 52px;
+    margin-bottom: 68px;
+}
+
+.course .coursetop{
+    background-color: #9bceea;
+    width: 230px;
+    height: 50px;
+    line-height: 50px;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+
+}
+
+.course .coursecenter{
+    background-color: #ffffff;
+}
+
+.course .coursecenter ul li{
+    padding: 12px 20px;
+    border-bottom: 1px solid  #eaeaea;
+}
+.course .coursecenter ul li h3{
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.course .coursecenter ul li p{
+    color: #5a5a5a;
+    font-size: 12px;
+}
+
+.course .coursebottom{
+    border: 2px solid skyblue;
+    width: 194px;
+    height: 34px;
+    line-height: 34px;
+    margin-top: 10px;
+    margin-left: 15px;
+    text-align: center;
+}
+.course .coursebottom a{
+    color: skyblue;
+
+}
+
+
+/*推荐*/
+.recommend{
+    margin-top: 8px;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: 0 2px 3px 3px rgba(0,0,0,0.3);
+    background-color: white;
+}
+
+.recommend .left{
+    float: left;
+    height: 60px;
+    margin-left: 35px;
+
+}
+
+.recommend .left a{
+    font-size: 16px;
+    color: #00a4ff;
+    font-weight: 600;
+}
+
+.recommend .goods{
+    float: left;
+}
+
+.recommend .interest{
+    float: right;
+}
+
+.goods ul {
+    margin-left: 33px;
+}
+
+.goods ul li{
+    float: left;
+}
+
+.goods ul li a{
+    padding: 0px 20px ;
+    font-size: 16px;
+    color: #050505;
+    border-left: 1px solid #5a5a5a;
+}
+
+.recommend .interest ul{
+    margin-right: 25px;
+}
+
+.recommend .interest ul li a{
+    font-size: 16px;
+    color: #00a4ff;
+}
+
+
+/*box推荐*/
+.box{
+    height: 600px;
+    width: 1225px;
+    margin-top: 34px;
+}
+
+.box .hd{
+    height: 42px;
+    background-color: white;
+}
+.box .hd .one{
+    float: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.box .hd .two{
+    float: right;
+    margin-top: 10px;
+    margin-right: 30px;
+    font-size: 12px;
+    color: #a5a5a5;
+}
+
+.box .bd{
+    background-color: white;
+}
+
+.box .bd div{
+    float: left;
+    width: 230px;
+    height: 271px;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 3px 3px rgba(0,0,0,0.3);
+    position:relative;
+
+}
+
+.box .bd div>img{
+    width: 100%;
+}
+
+.box .bd h3{
+    padding: 24px 18px 18px 23px;
+    font-weight: 400;
+    font-size: 14px;
+
+}
+
+.box .bd p{
+    padding: 0 66px 26px 23px;
+    font-size: 12px;
+    color: #a5a5a5;
+}
+
+.box .bd span{
+    color: #ff7c2d;
+}
+
+.box .hot{
+    position:absolute;
+    right: 0px;
+    top:0px;
+}
+
+.foot{
+    height: 412px;
+    margin-top: 39px;
+    background-color: #ffffff;
+}
+
+.foot .w .footleft{
+    float: left;
+    width: 607px;
+    height: 416px;
+}
+
+.foot .w .footright{
+    float: right;
+}
+
+.foot .w .footleftlogo{
+    width: 208px;
+    height: 43px;
+    margin: 33px 0 23px 21px;
+}
+
+
+.foot .w  p {
+    display: block;
+    margin-left:21px;
+}
+
+.foot .w  .footleftapp{
+    display: block;
+    width: 122px;
+    height: 39px;
+    margin-top: 21px;
+    margin-left: 21px;
+}
+
+.foot .w  .footleftapp a{
+    color: #00a4ff;
+    font-size: 16px;
+    border: 1px solid  #00a4ff;
+    padding: 7px 27px;
+
+}
+
+.foot .footright{
+    margin-right: 0px;
+    margin-top: 35px;
+}
+
+.foot .footright ul{
+    float: right;
+    margin-right: 80px;
+}
+
+.foot .footright ul li h4{
+    font-size: 17px;
+    font-weight: 400;
+    color: #333333;
+}
+
+.foot .footright ul li {
+    font-size: 12px;
+    color: #333333;
+    padding-bottom: 10px;
+}
+
+.gg1{
+    position:fixed;
+    left: 100px;
+    top: 200px;
+}
+.gg2{
+    position:fixed;
+    right: 100px;
+    top: 200px;
+}

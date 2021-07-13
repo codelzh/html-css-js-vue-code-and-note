@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    var test = "abcadfgva";
+    var temp = test.indexOf("a");
+
+    var num = 0;
+
+    while(temp!== -1){
+      console.log(temp);
+      num++;
+      temp = test.indexOf("a",temp+1);
+    }
+
+    console.log(num);
+
+
+    //数组也能用这套算法
+    var arr = ["blue", "red", "purple", "red", "yellow", "red"];
+    var temp = arr.indexOf("red");
+
+    while (temp !== -1) {
+      console.log(temp);
+      temp = arr.indexOf("red",temp+1);
+    }
+
+  </script>
+</body>
+
+</html>

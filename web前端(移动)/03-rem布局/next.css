@@ -1,0 +1,10 @@
+.t1 span {
+  color: pink;
+}
+.t2:hover {
+  font-size: 20px;
+  color: red;
+}
+.t2::after {
+  content: "";
+}

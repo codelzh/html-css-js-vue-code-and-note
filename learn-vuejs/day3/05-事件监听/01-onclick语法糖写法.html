@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <div>{{number}}</div>
+  <button v-on:click="increment">+</button>
+  <button v-on:click="reduce">-</button>
+
+  <p></p>
+
+  <!--
+    v-on 语法糖写法
+  -->
+  <button @click="increment">+</button>
+  <button @click="reduce">-</button>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      number:0
+    },
+    methods:{
+      increment(){
+        return this.number++
+      },
+      reduce(){
+        return this.number--
+      }
+    }
+  })
+</script>
+
+</body>
+</html>

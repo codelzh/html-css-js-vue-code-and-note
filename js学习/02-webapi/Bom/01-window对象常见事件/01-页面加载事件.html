@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    //页面加载事件，可以让js出现在任意地方
+    window.onload = function () {
+      var box = document.querySelector(".box");
+      console.log(box);
+    }
+
+    //DOMContentLoaded  和上面效果一样  但是这个是在元素加载完成后，执行，不包括图片，视频，css等
+    document.addEventListener("DOMContentLoaded",function(){
+      alert("!")
+    })
+  </script>
+</head>
+
+<body>
+  <div class="box"></div>
+
+</body>
+
+</html>

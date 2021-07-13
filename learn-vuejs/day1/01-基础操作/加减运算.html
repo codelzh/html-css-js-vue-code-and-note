@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+
+<h2>当前数字:{{number}}</h2>
+
+<button v-on:click="increment">+</button>
+<button v-on:click="subtract">-</button>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+    let app = new Vue({
+        el:'#app',
+        data:{
+            number:0
+        },
+        //定义js方法的
+        methods:{
+            increment(){
+                console.log("加执行");
+                this.number++;
+            },
+            subtract(){
+                console.log("减执行");
+                this.number--;
+            }
+        }
+    })
+</script>
+</body>
+</html>

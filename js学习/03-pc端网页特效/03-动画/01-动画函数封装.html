@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father{
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      background-color: pink;
+      width: 100px;
+      height: 20px;
+    }
+
+    .son{
+      position: absolute;
+      top: 100px;
+      left: 0px;
+      background-color: pink;
+      width: 80px;
+      height: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="father">father</div>
+  <div class="son">son</div>
+  <script>
+    var fahter = document.querySelector(".father");
+    move(fahter,400)
+    function move(obj, falg) {
+      clearInterval(obj.time)
+      //可以把定时器给一个属性
+      obj.time = setInterval(function () {
+        if(falg > obj.offsetLeft){
+          obj.style.left = obj.offsetLeft + 1 +"px";
+        }else{
+          clearInterval(obj.time);
+        }
+
+      }, 30)
+    }
+
+    
+  </script>
+</body>
+
+</html>

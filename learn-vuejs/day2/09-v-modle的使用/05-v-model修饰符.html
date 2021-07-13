@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--lazy当用户敲回车或鼠标离开，则执行绑定赋值-->
+  <input type="text" v-model.lazy="useracount">
+  {{useracount}}
+
+  <p></p>
+
+  <!--number 用户输入数字，赋值时候是字符串，如果希望是数字int类型，使用number-->
+  <input type="text" v-model.number="age">
+  {{typeof (age)}}--{{age}}
+
+  <p></p>
+
+  <!--trim 当用户输入左右两端有空格我想去掉并赋值，则使用-->
+  <input type="text" v-model.trim="userpsw">
+  {{userpsw}}
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      useracount:'',
+      age:1,
+      userpsw:''
+    }
+  })
+</script>
+
+
+</body>
+</html>

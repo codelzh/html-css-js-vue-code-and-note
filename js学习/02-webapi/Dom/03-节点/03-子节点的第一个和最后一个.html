@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+
+  <script>
+    //firstchild  lastchild 获取第一个，最后一个，包括其他节点  开发不常用
+    var ulele = document.querySelector("ul");
+    console.log(ulele.firstChild);
+    console.log(ulele.lastChild);
+
+    //firstElementChild  lastElementChild 获取第一个，最后一个,元素节点 但是支持ie9以上，开发不常用
+    console.log(ulele.firstElementChild);
+    console.log(ulele.lastElementChild);
+
+    //使用children来获取子第一个和最后一个节点,开发常用
+    console.log(ulele.children[0]);
+    console.log(ulele.children[ulele.children.length - 1]);
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,261 @@
+//font初始值
+@basefont: 70px;
+
+body {
+  min-width: 320px;
+  max-width: 750px;
+  margin: 0 auto;
+  background-color: #f2f4f7;
+}
+
+@media screen and (min-width:750px) {
+  html {
+    font-size: (750px / 10);
+  }
+}
+
+.header {
+  height: (60rem / @basefont);
+  text-align: center;
+  font-size: (35rem / @basefont);
+  margin-top: (35rem / @basefont);
+  border-bottom: 1px solid #ffffff;
+}
+
+//导航
+.nav-index {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+
+  a {
+    flex: 33%;
+    display: flex;
+    flex-direction: column;
+    margin-top: (52rem / @basefont);
+    text-align: center;
+    text-decoration: none;
+    color: #707070;
+
+    img {
+      flex: 1;
+      width: (100rem / @basefont);
+      height: (100rem / @basefont);
+      margin-left: 50%;
+      transform: translateX(-50%);
+    }
+
+    span {
+      flex: 1;
+      font-size: (25rem / @basefont);
+    }
+  }
+
+
+  //活动
+  .activity {
+    margin: (58rem / @basefont) (15rem / @basefont) (37rem / @basefont) (15rem / @basefont);
+
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+}
+
+
+//就业
+.work-index {
+  padding: (37rem / @basefont) (22rem / @basefont);
+  margin-top: (10rem / @basefont);
+  background-color: #ffffff;
+
+  .work-hd {
+    display: flex;
+    justify-content: space-between;
+    height: (40rem /@basefont);
+    background-color: #ffffff;
+    line-height: (40rem / @basefont);
+    padding: 0 (22rem / @basefont);
+
+    h4 {
+      font-size: (28rem / @basefont);
+      vertical-align: middle;
+
+      span {
+        display: inline-block;
+        width: (20rem / @basefont);
+        height: (20rem / @basefont);
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .more {
+      text-decoration: none;
+      font-size: (22rem / @basefont);
+      color: #b6b6b6;
+    }
+  }
+
+  .bd {
+    margin-top: (40rem / @basefont);
+
+    .swiper-slide {
+      a {
+        display: block;
+        width: (340rem / @basefont);
+        height: (378rem / @basefont);
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      span {
+        display: block;
+        width: (340rem / @basefont);
+      }
+
+
+
+    }
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      transition: 300ms;
+      transform: scale(0.8);
+      opacity: 0.6;
+    }
+
+    .swiper-slide-active,
+    .swiper-slide-duplicate-active {
+      transform: scale(1);
+      opacity: 1;
+      z-index: 999;
+    }
+  }
+
+}
+
+// 学习模块
+.study-index {
+  background-color: #ffffff;
+  margin-top: (15rem / @basefont);
+  padding: (23rem / @basefont) (18rem / @basefont);
+
+  .study-hd {
+    display: flex;
+    justify-content: space-between;
+    line-height: (40rem / @basefont);
+    line-height: (40rem / @basefont);
+
+    h4 {
+      font-size: (28rem / @basefont);
+
+      span {
+        display: inline-block;
+        width: (36rem / @basefont);
+        height: (36rem / @basefont);
+        vertical-align: middle;
+
+        img {
+          width: 100%;
+        }
+      }
+    }
+
+    .more {
+      text-decoration: none;
+      font-size: (22rem / @basefont);
+      color: #aaaaaa;
+    }
+  }
+
+  
+  .hd{
+    margin-top: (55rem / @basefont);
+    .swiper-slide {
+      margin-right: (30rem / @basefont);
+      overflow: hidden;
+      span{
+        overflow: hidden;
+        display: inline-block;
+        width: (222rem / @basefont);
+        height: (169rem / @basefont);
+        
+        img{
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      h5{
+        display: inline-block;
+        margin-top: (10rem / @basefont);
+        margin-bottom: (15rem / @basefont);
+        font-size: (5rem / @basefont);
+        width: 100%;
+      }
+
+      p{
+        color: red;
+        font-size: (5rem / @basefont);
+      }
+
+    }
+
+
+    .swiper-container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .swiper-slide {
+      text-align: center;
+      font-size: 18px;
+      background: #fff;
+
+      /* Center slide text vertically */
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      flex-direction: column;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+    }
+  }
+}

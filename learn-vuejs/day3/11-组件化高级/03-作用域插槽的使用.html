@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<!--
+  每个组件都有它自己的作用域
+-->
+
+<!--
+  我想每次展示的数据都是不同的如何操作？但是这是子的数据，我父没有
+-->
+<div id="app">
+  <mycpn></mycpn>
+
+  <mycpn>
+    <template slot-scope="slot">
+      <span v-for="item in slot.data">{{item + '='}}</span>
+    </template>
+  </mycpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <slot :data="PLanguage">
+      <ul>
+        <li v-for="item in PLanguage">{{item}}</li>
+      </ul>
+    </slot>
+  </div>
+</template>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const cpn = {
+    template:'#cpn',
+    data(){
+      return {
+        PLanguage:['c++','java','c#','js']
+      }
+    }
+  }
+
+  let app = new Vue({
+    el:'#app',
+    data:{
+      message:'hellow',
+    },
+    components:{
+      mycpn:cpn
+    }
+  })
+</script>
+
+</body>
+</html>

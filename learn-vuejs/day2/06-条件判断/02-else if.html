@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <h1 v-if="number>80">优秀</h1>
+  <h1 v-else-if="number>60">及格</h1>
+  <h1 v-else>不及格</h1>
+
+  <!---
+    在开发中如果逻辑较为复杂，不采用上面的方法
+  -->
+  {{shownumber}}
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      number:'100',
+    },
+    computed:{
+
+      shownumber(){
+        let cont = '';
+        if (this.number>80){
+          cont = '优秀'
+        }else if (this.number>60){
+          cont = '及格'
+        }else {
+          cont = '不及格'
+        }
+        return cont;
+      }
+    },
+  })
+</script>
+
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .father {
+      position: absolute;
+      top: 50px;
+      left: 0px;
+      background-color: pink;
+      width: 100px;
+      height: 20px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <button>移动</button>
+  <p> </p>
+  <div class="father">father</div>
+  <script>
+    var fahter = document.querySelector(".father");
+    var btn = document.querySelector("button");
+
+    function move(obj, falg) {
+      clearInterval(obj.time)
+      obj.time = setInterval(function () {
+        //缓动动画公式: (目标位置-自身的位置)/10
+        var step = (falg - obj.offsetLeft) / 10;
+        if (falg > obj.offsetLeft) {
+          obj.style.left = obj.offsetLeft + step + "px";
+        } else {
+          clearInterval(obj.time);
+        }
+
+      }, 30)
+    }
+
+    btn.addEventListener("click", function () {
+      move(fahter, 400)
+    })
+  </script>
+</body>
+
+</html>

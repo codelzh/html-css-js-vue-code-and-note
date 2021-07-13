@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<div id="app">
+  <!--单选的赋值的应用场景-->
+  <input type="checkbox" v-model="acheckbox">同意
+  <button v-bind:disabled="!acheckbox">下一步</button>
+
+  <p></p>
+
+  <!--多个的应用场景-->
+  <input type="checkbox" value="跑步" v-model="checkboxs">跑步
+  <input type="checkbox" value="踢球" v-model="checkboxs">踢球
+  <input type="checkbox" value="游泳" v-model="checkboxs">游泳
+  {{checkboxs}}
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      acheckbox:true,
+      checkboxs:[]
+    }
+  })
+</script>
+
+
+</body>
+</html>

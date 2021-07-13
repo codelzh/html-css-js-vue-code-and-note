@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+
+
+    .box{
+        width: 160px;
+        height: 30px;
+        border: 1px solid darkgray;
+    }
+
+    .box>.price>.ms{
+        position: relative;
+        left: 0;
+        float: left;
+        width: 100px;
+        height: 30px;
+        background-color: red;
+        color: white;
+        line-height: 30px;
+        text-align: center;
+        margin-right: 20px;
+        font-weight: 1000;
+    }
+
+    .box>.price>.ms>i{
+        position: absolute;
+        top: 0;
+        right: 0px;
+        width: 0;
+        height: 0;
+        border-bottom: 0px solid red;
+        border-top: 30px solid transparent;
+        border-left: 0px solid blue;
+        border-right: 20px solid white;
+    }
+
+    .box>.price>.yj{
+        color: #4c5152;
+        font-size: 10px;
+        text-decoration: line-through;
+    }
+
+  </style>
+</head>
+<body>
+
+<!--模仿京东三角-->
+
+<!--<div class="box">$168</div>-->
+
+
+<div class="box">
+
+  <div class="price">
+    <span class="ms">6355
+      <i></i>
+    </span>
+
+    <span class="yj">9774</span>
+  </div>
+
+</div>
+
+</body>
+</html>

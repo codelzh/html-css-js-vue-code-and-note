@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<!---
+  当v-if 为true 显示...
+-->
+<div id="app">
+  <span v-if='islogin'>
+    <span>手机号</span>
+    <input type="text" id="phone">
+  </span>
+
+  <!---
+  当v-if false 显示...
+ -->
+  <span v-else>
+    <span>邮箱</span>
+    <input type="text" id="email">
+  </span>
+
+  <button @click="islogin= !islogin ">切换</button>
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  let app = new Vue({
+    el:'#app',
+    data:{
+      islogin:true
+    }
+  })
+</script>
+
+</body>
+</html>
