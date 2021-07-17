@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="box">
+    <!-- 在style进行动态绑定时候,我们可以传一个对象   
+          在开发中，我们一般自定义一个属性值
+    -->
+    <!-- <div v-bind:style="{css属性名:css属性值}">{{name}}</div> -->
+    <div :style="{color: final}">{{name}}</div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        name: "zsf",
+        final:"pink",
+      }
+    });
+  </script>
+</body>
+
+</html>

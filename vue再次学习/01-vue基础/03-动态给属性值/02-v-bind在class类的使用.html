@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div id="box">
+    <!-- 在class进行动态绑定时候,我们可以传一个对象   如果boolean为true，那么类名添加，如果false，类名删除
+          在开发中，专门在data里面声明一个boolean变量，进行控制
+    -->
+    <!-- <div v-bind:class="{类名:boolean}">{{name}}</div> -->
+
+    <div v-bind:class="{active: isActive}">{{name}}</div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        name:"zsf",
+        isActive:true
+      }
+    });
+  </script>
+</body>
+
+</html>

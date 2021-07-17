@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="box">
+    <!-- v-bind添加到属性前面，那么属性的值就可以是data数据 -->
+    <img v-bind:src="imgurl" alt="">
+
+    <!--	简写 在属性前面写上 : -->
+    <img :src="imgurl" alt="">
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        imgurl: "https://www.runoob.com/wp-content/uploads/2017/01/vue.png",
+      }
+    });
+  </script>
+</body>
+
+</html>

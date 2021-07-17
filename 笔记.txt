@@ -1,3 +1,659 @@
+
+
+# vue基础
+
+# vue重点
+
+1:语法都是写在html标签上面
+
+2:在html标签上	语法=	加上""是字符串	不加""	是data数据或者方法
+
+
+
+
+
+## vue的几种安装
+
+1：下载.js文件	直接src引入
+
+2：cdn 引入
+
+3：npm安装
+
+现在刚开始学先用第一种简单的
+
+
+
+
+
+## 创建一个vue
+
+```js
+    const app = new Vue({
+      el:"#box",  //vue用来管理的dom元素	使用id选择器
+      data:{      //数据
+        name:"zs",
+      },
+      methods: {  //用来定义方法的
+        get:function(){
+          console.log("1");
+        }
+      },
+    })
+```
+
+
+
+
+
+## 插值操作
+
+### Mustach语法插值
+
+Mustach语法就是{{}}	里面写data对象里 的k，vue就会自动解析数据并渲染到dom上	相当于innetText
+
+```html
+  <div id="box">
+     <!-- {{}}	里面写data对象里的k -->
+    <h2>{{name}}</h2>
+      
+    <!--也可以进行拼接	-->
+    <h2>{{name + age}}</h2>
+      
+  	<!--数字类型可以加减乘除运算	-->
+    <h2>{{age * 2}}</h2>
+
+</div>
+  
+  <script>
+    const app = new Vue({
+      el:"#box",
+      data:{
+        name:"zs",
+        age:15
+      }
+    });
+  </script>
+
+```
+
+
+
+
+
+### v-once指令的使用
+
+指令是写在 html标签上的	vue会帮我们解析
+
+v-once	只渲染一次数据，改变数据不会再次渲染
+
+```html
+    <h2 v-once>{{name}}</h2>
+```
+
+
+
+
+
+### v-html指令的使用
+
+语法 v-html="data"
+
+v-html：把data数据当作html解析并渲染，相当于innetHtml
+
+```html
+  <div id="box">
+    <h2 v-html="message"></h2>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        message: "<a href='http://wwww.baidu.com'>baidu</a>",
+      }
+    });
+```
+
+
+
+
+
+### v-pre指令的使用
+
+v-pre：不解析mustach 语法
+
+
+
+
+
+## v-bind动态绑定属性
+
+### v-bind的基本使用
+
+v-bind：在dom属性前面添加，那么属性的值就可以是data数据
+
+简写	:
+
+```html
+  <div id="box">
+      <!-- v-bind添加到属性前面，那么属性的值就可以是data数据 -->
+      <img v-bind:src="imgurl" alt="">
+      
+      <!--	简写 在属性前面写上 : -->
+      <img :src="imgurl" alt="">
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        imgurl:"https://www.runoob.com/wp-content/uploads/2017/01/vue.png",
+      }
+    });
+  </script>
+```
+
+
+
+ 
+
+后面可以加boolean来决定是否添加该属性
+
+```html
+<button :disabled="true" @click="decrement">111</button>
+```
+
+
+
+
+
+### v-bind在class类的使用
+
+<div v-bind:class="{类名:boolean}"></div> 
+
+```html
+  <div id="box">
+    <!-- 在class进行动态绑定时候,我们可以传一个对象   如果boolean为true，那么类名添加，如果false，类名删除
+          在开发中，专门在data里面声明一个boolean变量，进行控制
+    -->
+      
+    <!-- <div v-bind:class="{类名:boolean}">{{name}}</div> -->
+    <div v-bind:class="{active: isActive}">{{name}}</div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        name:"zsf",
+        //用来控制类名的变量
+        isActive:true
+      }
+    });
+  </script>
+```
+
+
+
+### v-bind在style中的使用
+
+### <div v-bind:style="{css属性名:css属性值}"></div> 
+
+```html
+  <div id="box">
+    <!-- 在style进行动态绑定时候,我们可以传一个对象   
+          在开发中，我们一般自定义一个属性值
+    -->
+    <!-- <div v-bind:style="{css属性名:css属性值}">{{name}}</div> -->
+    <div :style="{color: final}">{{name}}</div>
+  </div>
+
+  <script>
+    const app = new Vue({
+      el: "#box",
+      data: {
+        name: "zsf",
+         //自定义一个属性值
+        final:"pink",
+      }
+    });
+  </script>
+```
+
+
+
+
+
+## 计算属性
+
+### 使用
+
+计算属性是写在vue{}	里面的	用来处理数据
+
+```js
+    const app = new Vue({
+      el: "#box",
+      data: {
+        name: "zsf",
+        firstName:"sss",
+        lastName:"zzz",
+      },
+      computed:{
+        fullname:function(){
+          return this.firstName + this.lastName;
+        }
+      },
+    });
+```
+
+
+
+### 计算属性和方法的对比
+
+我们发现计算属性和方法很相似
+
+计算属性是有缓存的，如果计算属性里面的值不变，多次调用计算属性，它只会执行一次
+
+方法调用一次，就会执行一次，效率没有计算属性好
+
+
+
+## es6的补充
+
+### let和const关键字
+
+let就是var的升级，let声明的变量有作用域，不会出现变量共享问题.
+
+const就是用来定义常量的。
+
+es5没有作用域
+
+
+
+### es6对象字面量增强写法
+
+属性
+
+```js
+var name = "zs"
+var age = 15;
+
+//es5写法，把上面的值，赋值给下面的属性，
+var o = {
+    name:name;
+    age:age
+}
+
+//es6写法，结果是相同的
+var o = {
+    name,
+    age,
+}
+```
+
+
+
+方法
+
+```js
+//es5写法
+var o = {
+    run:function(){
+        
+    }
+}
+
+//es6写法	省略了function，结果是一样的
+var o = {
+    run(){
+        
+    }
+}
+```
+
+
+
+
+
+## v-on事件监听
+
+### 基本使用
+
+语法 v-on:事件=
+
+在vue中，想绑定事件，直接在标签上写v-on
+
+
+
+v-on简写(语法糖)
+
+@事件=
+
+
+
+```html
+  <div id="app">
+    <button v-on:click=getName>点击</button>
+    <!-- v-on简写1 -->
+    <button @click=getName>点击</button>
+  </div>
+```
+
+
+
+@事件=	写方法，直接写
+
+写表达式要带""
+
+
+
+### 参数传递event对象
+
+如果想传递event事件对象，那么在实参写上$event
+
+```html
+  <div id="app">
+      <!--	传递event事件对象	-->
+    <button v-on:click=getAge(18,$event)>点击</button>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+      },
+      methods: {
+        getAge(age,event){
+          console.log(age);
+          console.log(event);
+        }
+      },
+    });
+  </script>
+```
+
+
+
+### v-on修饰符
+
+.stop	阻止事件冒泡	
+
+.prevent	阻止元素默认事件
+
+.keyCode	当事件是对应的键盘码，执行事件
+
+.once	执行一次事件
+
+如何使用？在事件后面加上	.对应的修饰符	就行
+
+比如	<button @click.stop=f1></button>
+
+
+
+## 条件判断
+
+vue中的条件判断是写在dom标签上的，用来判断是否渲染元素
+
+
+
+### v-if和v-else if 和v-else
+
+v-if="boolean"	如果为true就显示元素，false隐藏
+
+```html
+  <div id="app">
+      <!--	用一个变量控制	-->
+    <div v-if=isIf>123</div>
+    <div v-else>456</div>
+  </div>
+```
+
+
+
+### key的使用
+
+在vue中，如果有两个相同的元素，vue创建第一个，然后第二个不会创建，会把第一个创建好的元素拿来用，改变属性,id，但是不会改变value属性。如果想渲染两个新的元素，那么在dom元素上加上 key，两个dom元素的key不一样，就会渲染两个
+
+语法 key="值"	值随便填
+
+
+
+### v-show
+
+v-show和 v-if 一样，都是决定元素显示和隐藏的
+
+语法 v-show:"boolean"	true显示，false隐藏
+
+区别：
+
+v-show 为false的时候，元素是display:none	隐藏的
+
+v-if	为false，元素直接删除	
+
+
+
+
+
+## v-for的使用
+
+v-for是写在html标签上的，能遍历几次，就渲染几个元素
+
+### 遍历数组
+
+语法：v-for="item,index in 数组"
+
+item是每次遍历的值，index是下标
+
+```html
+  <div id="app">
+    <ul>
+      <li v-for="item,index in names"> {{index}} {{item}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        names:["zs","ls","ww"],
+      },
+      methods: {
+
+      },
+    });
+  </script>
+```
+
+
+
+
+
+### 遍历对象
+
+语法：v-for="value,key,index in 对象"
+
+```html
+  <div id="app">
+    <ul>
+      <li v-for="value,key in stu"> {{value}} {{key}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        stu:{
+          name:"zs",
+          age:18,
+          sex:"man"
+        }
+      },
+      methods: {
+
+      },
+    });
+  </script>
+```
+
+
+
+
+
+### vue中的点击谁给谁加style
+
+设置一个crrent变量，给每个li添加事件，每次点击，crrent = index，crrent就相当于被点击的那个。然后current和index比较，为true就是点击到了。
+
+```html
+  <div id="app">
+    <ul>
+      <li v-for="item,index in stu" :class="{active:currentIndex === index}" @click="changeColor(index)">{{item}}</li>
+    </ul>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      data: {
+        stu: ["zs", "ls", "ww", "xh"],
+        currentIndex:0,
+      },
+      methods: {
+        changeColor(index){
+          this.currentIndex = index;
+        }
+      },
+    });
+  </script>
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 为什么要使用模块化？
 如果不使用模块化，那么会有变量被修改，逻辑错误，不方便维护等问题
 什么是模块化？
@@ -222,7 +878,7 @@ render -> vdom -> dom
 	
 
 
- 
+
 
 -----------------------
 十二：前端渲染和后端渲染
@@ -350,7 +1006,6 @@ vueX
 vuex就是多个模块之间的一个共享域，在多个模块进行数据传输的时候，如果数据不方便传输，
 那我们就可以放到vuex中
 
-
 简单使用：
 1：安装npm install vuex --save
 2：注册vuex插件
@@ -381,7 +1036,6 @@ modules：模块化Vuex，可以让每一个模块拥有自己的state、mutatio
 1：创建目录结构
 2：起别名
 3：导入tabbat
-
 
 
 
