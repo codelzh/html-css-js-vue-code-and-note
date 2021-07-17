@@ -377,6 +377,8 @@ v-on简写(语法糖)
 
 ### v-on修饰符
 
+修饰符就是在后面加上.
+
 .stop	阻止事件冒泡	
 
 .prevent	阻止元素默认事件
@@ -536,47 +538,138 @@ item是每次遍历的值，index是下标
 
 
 
+## v-model在表单的使用
 
+### 基本使用
 
+v-model是用来双向绑定的，表单的value变data的数据也变，data数据变，表单value变。
 
+语法	v-model="data数据"
 
+```html
+  <div id="app">
+    <input type="text" v-model="username">
+    {{username}}
+  </div>
 
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        username:"",
+      }
+    });
+  </script>
+```
 
 
 
 
 
+### v-model原理
 
+就是给表单value动态绑定数据，然后绑定表单改变事件，发生改变把表单value在给data数据
 
+event.target.value 能获取表单value
 
+```html
+  <div id="app">
+    <input type="text" :value="username" @input="change">
+    {{username}}
+  </div>
 
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        username:"123",
+      },
+      methods: {
+        change(){
+          this.username = event.target.value
+        }
+      },
+    });
+  </script>
+```
 
 
 
 
 
+### 在radio中使用
 
+直接使用就行，没难点。
 
+给radio加上v-model=""	只要是同一个data数据	radio就会互斥
 
+name=""	在提交服务器值是key的存在
 
+```html
+  <div id="app">
+    <input type="radio" value="男" v-model="sex">男
+    <input type="radio" value="女" v-model="sex">女
+    {{sex}}
+  </div>
 
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        sex:"",
+      }
+    });
+  </script>
+```
 
 
 
+### 在checkbox中使用
 
+1：单个checkbox，data数据是boolean类型，并且value不用加
 
+2：多个checkbox，data数据是数组类型
 
+```html
+  <div id="app">
+    <!-- 单个 checkbox 使用  -->
+    <input type="checkbox" v-model="isAgree">我同意协议
+    {{isAgree}}
 
+    <p></p>
+    
+    <!-- 多个checkbox的使用 -->
+    <input type="checkbox" value="抽烟" v-model="hobby">抽烟
+    <input type="checkbox" value="喝酒" v-model="hobby">喝酒
+    <input type="checkbox" value="烫头" v-model="hobby">烫头
+    {{hobby}}
 
+  </div>
 
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        isAgree:false,
+        hobby:[],
+      },
+      methods: {
+      },
+    });
+  </script>
+```
 
 
 
 
 
+### v-model修饰符
 
+.lazy	用户在text文本框，敲回车或者光标离开text文本框，data数据才会更新。默认情况是实时更新data
 
+.number	把用户在text文本框的内容变成number类型。默认是string类型
 
+.trim	去掉用户在文本框输入的左右空格。
 
 
 
@@ -586,13 +679,41 @@ item是每次遍历的值，index是下标
 
 
 
+# 组件化开发
 
+组件化开发就是把一个页面，用多个vue文件来写
 
+## 基本使用
 
+分三步
 
+1：创建组件对象	2：注册组件	3：使用
 
+```html
+  <div id="app">
+    <!-- 3：使用 -->
+    <mycpn></mycpn>
+  </div>
 
+  <script>
+    //1；创建组件对象
+    const cpn = Vue.extend({
+      template: `
+        <div>哈哈哈
+          <h2>你好啊</h2>
+        </div>
+      `
+    })
 
+    //2：注册组件
+    // component("组件标签名",组件对象)
+    Vue.component("mycpn", cpn);
+      
+   	  var app = new Vue({
+      el: "#app",
+    });
+  </script>
+```
 
 
 
@@ -600,25 +721,269 @@ item是每次遍历的值，index是下标
 
 
 
+### 局部组件
 
+使用 Vue.component()	注册的组件都是全局组件，能在多个vue实例下使用。但是开发中只会创建一个vue实例，并且使用局部组件
 
+局部组件在vue实例下注册就行了
 
+```js
+    //1；创建组件对象
+    const cpn = Vue.extend({
+      template: `
+        <div>哈哈哈
+          <h2>你好啊</h2>
+        </div>
+      `
+    })
 
+    var app = new Vue({
+      el: "#app",
+        //2：注册组件
+        //在vue实例里注册组件,k就是标签名,value就是组件对象
+      components:{
+        mycpn:cpn,
+      }
+    });
+```
 
 
 
 
 
+### 父子组件
 
+有两个组件cpn1 cpn2，在cpn2里面注册cp1组件，那么cpn2就是父组件，cpn1就是子组件
 
+```js
+  <script>
+    const cpn1 = Vue.extend({
+      template: `
+        <div>哈哈哈
+          <h2>你好啊</h2>
+        </div>
+      `
+    })
 
+    const cpn2 = Vue.extend({
+      template: `
+        <div>哈哈哈
+          <h2>你好啊</h2>
+        </div>
+      `,
+        //在组件2里注册组件1
+      components:{
+        cpn1:cpn1
+      }
+    })
+```
 
 
 
 
 
+### 注册组件简写(语法糖)
 
+直接在component(标签名,组件对象)	组建对象传一个对象:	{template:`` }	
 
+```js
+  <script>
+    //全局组件 语法糖写法
+    Vue.component("cpn1",{template:`<div>你好</div>`})
+
+
+    var app = new Vue({
+      el: "#app",
+      //局部语法糖写法
+      components:{
+        cpn2:{template:`<div>哈哈哈哈</div>`}
+      }
+    });
+  </script>
+```
+
+
+
+
+
+### 组件化模版抽离写法
+
+就是把html	写在body里面，不在写到js里面
+
+使用 <template id="cpn1"></template> 标签。然后加上id，{template:id名}	就可以了
+
+```html
+<template id="cpn1">
+	<div>哈哈哈</div>
+</template>
+
+<template id="cpn2">
+	<div>呵呵和</div>
+</template>
+
+
+<script>
+	//模版抽离
+    Vue.component("cpn1",{template:cpn1})
+
+
+    var app = new Vue({
+      el: "#app",
+	//模版抽离
+      components:{
+        cpn2:{template:cpn2}
+      }
+    });
+  </script>
+```
+
+
+
+
+
+### 模块的data
+
+模块也有data，但是data必须是函数类型并且返回对象，这个对象里面就是data数据。这是因为多个模块调用函数，作用域不会共享，对象会共享。
+
+```html
+  <template id="cpn1">
+    <div>
+      {{name}}
+    </div>
+  </template>
+
+  <script>
+    Vue.component("cpn1", {
+      template: "#cpn1",
+        //data必须是函数类型并且返回对象，这个返回的对象里面就是data数据。
+      data() {
+        return {
+          name: "zs"
+        }
+      }
+    });
+
+    var app = new Vue({
+      el:"#app"
+    });
+  </script>
+```
+
+
+
+
+
+
+
+## 组件通信
+
+组件通信就是组件之间的data数据如何进行发送接收
+
+
+
+### 父传子类型限制
+
+props:{
+
+name:String,
+
+age:Number,
+
+}
+
+```html
+  <div id="app">
+    <!--2：在父组件里传数据 -->
+    <cpn1 :cname="name" :age="age"></cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      {{cname}}
+      {{age}}
+    </div>
+  </template>
+
+  <script>
+    var cpn1 = {
+      template: "#cpn1",
+      //1：使用props来接收数据，k就是要接收数据名字，value就是类型限制
+      props: {
+        cname: String,
+        age: Number
+      }
+    }
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        name: "zzzzz",
+        age: 18
+      },
+      components: {
+        cpn1: cpn1
+      }
+    });
+  </script>
+```
+
+
+
+
+
+### 父传子默认值
+
+要接收的数据的名称是对象
+
+props:{
+
+​	name:{
+
+​	type:String,
+
+​	default:"aaaa"
+
+​	}
+
+}
+
+```html
+  <div id="app">
+    <!--2：在父组件里传数据 -->
+    <cpn1></cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      {{cname}}
+    </div>
+  </template>
+
+  <script>
+    var cpn1 = {
+      template: "#cpn1",
+      //1：使用props来接收数据，要接收的数据可以有默认值
+      props: {
+        cname: {
+          type: String, //限制要接收的值的类型
+          default: "adssda",  //默认值
+          required:true,  //在使用这个模块，必须传这个参数，不然报错
+        }
+      }
+    }
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        name: "zzzzz",
+        age: 18
+      },
+      components: {
+        cpn1: cpn1
+      }
+    });
+  </script>
+```
 
 
 

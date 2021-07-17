@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <!--2：在父组件里传数据 -->
+    <cpn1></cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      {{cname}}
+    </div>
+  </template>
+
+  <script>
+    var cpn1 = {
+      template: "#cpn1",
+      //1：使用props来接收数据，要接收的数据可以有默认值
+      props: {
+        cname: {
+          type: String, //限制要接收的值的类型
+          default: "adssda",  //默认值
+          required:true,  //在使用这个模块，必须传这个参数，不然报错
+        }
+      }
+    }
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        name: "zzzzz",
+        age: 18
+      },
+      components: {
+        cpn1: cpn1
+      }
+    });
+  </script>
+</body>
+
+</html>

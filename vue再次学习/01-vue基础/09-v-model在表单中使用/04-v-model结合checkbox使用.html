@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+<body>
+
+  <div id="app">
+    <!-- 单个 checkbox 使用  -->
+    <input type="checkbox" v-model="isAgree">我同意协议
+    {{isAgree}}
+
+    <p></p>
+    
+    <!-- 多个checkbox的使用 -->
+    <input type="checkbox" value="抽烟" v-model="hobby">抽烟
+    <input type="checkbox" value="喝酒" v-model="hobby">喝酒
+    <input type="checkbox" value="烫头" v-model="hobby">烫头
+    {{hobby}}
+
+  </div>
+
+  <script>
+    var app = new Vue({
+      el:"#app",
+      data:{
+        isAgree:false,
+        hobby:[],
+      },
+      methods: {
+      },
+    });
+  </script>
+</body> 
+</html>
