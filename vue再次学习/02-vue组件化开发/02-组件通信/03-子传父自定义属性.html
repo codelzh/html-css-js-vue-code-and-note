@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <!--3：在父组件里的子组件标签上监听这个自定义事件，并且在父组件中写触发的方法 -->
+    <cpn1 @itemclick="cbtnclick"></cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      <!-- 1：1：先给子元素绑定事件 -->
+      <button v-for="item in books" @click="itemclick(item)">{{item.name}}</button>
+    </div>
+  </template>
+
+  <script>
+    var cpn1 = {
+      template: "#cpn1",
+      data() {
+        return {
+          books: [{
+              id: "aaa",
+              name: "哈利波特"
+            },
+            {
+              id: "bbb",
+              name: "三体"
+            },
+            {
+              id: "ccc",
+              name: "童年"
+            },
+            {
+              id: "ddd",
+              name: "在人间"
+            },
+
+          ]
+        }
+      },
+      methods: {
+        itemclick(item) {
+          //2:子事件被触发，使用	this.emit("自定义事件","数据")  来发送给父组件
+          this.$emit("itemclick", item);
+        }
+      },
+    }
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+
+      },
+      components: {
+        cpn1: cpn1
+      },
+      methods: {
+        cbtnclick(item) {
+          console.log(item);
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>

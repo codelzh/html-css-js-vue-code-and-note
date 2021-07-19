@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="vue.js"></script>
+</head>
+
+<body>
+
+  <div id="app">
+    <cpn1 :cnub1="nub1" :cnub2="nub2" @changeinput1="changeinput1" @changeinput2="changeinput2"></cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      props: {{cnub1}}
+      data: {{dnub1}}
+      <p></p>
+      props: {{cnub2}}
+      data: {{dnub2}}
+      <input type="text" v-model="dnub1" @input="changeinput1">
+      <input type="text" v-model="dnub2" @input="changeinput2">
+
+    </div>
+  </template>
+
+  <script>
+    var cpn1 = {
+      template: "#cpn1",
+      data() {
+        return {
+          dnub1: 0,
+          dnub2: 0,
+        }
+      },
+      methods: {
+        changeinput1() {
+          this.$emit("changeinput1", this.dnub1)
+        },
+        changeinput2() {
+          this.$emit("changeinput2", this.dnub2)
+        }
+      },
+      props: {
+        cnub1: Number,
+        cnub2: Number,
+      }
+    }
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        nub1: 0,
+        nub2: 1,
+      },
+      components: {
+        cpn1: cpn1
+      },
+      methods: {
+        changeinput1(nub1) {
+          this.nub1 = parseInt(nub1);
+        },
+        changeinput2(nub2) {
+          
+          this.nub2 = parseInt(nub2);
+
+        }
+      },
+    });
+  </script>
+</body>
+
+</html>
