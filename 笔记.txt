@@ -1134,6 +1134,132 @@ this.$refs	获取指定的子组件。使用：1：ref要在标签上声明	    
 
 
 
+## 插槽
+
+### 基本使用
+
+1.定义插槽	2.使用插槽
+
+插槽可以有默认值	<slot>button<slot>
+
+```html
+  <div id="app">
+    <cpn1>
+      <!-- 使用插槽，这个button会替代slot -->
+      <button>按钮</button>
+    </cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>哈哈哈
+      <!-- 定义插槽 -->
+      <slot></slot>
+    </div>
+  </template>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      components: {
+        cpn1: {
+          template: cpn1
+        }
+      }
+    });
+  </script>
+```
+
+
+
+
+
+### 具名插槽(多个插槽)的使用
+
+```html
+  <div id="app">
+    <cpn1>
+      <!-- 2:然后指定name 代替其中的一个-->
+      <button slot="center">按钮</button>
+    </cpn1>
+  </div>
+
+  <template id="cpn1">
+    <div>
+      <!-- 1：如果存在多个插槽，那么要给name -->
+      <slot name="left">
+        <span>我是左</span>
+      </slot>
+
+      <slot name="center">
+        <span>我是中间</span>
+      </slot>
+
+      <slot name="right">
+        <span>我是右</span>
+      </slot>
+    </div>
+  </template>
+
+  <script>
+    var app = new Vue({
+      el: "#app",
+      components: {
+        cpn1: {
+          template: cpn1
+        }
+      }
+    });
+  </script>
+```
+
+
+
+
+
+## es6的模块化
+
+### es6的导入导出
+
+开发中引入js文件，一般加上module属性，这样就可以使用 import 和 export
+
+```html
+<script type="module" src="aaa.js"></script>
+```
+
+
+
+导出操作
+
+```js
+var flag = true;
+export var name = "zs";
+
+function num(){
+  console.log("num");
+}
+
+export {flag,num}
+```
+
+
+
+导入操作
+
+```js
+import { flag,name } from "./aaa.js";
+```
+
+
+
+全部导入
+
+```js
+import * as data from "./aaa.js"
+
+//使用就是.
+data.falg;
+data.name
+```
 
 
 
@@ -1143,6 +1269,687 @@ this.$refs	获取指定的子组件。使用：1：ref要在标签上声明	    
 
 
 
+# webpack开发
+
+## webpack简介
+
+webpack是前端代码打包工具，把开发代码变成运行版代码。
+
+webpack依赖node node依赖很多包，npm是用来管理node下的包的，node包含npm，安装好node，npm也就有了
+
+![](E:\前端学习\vue再次学习\画图\webpack和node和npm的关系.png)
+
+
+
+
+
+## 安装
+
+安装好node后，安装webpack	@后面是版本号	-g是全局安装
+
+```bash
+npm install webpack@3.6.0 -g
+```
+
+
+
+## 基本使用
+
+![](E:\前端学习\vue再次学习\画图\目录结构.png)1
+
+
+
+把入口文件打包成一个js文件，然后html引用就行。webpack会自动处理js之间的依赖，所以main.js引用多少js文件都可以
+
+```bash
+webpack src/main.js dist/bundle.js
+```
+
+
+
+
+
+## webpack的配置
+
+## 这些配置知道什么意思就行，不用背，能复制粘贴使用就行，后面有脚手架.
+
+
+
+webpack.config.js 文件用来管理webpack配置的，这个文件是手动创建的
+
+package.json	npm包管理的文件，这个文件使用 npm init 命令创建
+
+ 
+
+
+
+使用	webpack 代替	webpack src/main.js dist/bundle.js	命令
+
+以下代码知道什么意思就行，是关于配置的
+
+在webpack.config.js 写上
+
+```js
+//引入node包
+const path = require('path')
+
+module.exports = {
+  //入口
+  entry:'./src/main.js',
+  //出口
+    output:{
+    path:path.resolve(__dirname ,'dist'),
+    filename:'bundle.js'
+  }
+}
+```
+
+
+
+
+
+局部安装webpack，每个项目都要有自己的webpack
+
+```bash
+    npm install webpack@3.6.0 save-dev
+```
+
+
+
+
+
+node命令和webpack的对应
+
+package.json	文件中的script就是node命令和webpack的对应关系
+
+```json
+  "scripts": {
+      //这个test就等于 npm run test = "echo \"Error: no test specified\" && exit 1"，可以简化代码
+    "test": "echo \"Error: no test specified\" && exit 1",
+      //就等于 npm run build = "webpack"
+    "build":"webpack"
+  },
+
+```
+
+
+
+script里面的命令，会使用本地的webpack配置
+
+
+
+
+
+
+
+## loader的使用
+
+webpack负责把js打包成一个文件，但是还有css，图片等，webpack是干不了的。这时候就需要loader，loader是用来处理各种文件的，加上loader后，webpack就能打包css，图片等资源
+
+loader的使用：
+
+1：找到你想用的loader	https://webpack.docschina.org/loaders/，安装它
+
+2：配置它
+
+3：style引入main.js文件使用，打包
+
+
+
+
+
+### 图片的处理
+
+1：安装处理图片的loader	https://webpack.docschina.org/loaders/url-loader/
+
+2：配置
+
+3：打包
+
+注意的点
+
+webpack.config.js文件中的图片loader的配置，limit: 8192
+
+如果图片小于8kb，就使用url-loader，打包的图片就以base64的形式显示。
+
+### 大于8kb的处理
+
+图片大于8kb，就用file-loader，打包的图片是真实图片，会把src的图片复制到dist，这时我们需要配置默认路径才可以找到图片
+
+在webpack.config.js文件中添加publicPath
+
+```js
+  output: {
+      //这句代码的意思是，所有url链接，都以dist/	开头
+    publicPath:"dist/",
+  },
+```
+
+
+
+### 大于8kb图片路径的处理
+
+大于8kb的图片会被复制到dist文件夹，并且图片名字是hash码，很乱。
+
+在webpack.config.js文件中给url-loader添加属性
+
+```json
+     options: {
+          name:"img/[name].[hash:8].[ext]"
+     },
+```
+
+
+
+
+
+
+
+### es6转es5
+
+1：下载loader
+
+2：配置
+
+3：打包，会发现bundle.js 变成es5语法
+
+要注意的是，里面开始不是"es2015"，要手动改
+
+```js
+presets: ['es2015']
+```
+
+
+
+
+
+## 在webpack中使用vue
+
+1：先使用npm安装vue
+
+2：导入	import Vue from "vue";
+
+3：写vue代码就行
+
+需要注意的是，会报错
+
+![](E:\前端学习\vue再次学习\画图\报错.png)
+
+
+
+这句话的意思是，使用的是vue-only版本，这个版本不能编译template模版，所以报错
+
+vue分两个版本
+
+1：runtime-compiler	开发版本，可以编译template模版
+
+2：runtime-only	运行版本，不能编译template模版，只包含了能运行vue代码的东西
+
+
+
+我们默认使用的是only版本，所以不能编译template模版(app也是模版)
+
+在webpack.congfig.js中添加一个对象可以解决
+
+```js
+module.exports = {
+  //入口
+  entry: './src/main.js',
+  //出口
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'bundle.js',
+    publicPath: "dist/",
+  },
+
+    //意思是，以后运行vue代码时候，往这个目录找，vue.esm.js可以编译模版
+  resolve:{
+    alias:{
+      "vue$":"vue/dist/vue.esm.js"
+    }
+  }
+
+}
+```
+
+
+
+
+
+## el和template的区别
+
+如果一个实例存在el对象，也存在template对象，那么templa的内容会把el的元素覆盖
+
+
+
+
+
+## vue最终的方案(开发中到底怎么写)
+
+在开发中，index文件是不需要写代码的。
+
+```js
+// ...main.js
+//1：导入app.vue
+import App from "./vue/App.vue";
+new Vue({
+    //2：把app对象，替换dom元素
+  el:"#app",
+  template:"<App/>",
+  components:{
+    App
+  }
+})
+```
+
+```vue
+<!-- app.vue -->
+<template>
+  <div>
+    <h2>哈哈哈哈哈</h2>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      name:"zs",
+    };
+  },
+};
+</script>
+<style scoped>
+  h2{
+    color:red;
+  }
+</style>
+
+
+```
+
+
+
+
+
+
+
+## 插件的使用
+
+1：npm安装你想要的插件	https://webpack.docschina.org/plugins
+
+2：在webpack.congfig.js	导入插件，并且添加plugins属性。(具体看上面链接)
+
+
+
+
+
+### html打包dist文件夹的插件
+
+https://webpack.docschina.org/plugins/html-webpack-plugin/
+
+在打包时候，index.html也是要打包dist文件夹下的，webpack默认不会打包，这时候就要用插件了。
+
+```js
+//里面跟一个对象，就会以src目录下index.html作为模版，复制到dist文件夹 
+plugins: [new HtmlWebpackPlugin({
+    template:"index.html"
+  })
+
+```
+
+
+
+这时候需要把webpack.config.js	的publicPath属性去掉，以后调试就在dist文件夹的index.html，所以不需要路径了。
+
+
+
+
+
+### 压缩js代码插件
+
+就是把js变成一行，去空格。
+
+https://www.webpackjs.com/plugins/uglifyjs-webpack-plugin/
+
+
+
+
+
+
+
+## 搭建本地服务器
+
+https://www.webpackjs.com/guides/development/#%E4%BD%BF%E7%94%A8-webpack-dev-server
+
+```bash
+npm install --save-dev webpack-dev-server@2.9.3
+```
+
+
+
+配置具体看上面链接
+
+```js
+//在webpack.congfig.js 中配置 
+devServer: {
+    //要作为本地服务器的目录
+    contentBase: './dist',
+    //端口号
+    port:8081,
+    //是否实时刷新
+    inline:true,
+  },
+```
+
+
+
+```js
+ //在package.json配置脚本，这样命令就能使用本地的webpack
+"scripts": {
+    "dev": "webpack-dev-server --open"
+  },
+```
+
+
+
+
+
+
+
+# vuecli使用(脚手架)
+
+1：安装	npm install -g @vue/cli
+
+2：如果想使用vue2的模版，要以下命令	npm install -g @vue/cli-init
+
+https://cli.vuejs.org/zh/guide/installation.html
+
+具体看上方文档
+
+
+
+
+
+## vuecli2
+
+```bash
+//使用下面命令来创建一个cli2的项目
+vue init webpack 项目名称
+```
+
+
+
+
+
+
+
+## vuecli3
+
+```bash
+//使用下面命令来创建一个cli2的项目
+vue create 项目名称
+```
+
+
+
+
+
+## runtime-compiler和only的区别
+
+区别就在main.js，一个使用template，一个使用render函数
+
+compiler:在渲染dom元素时候，过程如下:
+template -> ast -> render -> vdom - dom
+compiler是先把template编译
+
+only:在渲染dom元素的时候，过程如下
+render -> vdom -> dom
+直接省略了前两步
+
+
+
+only效率更高，在开发中一般使用only
+
+
+
+render函数就相当于
+
+```js
+new Vue({
+  el:"#app",
+  render:function(createlement){
+      //这个参数是render函数给的，用来添加元素，并且覆盖app
+      //也可以传一个模板
+      //作用和template是一样的，但是效率更高
+    return createlement(App);
+  }
+})
+```
+
+
+
+
+
+
+
+# vuerouter(vue路由)
+
+vue路由的核心就是改变url，但是页面不会再去请求资源
+
+存在两种方式
+
+1：location.href = ""	改变url
+
+2：history	对象来改变url
+
+
+
+
+
+
+
+## vuerouter的安装和配置
+
+1：通过npm安装，或者脚手架构建时候，选择vue-router
+
+### 使用
+
+1：导入路由对象，并且调用 vue.use(vuerouter)	因为vuerouter是vue的插件，vue的插件都需要vue.use()
+
+2：创建路由实例，并且传入路由映射配置	
+
+3：导出，在vue实例中挂载路由对象
+
+4：使用，通过<router-link>	和	<router-view>
+
+
+
+
+
+## 默认路径
+
+```js
+  {
+    //当路径为空时，重定向在hone页面
+    path:"",
+    //重定向
+    redirect:"/home"
+  },
+```
+
+
+
+
+
+## 改变为history模式
+
+```js
+const router = new VueRouter({
+  routes,
+  //在路由对象加上mode属性
+  mode:"history",
+})
+```
+
+
+
+
+
+
+
+## router-link的属性
+
+tag:指定router-link被渲染成什么元素
+
+replace：不会留下history记录
+
+active-class：当router-link被点击，vue会自动给一个class，active-class属性能改变这个给的class
+
+
+
+
+
+## 通过代码修改url
+
+就是给一个元素绑定事件，然后跳转
+
+使用	tihs.$router
+
+```js
+    home() {
+      //vue-router会给每一个组件$router属性
+      this.$router.push("/home");
+    },
+```
+
+
+
+
+
+## 动态路由的使用
+
+动态路由就是，我不确定url后面的参数信息，参数信息不是我决定的
+
+比如 user页面后面在跟上id	user/用户id	这个用户id不能写死
+
+```js
+  {
+    //这样写就是动态路由
+    path:"/user/:id",
+    component:user
+  }
+```
+
+
+
+
+
+```vue
+<div>    
+    <!--	然后在跳转页面，拼接上用户id	-->
+	<router-link v-bind:to="'/user/' + userid">用户</router-link>
+   	<router-view></router-view>
+ </div>
+</template>
+
+<script>
+export default {
+  name: "App",
+  data(){
+    return{
+      userid:"zs",
+    }
+  },
+};
+</script>
+```
+
+
+
+### 参数的获取
+
+使用动态路由	    path:/user/:id	这个id就是参数
+
+使用	this.$route	这个对象是被选中的路由组件，里面包含了参数
+
+
+
+
+
+## 路由懒加载
+
+在之前所有js都会打包成一个app.js文件，这个文件会非常大。所以要使用懒加载
+
+在route里index.js	导包时候	这样写
+
+```js
+const user = ()=> import("../components/user.vue")
+```
+
+
+
+这样，每个组件都会打包成一个个的js文件
+
+
+
+
+
+## 路由嵌套
+
+写children就行，然后在home里写上<router-link>	和 <router-view>
+
+```js
+  {
+    path: "/home",
+    component: home,
+    children: [
+      {
+        path:"",
+        component:homeNews
+      },
+      {
+        path: "message",
+        component: homeMessage
+      },
+      {
+        path: "news",
+        component: homeNews
+      }
+    ]
+  },
+```
+
+
+
+
+
+## 参数传递
+
+一个页面跳到另一个页面，想传一些数据
+
+1：动态路由的方式
+
+2：to里面传一个对象
+
+
+
+```vue
+<router-link :to="{path:'/profile', query:{name:'zs',age:18}}">档案</router-link>
+```
+
+
+
+```js
+//通过代码的方式传   
+profilebtn() {
+      this.$router.push({
+        path:"profile",
+        query:{name:"zs",age:20}
+      });
+    },
+```
 
 
 
