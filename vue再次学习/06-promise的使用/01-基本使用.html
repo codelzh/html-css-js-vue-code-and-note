@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    new Promise(function (resolve, reject) {
+      setTimeout(() => {
+        //当网络请求成功时候，调用resolve，就会到then处理代码
+        // resolve("请求成功的数据");
+
+        //网络请求失败，调用reject，就会到catch处理代码
+        reject("请求失败的数据");
+      }, 1000);
+    }).then(function (data) {
+      console.log(data);
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+  </script>
+</body>
+
+</html>

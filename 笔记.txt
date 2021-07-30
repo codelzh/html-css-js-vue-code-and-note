@@ -1760,6 +1760,13 @@ vue路由的核心就是改变url，但是页面不会再去请求资源
 
 2：创建路由实例，并且传入路由映射配置	
 
+```js
+  {
+    path:"",
+    component:
+  }
+```
+
 3：导出，在vue实例中挂载路由对象
 
 4：使用，通过<router-link>	和	<router-view>
@@ -1872,7 +1879,7 @@ export default {
 
 使用动态路由	    path:/user/:id	这个id就是参数
 
-使用	this.$route	这个对象是被选中的路由组件，里面包含了参数
+使用	this.$route	这个对象是被选中的路由组件(当前活跃的组件)，里面包含了参数
 
 
 
@@ -1959,11 +1966,264 @@ profilebtn() {
 
 
 
+# tarbar案例的经验
+
+1：如果想使用插槽，封装组件。那么就先在app里面写好，然后在复制粘贴到组件，一步步来
+
+2：slot 必须使用div 包起来，然后div可以添加属性，要不然在slot上面添加属性，容易被覆盖
+
+
+
+动态添加类的思路实现
+
+```js
+  computed:{
+    isActive(){
+      //利用$route 和path 实现排他思想的tabbar 的active类
+      //$route是当前活跃的组件
+      return this.$route.path.indexOf(this.path) !==-1
+    }
+  }
+```
+
+
+
+## 给路径起别名
+
+```js
+//在项目根目录创建vue.config.js 注意:文件名称必须是vue.config.js否则不会被解析
+//复制如下代码
+//记得重启服务
+const path = require('path')
+
+function resolve(dir) {
+    return path.join(__dirname, dir)
+}
+module.exports = {
+    lintOnSave: true,
+    chainWebpack: (config) => {
+        config.resolve.alias
+            .set('@$', resolve('src'))
+            .set('base', resolve('src/base'))
+            .set('views',resolve('src/views'))
+            .set('common', resolve('src/common'))
+            .set('components', resolve('src/components'))
+    }
+}
+```
 
 
 
 
 
+# promise的使用
+
+promise就是用来封装异步操作的。
+
+```js
+    new Promise(function (resolve, reject) {
+      setTimeout(() => {
+        //当网络请求成功时候，调用resolve，就会到then处理代码
+        // resolve("请求成功的数据");
+
+        //网络请求失败，调用reject，就会到catch处理代码
+        reject("请求失败的数据");
+      }, 1000);
+    }).then(function (data) {
+      console.log(data);
+    }).catch(function (erro) {
+      console.log(erro);
+    })
+```
+
+
+
+## promise的all方法
+
+all方法作用是：如果有多个网络请求，必须同时请求成功，才处理。
+
+```js
+    Promise.all([
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("data1")
+        }, 1000);
+      }),
+
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve("data2")
+        }, 4000);
+      }),
+
+    ]).then((data)=>{
+      //这个data是数组类型，里面包含上面的结果
+      console.log(data);
+    })
+```
+
+
+
+# vuex的使用
+
+vuex是vue的插件，和vuerouter一样。
+
+使用
+
+1：安装	npm install vuex	或者在cli脚手架构建项目时候选择vuex
+
+2：vue.use()	注册
+
+3：创建 vuex.store()	对象
+
+4：导入vuex，挂载到main.js
+
+```js
+import Vue from 'vue'
+import Vuex from 'vuex'
+
+Vue.use(Vuex)
+
+export default new Vuex.Store({
+  //状态,要共享的数据
+  state: {
+    name: "zs"
+  },
+  mutations: {},
+  actions: {},
+  modules: {}
+})
+```
+
+
+
+
+
+在其他组件中通过$store.state.数据	来获取，在vue注册插件vuex时候，会给所有组件添加属性$store	这个$store包含了vuex的信息。和router组件是一样。$router 和$route
+
+```vue
+<template>
+  <div>
+    <h2>我是App</h2>
+	//使用
+    {{$store.state.name}}
+  </div>
+</template>
+```
+
+
+
+
+
+## 修改数据
+
+在vuex中，我们修改数据是要通过Actions或者Mutations的，这样我们修改的数据可以使用devtools浏览器工具进行追踪。
+
+![](E:\前端学习\vue再次学习\画图\vuex的修改数据.png)
+
+
+
+### Mutations修改数据
+
+1：在vuex文件 Mutation里定义改变数据的方法
+
+2：在组件中使用	$store.commit("Mutation的方法名")	来改变数据
+
+```js
+// vuex文件
+export default new Vuex.Store({
+  //状态,要共享的数据
+  state: {
+    count:100
+  },
+  //里面主要写改变数据的函数
+  mutations: {
+    increment(){
+      this.state.count++
+    },
+    decrement(){
+      this.state.count--
+    }
+  },
+  actions: {},
+  modules: {}
+})
+```
+
+
+
+```js
+//在组件里面，定义方法，使用 this.$store.commit()	来调用Mutation里的方法
+methods:{
+    add(){
+      this.$store.commit("increment")
+    },
+    odd(){
+      this.$store.commit("decrement")
+    }
+  }
+```
+
+
+
+
+
+## getters的使用
+
+ getters作用和计算属性一样，都是改变数据
+
+```js
+export default new Vuex.Store({
+  //状态,要共享的数据
+  state: {
+    count:100
+  },
+  mutations: {
+
+  },
+  //getters作用和计算属性一样，都是在我这里改变数据
+  getters:{
+    //state是默认给的
+    towcount(state){
+      return state.count * 2;
+    }
+  },
+  actions: {},
+  modules: {}
+})
+```
+
+
+
+```js
+//在其他组件中使用
+{{$store.getters.towcount}}
+```
+
+
+
+
+
+## Mutation的参数传递
+
+```js
+    addCount() {
+        var count = 10;
+        //第二个参数写要传递的数据
+      this.$store.commit("incrementCount", count);
+    },
+```
+
+
+
+```js
+  mutations: {
+      //data形参接收参数
+    incrementCount(state,data){
+      this.state.count+=data
+    }
+  },
+```
 
 
 
