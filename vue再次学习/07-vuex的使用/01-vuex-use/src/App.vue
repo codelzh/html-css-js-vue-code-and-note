@@ -10,6 +10,12 @@
 
     <button @click="addCount(10)">---</button>
     <p></p>
+
+    <button @click="changState">改变vuex数据</button>
+    {{ $store.state.stu }}<p></p>
+
+    <button @click="asynz">异步操作</button>
+    <p></p>
   </div>
 </template>
 
@@ -29,6 +35,13 @@ export default {
     addCount(count) {
       this.$store.commit("incrementCount", count);
     },
+    changState() {
+      this.$store.commit("changState"); 
+    },
+    asynz(){
+      //通过$store.dispatch() 进入actions
+      this.$store.dispatch("asynz");
+    }
   },
 };
 </script>

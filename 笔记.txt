@@ -170,7 +170,7 @@ v-bind：在dom属性前面添加，那么属性的值就可以是data数据
 
 ### v-bind在class类的使用
 
-<div v-bind:class="{类名:boolean}"></div> 
+"<div v-bind:class="{类名:boolean}"></div> "
 
 ```html
   <div id="box">
@@ -198,7 +198,7 @@ v-bind：在dom属性前面添加，那么属性的值就可以是data数据
 
 ### v-bind在style中的使用
 
-### <div v-bind:style="{css属性名:css属性值}"></div> 
+"<div v-bind:style="{css属性名:css属性值}"></div>"
 
 ```html
   <div id="box">
@@ -219,6 +219,36 @@ v-bind：在dom属性前面添加，那么属性的值就可以是data数据
       }
     });
   </script>
+```
+
+
+
+### v-bind实现点击谁，给谁类
+
+```vue
+<template>
+  <div>
+      <!--	2：动态绑定类，在添加事件	-->
+    <div v-for="(item,index) in title" :class="{active:index==activeindex}" @click="itemclick(index)">
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "",
+  data() {
+    return {
+        //1：声明一个idnex
+      activeindex:0,
+    };
+  },
+  methods:{
+    itemclick(index){
+      this.activeindex = index;
+    }
+  },
+};
 ```
 
 
@@ -995,7 +1025,7 @@ props:{
 
 1：先给子元素绑定事件
 
-2：子事件被触发，使用	this.emit("自定义事件","数据")  来发送给父组件
+2：子事件被触发，使用	this.$emit("自定义事件","数据")  来发送给父组件
 
 3：在父组件里的子组件标签上监听这个自定义事件，并且在父组件中写触发的方法
 
@@ -1960,7 +1990,9 @@ profilebtn() {
 
 
 
+## keep-alive的使用
 
+`keep-alive` 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。
 
 
 
@@ -2014,7 +2046,7 @@ module.exports = {
 
 
 
-
+引入图片不管用，前面加~
 
 # promise的使用
 
@@ -2183,8 +2215,8 @@ export default new Vuex.Store({
   },
   //getters作用和计算属性一样，都是在我这里改变数据
   getters:{
-    //state是默认给的
-    towcount(state){
+    //state是默认给的，getter可以拿到getter里面所有的计算属性，
+    towcount(state,getter){
       return state.count * 2;
     }
   },
@@ -2209,7 +2241,7 @@ export default new Vuex.Store({
 ```js
     addCount() {
         var count = 10;
-        //第二个参数写要传递的数据
+        //第二个参数写要传递的数据	可以是对象
       this.$store.commit("incrementCount", count);
     },
 ```
@@ -2224,6 +2256,202 @@ export default new Vuex.Store({
     }
   },
 ```
+
+
+
+
+
+## vuex的数据响应式
+
+如果想添加和删除数据，要使用Vue.set() 和Vue.delete()    来响应式的增加删除vuex的数据
+
+在vuex中，事先写好的数据，对它进行操作可以进行响应式，但是没有的数据，要使用如下方法
+
+其他方法不能做到响应式
+
+```js
+//在mutations里面写对应的方法
+Vue.set(state.stu,0,"abc")
+Vue.delete(state.stu,0)
+```
+
+
+
+
+
+## vuex的actions的使用
+
+在进行异步操作时候，必须通过actions，要不然devtools工具追踪不到。如果异步操作想修改数据，还是要通过mutations
+
+```js
+    asynz(){
+      //通过$store.dispatch() 进入actions	后面可以传递参数
+      this.$store.dispatch("asynz");
+    }
+```
+
+
+
+```js
+  actions: {
+    //context就是store
+    asynz(context) {
+      setTimeout(() => {
+        //如果异步操作想修改数据，通过mutations	
+        context.commit("changState")
+      }, 1000);
+    }
+  },
+```
+
+
+
+
+
+## vuex抽离
+
+![](E:\前端学习\vue再次学习\画图\vuex目录结构.png).
+
+
+
+
+
+
+
+# axios的使用
+
+axios是用来网络请求的
+
+## 安装
+
+```bash
+npm install axios
+```
+
+
+
+## 基本使用
+
+```js
+axios(config)
+axios({
+  url: "http://httpbin.org/get",
+  method:"get",
+    params:{
+      name:'1',
+      age:'16'
+    }
+}).then((res) => {
+  console.log(res);
+}).catch(()=>{
+    
+})
+```
+
+
+
+## 多个请求都成功才处理
+
+```js
+axios.all([
+  {
+    url:'http://httpbin.org/get',
+    params:{
+      data:{message:'11111'}
+    }
+  },
+
+  {
+    url:'http://httpbin.org/get',
+    params:{
+      data:{message:'2222'}
+    }
+  },
+]).then(axios.spread((res1,res2)=>{
+  console.log(res1);
+  console.log(res2);
+}))
+```
+
+
+
+
+
+## 修改全局配置默认值
+
+用axios.defaults.配置	来修改默认值
+
+```js
+axios.defaults.baseURL='http://httpbin.org',
+```
+
+
+
+### 自定义实例默认值
+
+```js
+//自定义实例默认值
+const axios1 = axios.create({
+  baseURL:"http://httpbin.org/get",
+})
+
+//使用自定义实例
+// axios1(config)
+axios1({
+  url:"",
+}).then((res)=>{
+  console.log(res);
+})
+```
+
+
+
+
+
+## 模块封装
+
+```js
+import axios from "axios"
+
+const a = axios.create({
+  baseURL: "http://152.136.185.210:7878/api/m5",
+  timeout: 5000,
+})
+
+export function request(config, success, fail) {
+  return a(config)
+}
+```
+
+
+
+
+
+# 项目遇到的坑
+
+## mounted()加载好调用js失败
+
+当组件渲染好后，在mounted()生命周期函数调用轮播图js，但是js获取不到元素。
+
+原因：没加延迟，vue渲染没跟上
+
+设置settimeout	延迟完美解决
+
+```js
+  mounted() {
+    var t = this;
+    setTimeout(() => {
+      //轮播图函数
+      t.test();
+    }, 1000);
+  },
+```
+
+
+
+## 用flex布局碰上文字溢出隐藏
+
+flex布局直接崩溃，解决：不要设置flex:	给子元素设置百分比，自动撑
 
 
 
@@ -2343,7 +2571,7 @@ You may need an appropriate loader to handle this file type.
 我们去官网上找loader webpackjs.com
 
 随后安装npm npm install --save-dev css-loader
---save 指的是运行和开发公用一个
+--save 指的是运行和开发
 --save-dev 只开发时候使用
 
 在webpack.config.js配置
