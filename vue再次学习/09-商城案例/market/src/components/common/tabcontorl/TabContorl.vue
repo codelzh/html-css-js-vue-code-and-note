@@ -39,6 +39,8 @@ export default {
   text-align: center;
   margin-top: 5%;
   background-color: #fff;
+  position: sticky;
+  top: 5%;
 }
 
 .contorl-item {

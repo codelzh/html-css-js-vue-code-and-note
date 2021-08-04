@@ -1,6 +1,6 @@
 <template>
-  <div class="repeatimg-index" @load="test">
-    <ul class="ul">
+  <div class="repeatimg-index" @load="test" ref="banner">
+    <ul class="ul" ref="ul">
       <li><img :src="bannerData[3].image" alt="" /></li>
 
       <li v-for="item in bannerData" :key="item.title">
@@ -10,7 +10,7 @@
       <li><img :src="bannerData[0].image" alt="" /></li>
     </ul>
 
-    <ol class="ol">
+    <ol class="ol" ref="ol">
       <li class="active"></li>
       <li></li>
       <li></li>
@@ -41,12 +41,12 @@ export default {
   methods: {
     //轮播图的js
     test() {
-      var ul = document.getElementsByClassName("ul")[0];
-      var banner = document.getElementsByClassName("repeatimg-index")[0];
+      var ul = this.$refs.ul
+      var banner = this.$refs.banner
       var index = 0;
       var w = banner.offsetWidth;
 
-      var ol = document.getElementsByClassName("ol")[0];
+      var ol = this.$refs.ol
       //开启定时器，让图片滚动
       setInterval(() => {
         index++;
@@ -77,6 +77,7 @@ export default {
 .repeatimg-index {
   position: relative;
   overflow: hidden;
+  /* height: 100%; */
 }
 
 .repeatimg-index ul {

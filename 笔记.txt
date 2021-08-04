@@ -2455,9 +2455,84 @@ flex布局直接崩溃，解决：不要设置flex:	给子元素设置百分比�
 
 
 
+## flex布局碰上fiexd定位
+
+同一个元素上面添加这两个属性，布局又崩溃了。原因：width如果没有设置宽度默认是auto
+
+解决： width: 100%;	添加这个
+
+fiexd定位脱表，如果想占位，用一个盒子包住，盒子设置高度。
 
 
 
+
+
+```bash
+
+```
+
+
+
+
+
+# betterScroll的使用
+
+BetterScroll 是一款重点解决移动端（已支持 PC）各种滚动场景需求的插件。它的核心是借鉴的 [iscroll (opens new window)](https://github.com/cubiq/iscroll)的实现，它的 API 设计基本兼容 iscroll，在 iscroll 的基础上又扩展了一些 feature 以及做了一些性能优化。
+
+只要是滑动效果，大多都使用这个。原生也可以做到，但是这个简单。
+
+官网：https://better-scroll.github.io/docs/zh-CN/
+
+
+
+要配合betterScroll插件使用：better-scroll/observe-dom，作用：动态计算 BetterScroll 的可滚动高度或者宽度，你并不需要自己在高度或者宽度发生变化的时候，手动调用 refresh() 方法。插件通过 MutationObserver 帮你完成了
+
+这个插件解决了bug：滑动无效
+
+
+
+## 安装
+
+```bash
+npm install better-scroll --save
+```
+
+## 使用
+
+```js
+import BetterScroll from 'better-scroll'
+    //probeType 加上此属性。监听滚动的回调函数才会执行
+    //值  1 不监听
+    //    2 监听手指的滚动，惯性滚动不监听
+    //    3  只要是滚动都监听
+let bs = new BetterScroll('.wrapper', {
+    //配置信息
+      probeType: 3,
+      pullUpLoad: true,
+      click:true	//click必须为true，里面的元素才能被触发事件
+})
+
+    //滚动事件，position包含了xy坐标
+    bs.on("scroll", function (position) {
+      // console.log(position);
+    })
+
+    //下拉到底部事件
+    bs.on('pullingUp', () => {
+      console.log("我是底部");
+      
+      //.......获取数据，把数据放到data
+
+      //下拉到底部事件只会执行一次，下面这个方法代表事情做完了，然后下拉到底部事件会再次执行
+      bs.finishPullUp();
+    })
+```
+
+
+
+bs.scrollTo(x,y,time)	回到指定位置
+
+更多参数看文档。
 
 
 

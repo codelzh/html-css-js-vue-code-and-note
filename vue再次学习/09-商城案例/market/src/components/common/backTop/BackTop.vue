@@ -1,12 +1,12 @@
 <template>
-  <div id="tabbar">
-    <slot></slot>
+  <div class="backtop">
+    <img src="~assets/img/common/top.png" alt="">
   </div>
 </template>
 
 <script>
 export default {
-  name: "Tabbar",
+  name: "",
   data() {
     return {};
   },
@@ -17,15 +17,13 @@ export default {
 };
 </script>
 <style scoped>
-#tabbar {
-  display: flex;
+.backtop{
   position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  flex-direction: row;
-  text-align: center;
-  background-color: azure;
-  z-index: 2;
+  right: 5px;
+  bottom: 55px;
+}
+.backtop img{
+  width: 53px;
+  height: 53px;
 }
 </style>
