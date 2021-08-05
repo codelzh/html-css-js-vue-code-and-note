@@ -51,6 +51,9 @@ export default {
     backTop(x, y, time) {
       this.bs.scrollTo(x, y, time);
     },
+    refresh(){
+      this.bs.refresh();
+    }
   },
 };
 </script>

@@ -7,6 +7,7 @@ import home from "components/private/home/Home.vue"
 import category from "components/private/category/Category.vue"
 import car from "components/private/car/Car.vue"
 import my from "components/private/my/My.vue"
+const detail = ()=> import("components/private/detail/detail")
 
 const routes = [
 
@@ -31,6 +32,10 @@ const routes = [
     path: "/my",
     component: my
   },
+  {
+    path:"/detail",
+    component:detail
+  }
 ]
 
 const router = new VueRouter({

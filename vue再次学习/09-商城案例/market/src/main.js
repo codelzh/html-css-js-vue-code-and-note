@@ -6,6 +6,15 @@ import axios from "axios"
 Vue.prototype.axios = axios
 
 Vue.config.productionTip = false
+Vue.prototype.$bus = new Vue()
+
+
+
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+import 'swiper/css/swiper.css'
+
+Vue.use(VueAwesomeSwiper, /* { default options with global component } */)
+
 
 new Vue({
   el: "#app",
@@ -15,4 +24,3 @@ new Vue({
     return h(App)
   }
 })
-

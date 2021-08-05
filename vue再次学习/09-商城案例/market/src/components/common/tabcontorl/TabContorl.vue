@@ -37,7 +37,7 @@ export default {
 .tabcontorl {
   display: flex;
   text-align: center;
-  margin-top: 5%;
+  /* margin-top: 5%; */
   background-color: #fff;
   position: sticky;
   top: 5%;

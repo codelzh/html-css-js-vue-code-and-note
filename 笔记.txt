@@ -1899,6 +1899,15 @@ export default {
       userid:"zs",
     }
   },
+   methods:{
+     //代码方式带参数路由跳转
+       profilebtn() {
+      	this.$router.push({
+        path:"profile",
+        query:{name:"zs",age:20}
+      });
+    },
+   }
 };
 </script>
 ```
@@ -1911,7 +1920,9 @@ export default {
 
 使用	this.$route	这个对象是被选中的路由组件(当前活跃的组件)，里面包含了参数
 
+```
 
+```
 
 
 
@@ -2427,7 +2438,109 @@ export function request(config, success, fail) {
 
 
 
-# 项目遇到的坑
+# 项目
+
+## 首页
+
+### 数据的请求和数据保存的结构
+
+保存数据的结构
+
+```js
+      goods: {
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] },
+      },
+```
+
+
+
+数据请求的封装
+
+```js
+    getgoods(type) {
+      let page = this.goods[type].page + 1;
+
+      getgoods(type, page).then((res) => {
+        //把结果存放到data里面
+        for (let i of res.data.data.list) {
+          this.goods[type].list.push(i);
+        }
+        //当前商品页码+1
+        this.goods[type].page += 1;
+      });
+    },
+```
+
+
+
+### goods的页面
+
+goods 页面，在home页面父传子，把商品数据传过来。然后有多少条数据，遍历多少gooditem。然后把每条数据传给gooditem
+
+gooditem遍历具体的商品
+
+```vue
+//home页面
+<goods :goodsdata="goods[currentcategory].list"></goods>
+```
+
+
+
+### tabcontorl
+
+tabcontorl负责切换数据。当tabcontorl被点击，发出事件并且带上index。home监听到数据，根据index改变currentcategory，
+
+  goods: {
+        pop: { page: 0, list: [] },
+        new: { page: 0, list: [] },
+        sell: { page: 0, list: [] },
+      },
+
+goods[pop].list		goods[new].list		goods[sell].list	
+
+那么goods的数据就会改变，页面就刷新
+
+```vue
+//home页面
+//核心代码
+<goods :goodsdata="goods[currentcategory].list"></goods>
+```
+
+
+
+### 下拉加载更多
+
+监听beeterscroll的下拉到底事件。监听到，发送事件到home并且带上position，home请求数据。
+
+
+
+### tabcontorl吸顶效果
+
+获取tabcontorl的offsetTop	和滚动的y 做对比
+
+offsetTop 获取是不准确的，因为图片加载满，offsetTop没把图片算进来
+
+解决1:settTmeout	设置延迟	2：给图片加上load事件，然后获取offsetTop
+
+值得注意的是，fiexd布局在betterscroll里面，同样会被滚去
+
+我们在复制一个tabcontorl，当重叠时候，v-show来判断是否显示，true或者false由offsetTop和滚动的y	对比而来
+
+
+
+### home离开时候的状态保留
+
+1：使用keep-alive	不让路由组件销毁
+
+2：用activated()	和	deactivated()	生命周期函数，  离开时候记录y，进入时候把y给scrollTo()
+
+
+
+
+
+
 
 ## mounted()加载好调用js失败
 
@@ -2465,11 +2578,21 @@ fiexd定位脱表，如果想占位，用一个盒子包住，盒子设置高度
 
 
 
+## betterscroll的bug解决
+
+给图片添加事件，事件被触发，使用事件总线的方式调用betterscroll
 
 
-```bash
 
-```
+## 用防抖函数来限制refresh
+
+每次图片请求，都调用一次refresh，我们可以使用防抖函数，在最后一次调用refresh，提升效率
+
+
+
+
+
+
 
 
 
@@ -2536,11 +2659,73 @@ bs.scrollTo(x,y,time)	回到指定位置
 
 
 
+# 事件总线
+
+事件总线和vuex差不多，但是事件总线是用来不同的组件，收发事件的。
+
+```js
+//在vue实例添加原形
+Vue.prototype.$bus = new Vue()
+```
+
+
+
+```js
+//	A 组件的方法被触发，提交事件 
+methods:{
+    goodsimgload(){
+      this.$bus.$emit("goodsimgload")
+    }
+  },
+```
+
+
+
+```js
+// 	B	组件接收到对应的事件	并执行回调函数
+methods:{
+	accept(){
+		this.$bus.$on("goodsimgload",function(){
+			console.log("执行")
+		})
+	}
+}
+```
 
 
 
 
 
+# 防抖函数
+
+防抖函数：多次触发事件，只会在最后一次触发事件后等待设定的wait时间结束时执行一次
+
+```js
+    debounce(func, wait) {
+      let timeout;
+      return function () {
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+          func();
+        }, wait);
+      };
+    },
+```
+
+
+
+# vue细节
+
+在模版上是可以获取元素的
+
+this.$refs.名称.$el
+
+可以获取模版的所有元素，然后就可以获取元素的值
+
+
+
+在模版上可以添加事件	但是要带上native属性	@click.native=	
 
 
 

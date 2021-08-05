@@ -1,6 +1,14 @@
 <template>
   <div class="home-index">
     <hometop></hometop>
+    <tab-contorl
+      class="tabcontorl"
+      :title="['流行', '新款', '精选']"
+      @itemclick="itemclick"
+      ref="tabcontorlcopy"
+      v-show="tabcontorloisshow"
+    ></tab-contorl>
+
     <scroll
       class="wapper"
       ref="scroll"
@@ -51,6 +59,9 @@ export default {
       },
       currentcategory: "pop",
       isshow: false,
+      tabcontorloffsettop: 0,
+      tabcontorloisshow: false,
+      saveY: 0,
     };
   },
   components: {
@@ -64,7 +75,28 @@ export default {
     BackTop,
   },
 
-  mounted() {},
+  //让home保持原来的状态。  离开时候记录y，进入时候把y给到
+  activated() {
+    this.$refs.scroll.bs.scrollTo(0,this.saveY,0);
+    this.$refs.scroll.refresh();
+  },
+  deactivated() {
+    this.saveY = this.$refs.scroll.bs.y;
+  },
+
+  mounted() {
+    //解决betterscroll bug
+    var bridge = this;
+    const refresh = this.debounce(this.$refs.scroll.refresh, 300);
+    this.$bus.$on("goodsimgload", function () {
+      refresh();
+    });
+
+    //做tabcontorl 吸顶效果 先获取offsetTop值，然后这个值和滚动的y值做对比
+    setTimeout(() => {
+      this.tabcontorloffsettop = this.$refs.tabcontorl.$el.offsetTop;
+    }, 300);
+  },
   created() {
     //请求首页图片
     this.gethomedata();
@@ -80,6 +112,18 @@ export default {
      * 事件方法
      */
 
+    //防抖函数
+    debounce(func, wait) {
+      let timeout;
+      return function () {
+        if (timeout) clearTimeout(timeout);
+
+        timeout = setTimeout(() => {
+          func();
+        }, wait);
+      };
+    },
+
     //Tabcontorl的item被点击
     itemclick(index) {
       if (index == 0) {
@@ -91,6 +135,8 @@ export default {
       if (index == 2) {
         this.currentcategory = "sell";
       }
+      this.$refs.tabcontorlcopy.activeindex = index;
+      this.$refs.tabcontorl.activeindex = index;
     },
 
     //返回顶部
@@ -101,12 +147,16 @@ export default {
 
     //滚动
     homescroll(position) {
+      //1：返回顶部
       this.isshow = -position.y > 1000 ? true : false;
+
+      //2：tabcontorl
+      this.tabcontorloisshow =
+        -position.y > this.tabcontorloffsettop ? true : false;
     },
 
     //到达底部
     tobottom(bs) {
-    
       this.getgoods(this.currentcategory);
       bs.finishPullUp();
     },
