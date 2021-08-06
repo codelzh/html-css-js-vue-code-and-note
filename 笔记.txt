@@ -1119,6 +1119,8 @@ this.$children	获取所有的子组件，返回类型是数组，里面放着�
 
 this.$refs	获取指定的子组件。使用：1：ref要在标签上声明	         2：然后获取指定的	this.$refs.声明的标签名
 
+this.$refs.标签名.属性或方法	方法不用带()
+
 ```html
   <div id="app">
     <cpn></cpn>
@@ -2005,7 +2007,14 @@ profilebtn() {
 
 `keep-alive` 是 Vue 内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。
 
+### 去除个别页面的缓存
 
+```vue
+ 	<!-- exclude等于不做缓存的子组件页面的name属性 -->
+    <keep-alive exclude="Detail">
+      <router-view/>
+    </keep-alive>
+```
 
 
 

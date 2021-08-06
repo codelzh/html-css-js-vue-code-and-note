@@ -1,7 +1,8 @@
 <template>
+
   <div class="index">
     <tabbarmain></tabbarmain>
-    <keep-alive>
+    <keep-alive exclude="Detail">
       <router-view></router-view>
     </keep-alive>
 
@@ -17,6 +18,7 @@ const TabbarMain = ()=> import("components/common/tabbar/TabbarMain.vue")
 // gethomedate();
 export default {
   name: "App",
+  
   router,
   data() {
     return {};

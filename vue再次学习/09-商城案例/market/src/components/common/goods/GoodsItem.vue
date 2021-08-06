@@ -49,6 +49,7 @@ export default {
   width: 48%;
   margin: 1%;
   text-align: center;
+  -webkit-overflow-scrolling: touch;
 }
 .goodsitem div:nth-child(1) {
   overflow: hidden;

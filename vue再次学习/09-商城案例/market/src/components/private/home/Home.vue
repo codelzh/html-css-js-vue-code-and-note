@@ -77,11 +77,13 @@ export default {
 
   //让home保持原来的状态。  离开时候记录y，进入时候把y给到
   activated() {
-    this.$refs.scroll.bs.scrollTo(0,this.saveY,0);
+    this.$refs.scroll.refresh();
+    this.$refs.scroll.bs.scrollTo(0, this.saveY, 0);
     this.$refs.scroll.refresh();
   },
   deactivated() {
     this.saveY = this.$refs.scroll.bs.y;
+    // this.$refs.scroll.refresh();
   },
 
   mounted() {

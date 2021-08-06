@@ -1,22 +1,40 @@
 <template>
-  <div class="detail-top">
-    <div class="back">←</div>
-    <ul>
-      <li class="active">商品</li>
-      <li>参数</li>
-      <li>评价</li>
-      <li>推荐</li>
-    </ul>
+  <div>
+    <div class="detail-top">
+      <div class="back" @click="goback">←</div>
+      <ul>
+        <li
+          v-for="(item, index) in title"
+          :key="index"
+          @click="topclick(index)"
+          :class="{ active: currentIndex == index ? true : false }"
+        >
+          {{ item }}
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: "",
   data() {
-    return {};
+    return {
+      currentIndex: 0,
+      title: ["商品", "参数", "评价", "推荐"],
+    };
   },
+  methods: {
+    topclick(index) {
+      console.log(index);
+      this.currentIndex = index;
+    },
+    goback() {
+      this.$router.go(-1);
+    },
+  },
+
   created() {
     //获取数据
   },
@@ -26,10 +44,13 @@ export default {
 </script>
 <style scoped>
 .detail-top {
+  /* position: fixed; */
   display: flex;
   background-color: white;
   height: 44px;
   line-height: 44px;
+  width: 100%;
+  z-index: 2;
 }
 
 .back {

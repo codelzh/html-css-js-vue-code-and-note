@@ -3,11 +3,13 @@ import VueRouter from "vue-router"
 
 Vue.use(VueRouter)
 
-import home from "components/private/home/Home.vue"
-import category from "components/private/category/Category.vue"
-import car from "components/private/car/Car.vue"
-import my from "components/private/my/My.vue"
-const detail = ()=> import("components/private/detail/detail")
+
+const home = () => import("components/private/home/Home.vue")
+const category = () => import("components/private/category/Category.vue")
+const car = () => import("components/private/car/Car.vue")
+
+const my = () => import("components/private/my/My.vue")
+const detail = () => import("components/private/detail/detail")
 
 const routes = [
 
@@ -33,8 +35,8 @@ const routes = [
     component: my
   },
   {
-    path:"/detail",
-    component:detail
+    path: "/detail",
+    component: detail
   }
 ]
 

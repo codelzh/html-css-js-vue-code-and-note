@@ -1,6 +1,6 @@
 <template>
   <div class="goods">
-    <goods-item v-for="item in goodsdata" :key="item.iid" :goodsitems="item" class="goodsitem"></goods-item>
+    <goods-item v-for="(item,index) in goodsdata" :key="index" :goodsitems="item" class="goodsitem"></goods-item>
   </div>
 </template>
 
@@ -32,6 +32,7 @@ export default {
 .goods{
   display: flex;
   flex-wrap: wrap;
+  -webkit-overflow-scrolling: touch;
 }
 
 </style>
