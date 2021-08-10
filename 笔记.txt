@@ -2009,6 +2009,8 @@ profilebtn() {
 
 ### 去除个别页面的缓存
 
+exclude="xxx,yyy"
+
 ```vue
  	<!-- exclude等于不做缓存的子组件页面的name属性 -->
     <keep-alive exclude="Detail">
@@ -2190,7 +2192,7 @@ export default new Vuex.Store({
   },
   //里面主要写改变数据的函数
   mutations: {
-    increment(){
+    increment(state,payload){
       this.state.count++
     },
     decrement(){
@@ -2208,7 +2210,7 @@ export default new Vuex.Store({
 //在组件里面，定义方法，使用 this.$store.commit()	来调用Mutation里的方法
 methods:{
     add(){
-      this.$store.commit("increment")
+      this.$store.commit("increment","参数")
     },
     odd(){
       this.$store.commit("decrement")
@@ -2325,6 +2327,33 @@ Vue.delete(state.stu,0)
 ```
 
 
+
+### actions返回promise
+
+Action 通常是异步的，那么如何知道 action 什么时候结束呢？更重要的是，我们如何才能组合多个 action，以处理更加复杂的异步流程？
+
+actions可以返回promise	store.dispatch 仍旧返回 Promise
+
+```js
+actions: {
+  actionA ({ commit }) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        commit('someMutation')
+        resolve()
+      }, 1000)
+    })
+  }
+}
+```
+
+
+
+```js
+store.dispatch('actionA').then(() => {
+  // ...
+})
+```
 
 
 
@@ -2707,7 +2736,7 @@ methods:{
 
 # 防抖函数
 
-防抖函数：多次触发事件，只会在最后一次触发事件后等待设定的wait时间结束时执行一次
+防抖函数：多次触发事件或函数，只会在最后一次触发事件后等待设定的wait时间结束时执行一次
 
 ```js
     debounce(func, wait) {
@@ -2735,6 +2764,99 @@ this.$refs.名称.$el
 
 
 在模版上可以添加事件	但是要带上native属性	@click.native=	
+
+# vue全局组件的封装
+
+一般普通组件就是导入，注册，使用。
+
+但是还有一中全局组件的注册方式
+
+在main.js引入js文件
+
+```js
+//自定义组件
+import toast  from "@/components/common/toast/index.js"
+Vue.use(toast)
+```
+
+当Vue.use 被执行，会调用install()方法
+
+
+
+```js
+index.js文件
+//引入想注册为全局的组件
+import Toast from "./Toast.vue"
+
+const obj = {};
+obj.install = function (Vue) {
+  // 1.创建组件构造器
+  const toastConstructor = Vue.extend(Toast)
+
+  // 2.new一个组件对象
+  const toast = new toastConstructor()
+
+  // 3.将组件对象手动挂载到某个元素上
+  toast.$mount(document.createElement('div'))
+
+  // 4.将挂载了组件对象的元素添加到body
+  document.body.appendChild(toast.$el)
+
+  // 5.将组件对象挂载到Vue的原型上，
+  Vue.prototype.$toast = toast
+}
+
+export default obj;
+```
+
+
+
+前四步都是把template模版添加到body上，第五步是添加js属性。这代码不用背，复制就行
+
+
+
+```js
+//在其他组件使用，你也可以定义方法传参数,	然后	.方法	来调用
+this.$toast
+```
+
+
+
+
+
+# 其他细节
+
+## 移动端的300毫秒点击
+
+移动设备上的浏览器默认会在用户点击屏幕大约延迟300毫秒后才会触发点击事件，这是为了检查用户是否在做双击。为了能够立即响应用户的点击事件，才有了FastClick。
+
+项目地址：https://github.com/ftlabs/fastclick
+
+```bash
+npm install fastclick --save
+```
+
+
+
+## vue的图片懒加载
+
+就是在可视区域的图片才会被加载
+
+```bash
+$npm  install vue-lazyload --save
+```
+
+项目地址：https://github.com/hilongjw/vue-lazyload
+
+
+
+
+
+
+
+
+
+
 
 
 

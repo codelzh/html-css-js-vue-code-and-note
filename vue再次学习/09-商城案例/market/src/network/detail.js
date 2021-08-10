@@ -12,6 +12,12 @@ export const getdetaildata = function (id) {
   })
 }
 
+export const getrecommend = function () {
+  return request({
+    url: "/recommend",
+  })
+}
+
 
 //商品基本信息
 export class Goods {

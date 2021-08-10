@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     topclick(index) {
-      console.log(index);
       this.currentIndex = index;
+      this.$emit("detailtopclick",index)
     },
     goback() {
       this.$router.go(-1);

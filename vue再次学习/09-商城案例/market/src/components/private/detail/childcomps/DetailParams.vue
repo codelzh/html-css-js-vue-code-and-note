@@ -29,11 +29,11 @@ export default {
   props: {
     rule: {
       type: Array,
-      default: [],
+      default: ()=>{return[]},
     },
     info: {
       type: Array,
-      default: [],
+      default: ()=>{return[]},
     },
   },
   //生命周期 - 创建完成（访问当前this实例）
@@ -47,6 +47,7 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+
 .rule-item {
   /* background-color: red; */
   border-bottom: 0.1px solid rgba(0, 0, 0, 0.1);

@@ -39,7 +39,7 @@ export default {
     var bridge = this;
     this.bs.on("scroll", function (position) {
       //发送给home
-      bridge.$emit("homescroll", position);
+      bridge.$emit("scroll", position);
     });
 
     //滑动到底

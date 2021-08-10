@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     imgload() {
-      this.$bus.$emit("imgload");
+      this.$bus.$emit("goodsimgload");
     },
   },
   //生命周期 - 创建完成（访问当前this实例）

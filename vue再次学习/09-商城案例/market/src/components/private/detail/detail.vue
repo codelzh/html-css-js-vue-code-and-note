@@ -1,7 +1,11 @@
 <template>
   <div class="detail">
-    <detail-top class="detail-top"></detail-top>
-    <scroll class="wapper" ref="scroll">
+    <detail-top
+      class="detail-top"
+      @detailtopclick="detailtopclick"
+      ref="detailtop"
+    ></detail-top>
+    <scroll class="wapper" ref="scroll" @scroll="detailscroll">
       <swiper>
         <swiper-item v-for="(item, index) in detailimg" :key="index"
           ><img :src="item" alt=""
@@ -10,54 +14,46 @@
       <goods-detail :goods="Goods"></goods-detail>
       <shop-detail :shop="Shop"></shop-detail>
       <goods-img-more :imglist="goodsimgmore"></goods-img-more>
-      <detail-params :rule="Param.rule" :info="Param.info"></detail-params>
+      <detail-params
+        :rule="Param.rule"
+        :info="Param.info"
+        class="params"
+        ref="params"
+      ></detail-params>
+      <detail-evaluation
+        :evaluation="evaluation"
+        ref="evaluation"
+      ></detail-evaluation>
+      <detail-recommend
+        :recommendInfo="recommend"
+        ref="recommend"
+      ></detail-recommend>
     </scroll>
-    <ul>
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
-      <li>12</li>
-      <li>13</li>
-      <li>14</li>
-      <li>15</li>
-      <li>16</li>
-      <li>17</li>
-      <li>18</li>
-      <li>19</li>
-      <li>20</li>
-      <li>21</li>
-      <li>22</li>
-      <li>23</li>
-      <li>24</li>
-      <li>25</li>
-      <li>26</li>
-      <li>27</li>
-      <li>28</li>
-      <li>29</li>
-      <li>30</li>
-    </ul>
+    <detail-bottom @addcar="addcar"></detail-bottom>
   </div>
 </template>
 
 <script>
 import detailTop from "@/components/private/detail/childcomps/detailTop.vue";
-import swiper from "@/components/common/swiper/swiper.vue";
-import swiperItem from "@/components/common/swiper/swiperItem.vue";
 import goodsDetail from "@/components/private/detail/childcomps/DetailBaseInfo.vue";
 import shopDetail from "@/components/private/detail/childcomps/DetailShopInfo.vue";
-import Scroll from "@/components/common/betterScroll/Scroll.vue";
 import GoodsImgMore from "@/components/private/detail/childcomps/GoodsImgMore.vue";
 import DetailParams from "@/components/private/detail/childcomps/DetailParams.vue";
+import DetailEvaluation from "@/components/private/detail/childcomps/DetailEvaluation.vue";
+import DetailRecommend from "@/components/private/detail/childcomps/DetailRecommendInfo.vue";
+import DetailBottom from "@/components/private/detail/childcomps/DetailBottom.vue";
 
-import { getdetaildata, Goods, Shop, Param } from "@/network/detail.js";
+import swiper from "@/components/common/swiper/swiper.vue";
+import swiperItem from "@/components/common/swiper/swiperItem.vue";
+import Scroll from "@/components/common/betterScroll/Scroll.vue";
+
+import {
+  getdetaildata,
+  getrecommend,
+  Goods,
+  Shop,
+  Param,
+} from "@/network/detail.js";
 
 export default {
   name: "Detail",
@@ -70,6 +66,9 @@ export default {
       Shop: {},
       Param: {},
       goodsimgmore: [],
+      evaluation: {},
+      recommend: [],
+      detailtopposition: [],
     };
   },
   components: {
@@ -81,6 +80,10 @@ export default {
     Scroll,
     GoodsImgMore,
     DetailParams,
+    DetailEvaluation,
+    DetailRecommend,
+    DetailBottom,
+    
   },
   created() {
     this.goodsid = this.$route.query.id;
@@ -100,18 +103,54 @@ export default {
 
       //商品详情页图片
       this.goodsimgmore = data.detailInfo.detailImage[0].list;
+
+      //商品评价
+      this.evaluation = data.rate.list[0];
+    }).catch((erro)=>{
+      console.log(erro);
+    });
+
+    //商品推荐
+    getrecommend().then((res) => {
+      this.recommend = res.data.data.list;
     });
   },
   mounted() {
     //scroll 滚动bug解决
     var bridge = this;
     const refresh = this.debounce(this.$refs.scroll.refresh, 300);
+    const detailtopoisition = this.debounce(function () {
+      bridge.detailtopposition = [];
+      bridge.detailtopposition.push(0);
+      bridge.detailtopposition.push(bridge.$refs.params.$el.offsetTop);
+      bridge.detailtopposition.push(bridge.$refs.evaluation.$el.offsetTop);
+      bridge.detailtopposition.push(bridge.$refs.recommend.$el.offsetTop);
+    }, 2000);
+
     this.$bus.$on("goodsimgload", function () {
       refresh();
+
+      //点击top栏，走相应的位置
+      detailtopoisition()
     });
   },
   activated() {},
   methods: {
+    addcar() {
+      //把购物车相应的数据添加到vuex
+      let car = {};
+      car.goodsimg = this.goodsdetaildata.itemInfo.topImages[0];
+      car.goodstitle = this.goodsdetaildata.itemInfo.title;
+      car.goodsdesc = this.goodsdetaildata.itemInfo.desc;
+      car.goodsprice = this.goodsdetaildata.itemInfo.lowNowPrice;
+      car.goodsid = this.goodsdetaildata.itemInfo.iid;
+
+      //调用actions添加到购物车，并返回promise  then是count+1 erro是添加购物车
+      this.$store.dispatch("addcar", car).then((res)=>{
+      }).catch((erro)=>{
+        this.$toast.show(erro,2000)
+      })
+    },
     //防抖函数
     debounce(func, wait) {
       let timeout;
@@ -122,6 +161,26 @@ export default {
           func();
         }, wait);
       };
+    },
+    //点击top栏，滚动相应的位置
+    detailtopclick(index) {
+      this.$refs.scroll.backTop(0, -this.detailtopposition[index], 300);
+    },
+
+    //监听滚动事件，改变top栏
+    detailscroll(position) {
+      if (-position.y >= this.detailtopposition[0]) {
+        this.$refs.detailtop.currentIndex = 0;
+      }
+      if (-position.y >= this.detailtopposition[1]) {
+        this.$refs.detailtop.currentIndex = 1;
+      }
+      if (-position.y >= this.detailtopposition[2]) {
+        this.$refs.detailtop.currentIndex = 2;
+      }
+      if (-position.y >= this.detailtopposition[3]) {
+        this.$refs.detailtop.currentIndex = 3;
+      }
     },
   },
 };
@@ -144,5 +203,10 @@ export default {
 
 .wapper {
   height: calc(100% - 44px);
+  position: relative;
+}
+
+.params {
+  margin-bottom: 3%;
 }
 </style>

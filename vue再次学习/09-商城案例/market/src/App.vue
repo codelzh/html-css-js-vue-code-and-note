@@ -2,7 +2,7 @@
 
   <div class="index">
     <tabbarmain></tabbarmain>
-    <keep-alive exclude="Detail">
+    <keep-alive exclude="Detail,car">
       <router-view></router-view>
     </keep-alive>
 

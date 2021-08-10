@@ -36,7 +36,10 @@ const routes = [
   },
   {
     path: "/detail",
-    component: detail
+    component: detail,
+    meta:{
+      // keepAlive: true
+    }
   }
 ]
 

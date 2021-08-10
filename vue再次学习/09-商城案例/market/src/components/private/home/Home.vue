@@ -13,7 +13,7 @@
       class="wapper"
       ref="scroll"
       :probetype="3"
-      @homescroll="homescroll"
+      @scroll="homescroll"
       @tobottom="tobottom"
     >
       <home-repeat-img :bannerData="homebannerData"></home-repeat-img>
