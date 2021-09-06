@@ -214,9 +214,9 @@ E:\前端学习\web前端\day1\04-浮动\画图
 
 
 清除浮动的方法
-1:额外标签法，在最后的浮动添加标签，此标签应该有clear: both; 属性
+1:额外标签法，在最后的浮动添加标签，此标签应该有clear: both; 属性	   <div style="clear: both"></div>
 2:overflow，在父元素上面添加属性 overflow:..
-3：给父添加after伪元素
+3：给父添加after伪元素	伪元素记得转块级元素
 4:给父添加双伪元素
 
 细节：1,3,4只要是添加其他元素的来清除浮动的，必须为块级元素
@@ -377,6 +377,18 @@ overflow: hidden;
 
 /*3:溢出的文字为省略号*/
 text-overflow:ellipsis;
+
+多行：
+
+```css
+        overflow: hidden;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        word-break: break-all;
+        -webkit-box-orient: vertical;
+```
 
 
 

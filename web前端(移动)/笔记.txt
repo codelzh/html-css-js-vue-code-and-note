@@ -428,15 +428,23 @@ https://www.swiper.com.cn/
 
 
 
+# 布局的经验
+
+row是加在item的父亲上，然后多个item使用col-
+
+布局还是flex，bootstrap只是给了自适应。
+
+bootstrap在什么时候加？手机和电脑需要两个不同的元素排序
 
 
 
+flex自适应，就是flex给一个结构，不给flex下面元素宽高,也不设置flex占几个，让子元素自己撑开。就可以做到自适应。!!!!!!!!!!!!!	重点
 
 
 
+# 关于图片
 
-
-
+图片如果不能自适应，记得给父加overflow:hidden
 
 
 

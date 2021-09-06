@@ -230,7 +230,7 @@ v-bind：在dom属性前面添加，那么属性的值就可以是data数据
   <div>
       <!--	2：动态绑定类，在添加事件	-->
     <div v-for="(item,index) in title" :class="{active:index==activeindex}" @click="itemclick(index)">
-    </div>
+    </div>	
   </div>
 </template>
 
@@ -1164,6 +1164,10 @@ this.$refs.标签名.属性或方法	方法不用带()
 
 
 
+### 子访问父
+
+this.$parent.属性或方法
+
 
 
 ## 插槽
@@ -1999,6 +2003,7 @@ profilebtn() {
         query:{name:"zs",age:20}
       });
     },
+        //$route.query获取参数
 ```
 
 
